@@ -6,15 +6,15 @@ GRUPO : TIC-TEAM
 
 INTEGRANTES : 
 
-  Juan Diego Pineda Alvernia
+  -Juan Diego Pineda Alvernia
   
-  Johan Esteban Rippe Gaona
+  -Johan Esteban Rippe Gaona
   
-  Luz Enidth Gonzalez Posada
+  -Luz Enidth Gonzalez Posada
   
-  Andrew Guissepe Buitrago Huertas
+  -Andrew Guissepe Buitrago Huertas
   
-  Jessica Lizeth Moncada Gallego
+  -Jessica Lizeth Moncada Gallego
   
   
   
