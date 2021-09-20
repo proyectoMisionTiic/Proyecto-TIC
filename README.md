@@ -22,11 +22,11 @@ SOBRE EL PROYECTO:
 Construir una aplicación software que permita controlar las ventas físicas y virtuales de una empresa de manufactura y hacerles el correspondiente seguimiento.
 
 La aplicación contará con:
-● Módulo administrador de ventas. 
-● Módulo para registrar el estado de la venta. 
-● Gestión de vendedores.
-● Gestión de ingreso al sistema de información. 
-● Gestión de usuarios y roles.
+● Módulo administrador de ventas
+● Módulo para registrar el estado de la venta
+● Gestión de vendedores
+● Gestión de ingreso al sistema de información
+● Gestión de usuarios y roles
 
 
 
