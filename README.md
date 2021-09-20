@@ -21,7 +21,7 @@ INTEGRANTES :
 SOBRE EL PROYECTO:
 Construir una aplicación software que permita controlar las ventas físicas y virtuales de una empresa de manufactura y hacerles el correspondiente seguimiento.
 
-La aplicación contará con:
+LA APLICACIÓN CONTARÁ CON:
 ● Módulo administrador de ventas
 ● Módulo para registrar el estado de la venta
 ● Gestión de vendedores
