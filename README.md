@@ -28,6 +28,20 @@ LA APLICACIÓN CONTARÁ CON:
 ● Gestión de ingreso al sistema de información
 ● Gestión de usuarios y roles
 
+LAS HERRAMIENTAS A USAR SON:
+●	React JS
+●	HTML 5 
+● CSS3 
+●	Lenguaje JavaScript
+●	Lenguaje TypeScript 
+●	Node Js
+●	Plataformas de desarrollo para Backend (Node JS)
+●	Stack MERN
+●	(OAuth2)
+●	(Heroku)
+●	(Git / GitHub)
+
+
 
 
 
