@@ -34,7 +34,7 @@ function App() {
             Contraseña :
            <input name="contraseña" type="password"/>
         </label>
-        /*Boton para enviar la informacion ingresada por el usuario*/
+        {/*Boton para enviar la informacion ingresada por el usuario*/}
         <button type="submit">Registrar</button>
      </form>
     </section>
