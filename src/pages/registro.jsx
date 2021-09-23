@@ -1,5 +1,5 @@
 
-function Index(){
+function Registro(){
     return(
     <div>
           
@@ -39,4 +39,4 @@ function Index(){
     
     </div>)
 }
-export default Index;
+export default Registro;

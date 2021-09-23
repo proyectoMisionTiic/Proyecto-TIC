@@ -1,9 +1,9 @@
-import Index from './pages';
+import Registro from './pages/registro';
 
 function App() {
   return (
     <div className="App">
-      <Index/>
+      <Registro/>
     </div>
   );
 }
