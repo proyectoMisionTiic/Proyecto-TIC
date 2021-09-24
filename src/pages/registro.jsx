@@ -7,7 +7,7 @@ function Registro(){
     {/* Section para la imagen superior*/} 
 
     <section>
-    {/*Se crea div para trabajar la imagen como un contenedor y cambiar tamaño*/}
+    
         <div>
             <img src= {imagenRegistro} alt="Foto de una tienda de ropa"/>
         </div>
