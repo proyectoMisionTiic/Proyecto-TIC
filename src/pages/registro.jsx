@@ -1,4 +1,6 @@
 
+import imagenRegistro from '../media/imagen_registro.jpg';
+
 function Registro(){
     return(
     <div>
@@ -7,7 +9,7 @@ function Registro(){
     <section>
     {/*Se crea div para trabajar la imagen como un contenedor y cambiar tamaño*/}
         <div>
-            <img src=" ./media/imagen_registro.jpg" alt="Foto de una tienda de ropa"/>
+            <img src= {imagenRegistro} alt='Imagen de una tienda de ropa'/>
         </div> 
     </section>
 
