@@ -1,3 +1,4 @@
+import imagenRegistro from '../media/imagen_registro.jpg';
 
 function Registro(){
     return(
