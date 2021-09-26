@@ -1,0 +1,14 @@
+/* ./src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.contenedor{
+
+  width:100%;
+  background-color:#F5DEDE;
+  
+}
+
+
