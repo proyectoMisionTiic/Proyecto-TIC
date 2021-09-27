@@ -16,13 +16,42 @@ import Login from './pages/Login'
 
 function App() {
   return (
-    <div className='' >
-       <Layout>
-         <Principal/>
-      </Layout>
+
+  <Router>
+      <Switch >
+        <Route path={['/Principal']}>
+            <Layout> 
+              <Switch> 
+                  <Route path='/Principal'>
+                    <Principal/>
+                  </Route>
+              </Switch> 
+            </Layout> 
+        </Route>
+
+
+        <Route path={['/Login']}>
+              <Switch> 
+                  <Route path='/Login'>
+                    <Login/>
+                  </Route>
+              </Switch> 
+        
+        </Route>
+      </Switch>
+
       
-    </div>
-    
+
+
+
+
+
+
+  </Router>
+
+
+
+
   );
 }
 

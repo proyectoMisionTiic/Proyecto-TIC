@@ -23,7 +23,7 @@
         // => @media (min-width: 1280px) { ... }
 
 
-        'Monitor': '1100px',
+        'Monitor':'1400px',
       },
     }
    }
