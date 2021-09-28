@@ -1,0 +1,160 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+  }
+  
+  body {
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 100px;
+	background: #094b77;
+  }
+  
+  .container {
+	max-width: 700px;
+	width: 100%;
+	background: #fff;
+	padding: 25px 30px;
+	border-radius: 5px;
+  }
+  
+  .container .titulo {
+	font-size: 30px;
+	font-weight: 500;
+	text-align: center;
+  }
+  .container form .detalles-producto {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin: 20px 0 12px 0;
+  }
+  
+  form .detalles-producto .input-box {
+	width: calc(100% / 2 - 20px);
+	margin-bottom: 5px;
+  }
+  .detalles-producto .input-box .detalles {
+	font-weight: 500;
+	display: block;
+	margin-bottom: 5px;
+  }
+  .detalles-producto .input-box input {
+	height: 45px;
+	width: 100%;
+	outline: none;
+	font-size: 16px;
+	border-radius: 5px;
+	padding-left: 15px;
+	border: 1px solid #ccc;
+	border-bottom-width: 2px;
+	transition: all 0.3s ease;
+  }
+  .detalles-producto .input-box input:focus,
+  .detalles-producto .input-box input:valid {
+	border-color: #094b77;
+  }
+  
+  .centrado {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+  }
+  /* Quitar las flechas en los campos que llevan numeros */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+  }
+  
+  .estado-titulo {
+	text-align: center;
+  }
+  form .estado-detalles .estado-titulo {
+	font-size: 20px;
+	font-weight: 500;
+  }
+  form .estado-detalles .category {
+	display: flex;
+	width: 80%;
+	margin: 14px 0;
+	justify-content: space-between;
+  }
+  .estado-detalles .category label {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+  }
+  .estado-detalles .category .punto {
+	height: 20px;
+	width: 20px;
+	border-radius: 50%;
+	margin-right: 10px;
+	background: #d9d9d9;
+	border: 5px solid transparent;
+  }
+  #punto-1:checked ~ .category label .uno,
+  #punto-2:checked ~ .category label .dos {
+	border-color: #d9d9d9;
+	background: #094b77;
+  }
+  form input[type="radio"] {
+	display: none;
+  }
+  form .botones {
+	width: 100%;
+	text-align: center;
+  }
+  
+  form .button {
+	height: 45px;
+	margin: 20px 0;
+	display: inline-block;
+	width: 50%;
+	padding-inline: 8px;
+  }
+  form .button input {
+	height: 100%;
+	width: 100%;
+	border-radius: 5px;
+	border: none;
+	color: #fff;
+	font-size: 22px;
+	font-weight: bold;
+	letter-spacing: 1px;
+	cursor: pointer;
+	background: #094b77;
+  }
+  
+  form .button input:hover {
+	  background-color: rgba(23, 172, 43, 0.493);
+  }
+  
+  /* RESPONSIVE */
+  @media (max-width: 584px) {
+	.container {
+	  max-width: 100%;
+	}
+	form .detalles-producto .input-box {
+	  margin-bottom: 15px;
+	  width: 100%;
+	}
+	form .estado-detalles .category {
+	  width: 100%;
+	}
+   .container form .detalles-producto {
+	  max-height: 300px;
+	  overflow-y: scroll;
+	}
+	.detalles-producto::-webkit-scrollbar {
+	  width: 5px;
+	}
+  }
+  @media (max-width: 459px) {
+	.container .category {
+	  flex-direction: column;
+	}
+  }

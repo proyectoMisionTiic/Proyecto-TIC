@@ -1,5 +1,4 @@
-
-import '../src/styles/style.css';
+import "./styles/style.css";
 import Layout from './layouts/layout'
 import React from "react";
 import Principal from './pages/Principal'

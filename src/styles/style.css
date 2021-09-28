@@ -5,16 +5,58 @@
 
 
 .contenedor{
-
   width:100%;
-  background-color:#F5DEDE;
-  
+  background-color:rgb(215, 226, 226);
 }
 
+.contenido-principal {
+  position:relative;
+  padding-top: 50px;
+  background-color:rgb(215, 226, 226)
 
-.fondo{
+}
+.contenido-principal .vista-cajas {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 0 20px
+}
+.contenido-principal .vista-cajas .cajas{
+  width: calc(100% /4 - 15px);
+  background-color:#fff;
+  display:flex;
+  justify-content: center;
+  padding: 15px 14px;
+  align-items: center; 
+  border-radius: 12px;
 
-  background-color:#F5DEDE;
 }
 
+.contenido-principal .vista-cajas .tema-caja{
+  font-size: 25px;
+  font-weight: 500;
+}
 
+.contenido-principal .vista-cajas .cifra{
+  font-size: 35px;
+  font-weight: 500;
+  margin-top: 5px;
+  display: inline-block;
+}
+
+.vista-cajas .cajas .icono{
+  font-size: 32px;
+  font-weight: 500;
+  height: 50px;
+  width: 50px;
+  background: rgb(83, 152, 231);
+  color: rgb(9, 83, 167);
+  line-height: 50px;
+  text-align: center;
+  border-radius:12px;
+  margin-left: 10px;
+}
+
+.vista-cajas .cajas .icono .dos{
+  background: rgb(13, 195, 43);
+}
