@@ -14,7 +14,7 @@ const Principal = () => {
             <div className="tema-caja">Total ventas</div>
             <div className="cifra">$5.124.000</div>
           </div>
-          <i className="bx bx-dollar icono "></i>
+          <i className="bx bx-dollar icono dos"></i>
         </div>
         <div className="cajas">
           <div className="lado-izq">
@@ -28,7 +28,7 @@ const Principal = () => {
             <div className="tema-caja">Mejor vendedor</div>
             <div className="cifra">JuanD</div>
           </div>
-          <i className='bx bx-user-pin icono'></i>
+          <i className='bx bx-user-pin icono cuatro'></i>
         </div>
       </div>
     </div>

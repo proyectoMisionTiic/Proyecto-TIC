@@ -50,13 +50,19 @@
   height: 50px;
   width: 50px;
   background: rgb(83, 152, 231);
-  color: rgb(9, 83, 167);
   line-height: 50px;
   text-align: center;
   border-radius:12px;
   margin-left: 10px;
 }
 
-.vista-cajas .cajas .icono .dos{
-  background: rgb(13, 195, 43);
+.vista-cajas .cajas .icono.dos{
+  color: rgb(16, 180, 43);
+  background-color: rgb(133, 236, 133);
+
+}
+.vista-cajas .cajas .icono.cuatro{
+  color: rgb(222, 231, 89);
+  background-color: rgb(238, 234, 16);
+
 }

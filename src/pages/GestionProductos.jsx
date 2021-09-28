@@ -1,5 +1,6 @@
 import React from 'react'
 import "../styles/Style-gestionar-productos.css";
+import Nav from '../components/nav';
 
 const GestionProductos = () => {
 	return (
@@ -72,7 +73,7 @@ const GestionProductos = () => {
       </div>
       <div className="container-tabla"></div>
     </body>
-	)
+	);
 }
 
 export default GestionProductos

@@ -1,7 +1,10 @@
 import "./styles/style.css";
+import "./styles/Style-gestionar-productos.css";
+
 import Layout from './layouts/layout'
 import React from "react";
 import Principal from './pages/Principal'
+import GestionProductos from "./pages/GestionProductos";
 import {
   BrowserRouter as Router,
   Switch,
@@ -18,7 +21,7 @@ function App() {
 
   <Router>
       <Switch >
-        <Route path={['/Principal']}>
+      <Route path={['/Principal']}>
             <Layout> 
               <Switch> 
                   <Route path='/Principal'>
@@ -27,6 +30,18 @@ function App() {
               </Switch> 
             </Layout> 
         </Route>
+
+        <Route path={['/Productos']}> 
+        <Layout> 
+              <Switch> 
+                  <Route path='/Productos'>
+                    <GestionProductos/>
+                  </Route>
+              </Switch> 
+              </Layout> 
+        </Route>
+
+        
 
 
         <Route path={['/Login']}>
