@@ -1,15 +1,10 @@
+const GestionarUsuarios = () => {
+  return (
+    <div>
+      {" "}
+      <div <H2>className="m-20"> Usuarios<H2></div>
+    </div>
+  );
+};
 
-
- const GestionarUsuarios = () =>{
-    return(
-       <div >
-           oeeeeeee
-       </div>
-    );
- 
-    
- 
-  }
- 
-  export default GestionarUsuarios;
-  
+export default GestionarUsuarios;
