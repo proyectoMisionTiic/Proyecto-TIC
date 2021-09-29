@@ -5,15 +5,15 @@ import Principal from "./pages/Principal";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import Login from "./pages/Login";
-import GestionarUsuarios from "./pages/GestionarUsuarios";
+import GestionUsuarios from "./pages/GestionUsuarios";
 function App() {
   return (
     <Router>
       <Switch>
-        <Route path={["/Principal"]}>
+        <Route path={['/Principal']}>
           <Layout>
             <Switch>
-              <Route path="/Principal">
+              <Route path='/Principal'>
                 <Principal />
               </Route>
             </Switch>
@@ -28,11 +28,11 @@ function App() {
           </Switch>
         </Route>
 
-        <Route path={["/gestionarusuarios"]}>
+        <Route path={['/Usuarios']}>
           <Layout>
             <Switch>
-              <Route path="/gestionarusuarios">
-                <GestionarUsuarios />
+              <Route path='/Usuarios'>
+                <GestionUsuarios/>
               </Route>
             </Switch>
           </Layout>
