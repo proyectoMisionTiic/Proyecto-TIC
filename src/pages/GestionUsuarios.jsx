@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../styles/Style-gestionar-productos.css";
+
 const usuariosBackend = [
   {
     nombre: "Juan",
@@ -22,7 +23,7 @@ const usuariosBackend = [
 const Usuarios = () => {
   const [mostrarTabla, setMostrarTabla] = useState(true);
   const [usuarios, setUsuarios] = useState([]);
-  const [textoBoton, setTextoBoton] = useState("Crear Nuevo Usuario");
+  const [textoBoton, setTextoBoton] = useState("Crear o Modificar Usuario");
 
   useEffect(() => {
     //obtener lista de usuarios
@@ -31,7 +32,7 @@ const Usuarios = () => {
 
   useEffect(() => {
     if (mostrarTabla) {
-      setTextoBoton("Crear Nuevo Usuario");
+      setTextoBoton("Crear o Modificar Usuario");
     } else {
       setTextoBoton("Mostrar Todos los usuarios");
     }
@@ -43,7 +44,7 @@ const Usuarios = () => {
           onClick={() => {
             setMostrarTabla(!mostrarTabla);
           }}
-          className="text-white bg-gray-800 p-5 rounded-full m-6 w-28 self-end"
+          className="bg-gray-800 text-white px-4 py-2 rounded-xl "
         >
           {textoBoton}
         </button>
@@ -65,50 +66,49 @@ const TablaUsuarios = ({ listaUsuarios }) => {
     );
   }, [listaUsuarios]);
   return (
-    
     <div className="flex ml-7 mt-7 w-full mr-20">
-          <div class="md:px-32 w-full">
-            <div class="shadow overflow-hidden rounded border-b border-gray-200">
-              <table class="min-w-full bg-white">
-                <thead class="bg-gray-800 text-white">
-                  <tr>
-                    <th class="w-1/3 text-center py-3 px-4 uppercase font-semibold text-sm">
-                      Nombre
-                    </th>
-                    <th class="w-1/3 text-center py-3 px-4 uppercase font-semibold text-sm">
-                      Apellido
-                    </th>
-                    <th class="w-1/3 text-center py-3 px-4 uppercase font-semibold text-sm">
-                      Cedula
-                    </th>
-                    <th class="text-center py-3 px-4 uppercase font-semibold text-sm">
-                      Email
-                    </th>
-                    <th class="text-center py-3 px-4 uppercase font-semibold text-sm">
-                      Rol
-                    </th>
-                    <th class="text-center py-3 px-4 uppercase font-semibold text-sm">
-                      Estado
-                    </th>
-                  </tr>
-                </thead>
-        <tbody>
-          {listaUsuarios.map((usuario) => {
-            return (
+      <div class="md:px-32 w-full">
+        <div class="shadow overflow-hidden rounded border-b border-gray-200">
+          <table class="min-w-full bg-white">
+            <thead class="bg-gray-800 text-white">
               <tr>
-                <td>{usuario.nombre}</td>
-                <td>{usuario.apellido}</td>
-                <td>{usuario.cedula}</td>
-                <td>{usuario.email}</td>
-                <td>{usuario.rol}</td>
-                <td>{usuario.estado}</td>
+                <th class="w-2 text-left py-3 px-4 uppercase font-semibold text-sm">
+                  Nombre
+                </th>
+                <th class="w-2 text-left  py-3 px-4 uppercase font-semibold text-sm">
+                  Apellido
+                </th>
+                <th class="w-2 text-left py-3 px-4 uppercase font-semibold text-sm">
+                  Cedula
+                </th>
+                <th class="w-2 text-left py-3 px-4 uppercase font-semibold text-sm">
+                  Email
+                </th>
+                <th class="w-2 text-left py-3 px-4 uppercase font-semibold text-sm">
+                  Rol
+                </th>
+                <th class="w-2 text-left py-3 px-4 uppercase font-semibold text-sm">
+                  Estado
+                </th>
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
-    </div>
+            </thead>
+            <tbody>
+              {listaUsuarios.map((usuario) => {
+                return (
+                  <tr>
+                    <td>{usuario.nombre}</td>
+                    <td>{usuario.apellido}</td>
+                    <td>{usuario.cedula}</td>
+                    <td>{usuario.email}</td>
+                    <td>{usuario.rol}</td>
+                    <td>{usuario.estado}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 };
@@ -116,7 +116,7 @@ const TablaUsuarios = ({ listaUsuarios }) => {
 const FormularioCreacionUsuarios = () => {
   return (
     <body className="flex">
-      <div className="container ml-7 mt-7 max-h-full w-1/2">
+      <div className="container ml-7 mt-7 max-h-full w-1/2 object-center">
         {/* Inicio Seccion de input del usuario */}
         <div className="titulo">Registro de Usuarios</div>
         <form action="#">
@@ -141,14 +141,6 @@ const FormularioCreacionUsuarios = () => {
               <input type="text" placeholder="Ingrese el email " required />
             </div>
 
-            {/*<div className="input-box">
-            <span className="detalles">Rol</span>
-            <input
-              type="text"
-              placeholder="Ingrese rol"
-              required
-            />
-            */}
             <div className="input-box">
               <span className="detalles">Rol</span>
               <select className="border-2 ">
