@@ -6,7 +6,7 @@ const usuariosBackend = [
     nombre: "Juan",
     apellido: "Montoya",
     cedula: "123456789",
-    email: "juanm@gmail.com",
+    email: "juanmontoya@gmail.com",
     rol: "Administrador",
     estado: "Pendiente",
   },
@@ -14,9 +14,17 @@ const usuariosBackend = [
     nombre: "Andrea",
     apellido: "Gomez",
     cedula: "987654321",
-    email: "andr@hotmail.com",
-    rol: "Vendedo",
+    email: "andgomez@hotmail.com",
+    rol: "Vendedor",
     estado: "Autorizado",
+  },
+  {
+    nombre: "Santiago",
+    apellido: "Cadavid",
+    cedula: "145623698",
+    email: "santicadv@hotmail.com",
+    rol: "Vendedor",
+    estado: "Pendiente",
   },
 ];
 
@@ -34,7 +42,7 @@ const Usuarios = () => {
     if (mostrarTabla) {
       setTextoBoton("Crear o Modificar Usuario");
     } else {
-      setTextoBoton("Mostrar Todos los usuarios");
+      setTextoBoton("Mostrar Todos los Usuarios");
     }
   }, [mostrarTabla]);
   return (
@@ -44,7 +52,7 @@ const Usuarios = () => {
           onClick={() => {
             setMostrarTabla(!mostrarTabla);
           }}
-          className="bg-gray-800 text-white px-4 py-2 rounded-xl "
+          className="bg-gray-800 text-white px-4 py-2 rounded-xl text-4xl"
         >
           {textoBoton}
         </button>
@@ -66,28 +74,28 @@ const TablaUsuarios = ({ listaUsuarios }) => {
     );
   }, [listaUsuarios]);
   return (
-    <div className="flex ml-7 mt-7 w-full mr-20">
+    <div className="table-fixed flex ml-20 mt-7 w-full mr-20">
       <div class="md:px-32 w-full">
         <div class="shadow overflow-hidden rounded border-b border-gray-200">
           <table class="min-w-full bg-white">
             <thead class="bg-gray-800 text-white">
               <tr>
-                <th class="w-2 text-left py-3 px-4 uppercase font-semibold text-sm">
+                <th class="text-xl w-2 py-4 px-2 text-left uppercase font-semibold">
                   Nombre
                 </th>
-                <th class="w-2 text-left  py-3 px-4 uppercase font-semibold text-sm">
+                <th class="text-xl w-2 py-4 text-left uppercase font-semibold">
                   Apellido
                 </th>
-                <th class="w-2 text-left py-3 px-4 uppercase font-semibold text-sm">
+                <th class="text-xl w-2 py-4 text-left uppercase font-semibold">
                   Cedula
                 </th>
-                <th class="w-2 text-left py-3 px-4 uppercase font-semibold text-sm">
-                  Email
+                <th class="text-xl w-2 py-4 text-left uppercase font-semibold">
+                  Correo electronico
                 </th>
-                <th class="w-2 text-left py-3 px-4 uppercase font-semibold text-sm">
+                <th class="text-xl w-2 py-4 text-left uppercase font-semibold">
                   Rol
                 </th>
-                <th class="w-2 text-left py-3 px-4 uppercase font-semibold text-sm">
+                <th class="text-xl w-2 py-4 text-left uppercase font-semibold">
                   Estado
                 </th>
               </tr>
@@ -116,7 +124,7 @@ const TablaUsuarios = ({ listaUsuarios }) => {
 const FormularioCreacionUsuarios = () => {
   return (
     <body className="flex">
-      <div className="container ml-7 mt-7 max-h-full w-1/2 object-center">
+      <div className="container centrado mt-7 max-h-full  w-1/2 ">
         {/* Inicio Seccion de input del usuario */}
         <div className="titulo">Registro de Usuarios</div>
         <form action="#">
@@ -138,12 +146,21 @@ const FormularioCreacionUsuarios = () => {
 
             <div className="input-box">
               <span className="detalles">Email</span>
-              <input type="text" placeholder="Ingrese el email " required />
+              <input type="email" placeholder="Ingrese el email " required />
             </div>
 
             <div className="input-box">
               <span className="detalles">Rol</span>
-              <select className="border-2 ">
+              <select
+                className="border-2"
+                name="brand"
+                required
+                defaultValue={0}
+              >
+                <option disabled value={0}>
+                  Seleccione un rol
+                </option>
+
                 <option value="rol"> Administrador </option>
                 <option value="rol"> Vendedor </option>
               </select>
@@ -151,7 +168,16 @@ const FormularioCreacionUsuarios = () => {
 
             <div className="input-box">
               <span className="detalles">Estado</span>
-              <select className="border-2">
+              <select
+                className="border-2"
+                name="brand"
+                required
+                defaultValue={0}
+              >
+                <option disabled value={0}>
+                  Seleccione un estado
+                </option>
+
                 <option value="autorizado"> Autorizado </option>
                 <option value="pendiente"> Pendiente </option>
                 <option value="no autorizado"> No Autorizado </option>
