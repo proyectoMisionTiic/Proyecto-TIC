@@ -9,6 +9,7 @@ import Principal from "./pages/Principal";
 import InformacionVentas from "./pages/informacionVentas";
 import GestionUsuarios from "./pages/GestionUsuarios";
 import GestionVentas from "./pages/gestionVentas";
+import VerProductos from "./pages/VerProductos";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 
@@ -18,7 +19,7 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path={["/Principal", "/Ventas", "/InformacionVentas", "/GestionUsuarios", "/GestionProductos"]}>
+        <Route path={["/Principal", "/Ventas", "/InformacionVentas", "/GestionUsuarios", "/GestionProductos","/VerProductos"]}>
           <Layout>
             <Switch>
               <Route path="/Principal">
@@ -39,6 +40,9 @@ function App() {
 
               <Route path="/GestionUsuarios">
                 <GestionUsuarios />
+              </Route>
+              <Route path="/VerProductos">
+                <VerProductos/>
               </Route>
             </Switch>
           </Layout>
