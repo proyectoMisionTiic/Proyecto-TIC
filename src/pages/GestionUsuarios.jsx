@@ -74,7 +74,7 @@ const TablaUsuarios = ({ listaUsuarios }) => {
     );
   }, [listaUsuarios]);
   return (
-    <div className="table-fixed flex ml-20 mt-7 w-full mr-20">
+    <div className="bg-gray-800 self-center container p-10 ml-10 mr-20 mt-10 ">
       <div class="md:px-32 w-full">
         <div class="shadow overflow-hidden rounded border-b border-gray-200">
           <table class="min-w-full bg-white">
