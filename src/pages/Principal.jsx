@@ -1,22 +1,36 @@
+import React from 'react'
+import "../styles/Style-ventas.css";
 
+const Principal = () => {
+  return (
+    <div >
+      <div className=''>
 
- const Principal = () =>{
-   return(
-      <div >
-          <div className='m-20'>
-          
+        <div >
 
-            
+          <div className="bg-gray-900 contenedorEntrada">
+            {/* Inicio Seccion de input del usuario */}
+            <div className="titulo p-32 entradax text-center">Bienvenido :)</div>
+
           </div>
+        </div>
+
+
+
+
+
+
+
       </div>
-   );
+    </div>
+  );
 
-   
 
- }
 
- export default Principal;
- 
- 
- 
+}
+
+export default Principal;
+
+
+
 

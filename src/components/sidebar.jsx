@@ -1,5 +1,6 @@
 import Botonsidebar from "./botonsidebar";
 
+import {Link} from 'react-router-dom';
 
 const Sidebar = () => {
 
@@ -8,17 +9,28 @@ const Sidebar = () => {
         <div> 
 
     
-                <div className=' celular:bg-gray-800    flex flex-col celular:w-screen   tablet:h-screen  portatil:w-full tablet:w-full portatil:mr-36 tablet:gap-20  '>
+                <nav className=' celular:bg-gray-800    flex flex-col celular:w-screen   tablet:h-screen  portatil:w-full tablet:w-full portatil:mr-10 tablet:gap-20 portatil:text-3xl  '>
 
-                    <div className=' flex   hover:bg-green-500 my-1 p-2.5 tablet:mt-20 ml-2 mr-2 tablet:mb-10 portatil:mb-15'>
-                        <i class="fas fa-shopping-cart text-white justify-center mr-3"></i>
-                        <Botonsidebar className='celular:' NombreBoton='Gestionar Venta' />
-                    </div>
+                <ul>
+            
+                    <Link to="/Ventas">
+                        <div className=' flex   hover:bg-green-500 my-1 p-2.5 tablet:mt-20 ml-2 mr-2 tablet:mb-10 portatil:mb-15'>
+                                <i class="fas fa-shopping-cart text-white justify-center mr-3"></i>
+                                <Botonsidebar className='celular:' NombreBoton='Gestionar Venta' />
+                            </div>
+                    </Link>
+                   
+                 
 
-                    <div className=' flex   hover:bg-green-500 my-1 p-2.5  ml-2 mr-2 tablet:mb-10 portatil:mb-15'>
+            
+
+                    <Link to="/InformacionVentas">
+                        <div className=' flex   hover:bg-green-500 my-1 p-2.5  ml-2 mr-2 tablet:mb-10 portatil:mb-15'>
                         <i class="fas fa-receipt text-white justify-center mr-3"></i>
                         <Botonsidebar className='celular:' NombreBoton='Informacion Ventas' />
-                    </div>
+                                    </div>
+                    
+                    </Link>
 
                     <div className=' flex   hover:bg-green-500 my-1 p-2.5  ml-2 mr-2 tablet:mb-10 portatil:mb-15'>
                         <i class="fas fa-tshirt text-white justify-center mr-3"></i>
@@ -27,7 +39,7 @@ const Sidebar = () => {
 
                     <div className=' flex  hover:bg-green-500 my-1 p-2.5  ml-2 mr-2 tablet:mb-10 portatil:mb-15'>
                         <i class="fab fa-shopify text-white justify-center mr-3"></i>
-                        <Botonsidebar className='celular:' NombreBoton='Gestionar Productos' />
+                        <Botonsidebar className='celular:' NombreBoton='Gestionar Producto' />
                     </div>
 
                     <div className=' flex  hover:bg-green-500 my-1 p-2.5  ml-2 mr-2 tablet:mb-10 portatil:mb-15'>
@@ -41,10 +53,13 @@ const Sidebar = () => {
                         <Botonsidebar className='celular:' NombreBoton='Salir' />
                     </div>
 
+
+                </ul>
+
                    
               
 
-            </div>
+            </nav>
 
 
 
