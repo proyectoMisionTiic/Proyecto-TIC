@@ -40,11 +40,6 @@ const Sidebar = () => {
             />
           </div>
 
-          <div className=" flex  hover:bg-green-500 my-1 p-2.5  ml-2 mr-2 tablet:mb-10 portatil:mb-20">
-            <i class="fas fa-sign-out-alt text-white justify-center "></i>
-            <Botonsidebar className="celular:" NombreBoton="Salir" />
-          </div>
-
           <Link to="/GestionUsuarios">
             <div className=" flex   hover:bg-green-500 my-1 p-2.5 tablet:mt-20 ml-2 mr-2 tablet:mb-10 portatil:mb-15">
               <i class="fas fa-shopping-cart text-white justify-center mr-3"></i>
@@ -54,6 +49,12 @@ const Sidebar = () => {
               />
             </div>
           </Link>
+
+          <div className=" flex  hover:bg-green-500 my-1 p-2.5  ml-2 mr-2 tablet:mb-10 portatil:mb-20">
+            <i class="fas fa-sign-out-alt text-white justify-center "></i>
+            <Botonsidebar className="celular:" NombreBoton="Salir" />
+          </div>
+          
         </ul>
       </nav>
     </div>
