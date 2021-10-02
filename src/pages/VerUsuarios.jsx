@@ -31,33 +31,19 @@ const usuariosBackend = [
 const VerUsuarios = () => {
   const [mostrarTabla, setMostrarTabla] = useState(true);
   const [usuarios, setUsuarios] = useState([]);
-  const [textoBoton, setTextoBoton] = useState("Crear o Modificar Usuario");
 
   useEffect(() => {
     //obtener lista de usuarios
     setUsuarios(usuariosBackend);
   }, []);
 
-  useEffect(() => {
-    if (mostrarTabla) {
-      setTextoBoton("Crear o Modificar Usuario");
-    } else {
-      setTextoBoton("Mostrar Todos los Usuarios");
-    }
-  }, [mostrarTabla]);
+  useEffect(() => {}, [mostrarTabla]);
+
   return (
     <div className="flex h-full w-full flex-col items-center justify-start p-8">
       <div className="flex flex-col">
-        <button
-          onClick={() => {
-            setMostrarTabla(!mostrarTabla);
-          }}
-          className="bg-gray-900 text-white px-4 py-2 rounded-xl text-4xl"
-        >
-          {textoBoton}
-        </button>
+        <TablaUsuarios listaUsuarios={usuarios} />
       </div>
-    
     </div>
   );
 };
@@ -94,6 +80,9 @@ const TablaUsuarios = ({ listaUsuarios }) => {
                 <th class="text-xl w-2 py-4 text-left uppercase font-semibold">
                   Estado
                 </th>
+                <th class="text-xl w-2 py-4 text-left uppercase font-semibold">
+                  Acciones
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -106,6 +95,8 @@ const TablaUsuarios = ({ listaUsuarios }) => {
                     <td>{usuario.email}</td>
                     <td>{usuario.rol}</td>
                     <td>{usuario.estado}</td>
+                    <i class="fas fa-ban"></i>
+                    <i class="fas fa-broom"></i>
                   </tr>
                 );
               })}
