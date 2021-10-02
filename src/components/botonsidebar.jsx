@@ -2,8 +2,8 @@ const botonsidebar = ({NombreBoton}) =>{
 
     return(
      <>
-     <div className=' w-full  text-left '>
-         <span className=' block text-white cursor-pointer  '>{NombreBoton}</span>
+     <div className=' w-full   text-left '>
+         <li className=' block text-white cursor-pointer  '>{NombreBoton}</li>
      </div>
         
      </>

@@ -19,7 +19,7 @@
 	padding: 25px 30px;
 	border-radius: 5px;
   }
-  
+
   .container .titulo {
 	font-size: 30px;
 	font-weight: 500;
@@ -68,7 +68,7 @@
 	-webkit-appearance: none;
 	margin: 0;
   }
-  
+
   .estado-titulo {
 	text-align: center;
   }
@@ -156,4 +156,4 @@
 	.container .category {
 	  flex-direction: column;
 	}
-  }
+

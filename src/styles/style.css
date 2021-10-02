@@ -6,6 +6,7 @@
 
 .contenedor{
   width:100%;
+
   background-color:rgb(215, 226, 226);
 }
 
@@ -30,6 +31,8 @@
   align-items: center; 
   border-radius: 12px;
 
+
+  background-color:tra;
 }
 
 .contenido-principal .vista-cajas .tema-caja{
@@ -47,6 +50,7 @@
    justify:center; 
 }
 
+
 .vista-cajas .cajas .icono{
   font-size: 35px;
   font-weight: 600;
@@ -57,6 +61,9 @@
   text-align: center;
   border-radius:12px;
   margin-left: 40px;
+  background-position: bottom center;
+  background-image:url('../media/pexels-sam-lion-5709661\ \(1\).jpg') !important;
+
 }
 
 .vista-cajas .cajas .icono.dos{
