@@ -52,7 +52,7 @@ const GestionUsuarios = () => {
           onClick={() => {
             setMostrarTabla(!mostrarTabla);
           }}
-          className="bg-gray-800 text-white px-4 py-2 rounded-xl text-4xl"
+          className="bg-gray-900 text-white px-4 py-2 rounded-xl text-4xl"
         >
           {textoBoton}
         </button>
@@ -78,7 +78,7 @@ const TablaUsuarios = ({ listaUsuarios }) => {
       <div class="md:px-32 w-full">
         <div class="shadow overflow-hidden rounded border-b border-gray-200">
           <table class="min-w-full bg-white">
-            <thead class="bg-gray-800 text-white">
+            <thead class="bg-gray-900 text-white">
               <tr>
                 <th class="text-xl w-2 py-4 px-2 text-left uppercase font-semibold">
                   Nombre
