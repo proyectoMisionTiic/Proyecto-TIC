@@ -7,14 +7,16 @@
 .contenedor{
 
   width:100%;
-  background-color:#F5DEDE;
+  background-color:tra;
+
   
 }
 
 
 .fondo{
 
-  background-color:#F5DEDE;
+  background-position: bottom center;
+  background-image:url('../media/pexels-sam-lion-5709661\ \(1\).jpg') !important;
 }
 
 

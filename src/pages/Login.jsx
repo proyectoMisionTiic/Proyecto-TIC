@@ -1,17 +1,19 @@
 import Logo from '../media/logo_small.png';
 
+import {Link} from 'react-router-dom';
+
 
 const Login = ()=>{
 
     return(
-      <div className='fondo w-screen h-screen p-16 celular:text-2x1 tablet:text-4xl flex  '> 
+      <div className='fondo w-full h-screen  celular:text-2x1 tablet:text-4xl flex  '> 
            
-            <div className='bg-white w-full  rounded-3xl p-8  tablet:w-6/12  portatil:w-4/12 Monitor:w-3/12 mx-auto my-auto shadow-2xl' >
+            <div className='rounded-3xl p-6  mx-auto my-auto shadow-2xl bg-white ' >
                 <form action="">
 
 
                         <div>
-                          <img className='mb-16 m-auto' src={Logo} alt="" />
+                          <img className='mb-16 m-auto h-20' src={Logo} alt="" />
                         </div>
 
 
@@ -36,13 +38,14 @@ const Login = ()=>{
                           </div>
                         </div>
 
-
+                        <Link to='/Principal'>
                         <div>
-                          <input className='text-white w-full bg-gray-900 rounded-xl mt-20 p-3 cursor-pointer ' type="button" value='Ingresar' />
+                          <input autocomplete='name' className='text-white w-full bg-gray-900 rounded-xl mt-20 p-3 cursor-pointer ' type="button" value='Ingresar' />
                         </div>
+                        </Link>
 
                         <div>
-                          <input className='text-white w-full bg-red-700 rounded-xl mt-20 p-3 cursor-pointer' type="button"  value='Ingresar Con Google' />
+                          <input   className='text-white w-full bg-red-700 rounded-xl mt-20 p-3 cursor-pointer' type="button"  value='Ingresar Con Google' />
                         </div>
                  
 
