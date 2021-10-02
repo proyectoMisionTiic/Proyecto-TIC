@@ -26,7 +26,7 @@
   background-color:#fff;
   display:flex;
   justify-content: center;
-  padding: 15px 14px;
+  padding: 20px;
   align-items: center; 
   border-radius: 12px;
 
@@ -35,25 +35,28 @@
 .contenido-principal .vista-cajas .tema-caja{
   font-size: 25px;
   font-weight: 500;
+  /* padding: 10px; */
+  padding-bottom: 10px;
 }
 
 .contenido-principal .vista-cajas .cifra{
   font-size: 35px;
   font-weight: 500;
-  margin-top: 5px;
-  display: inline-block;
+  margin: 5px;
+  /* display: inline-block; */
+   justify:center; 
 }
 
 .vista-cajas .cajas .icono{
-  font-size: 32px;
-  font-weight: 500;
+  font-size: 35px;
+  font-weight: 600;
   height: 50px;
   width: 50px;
   background: rgb(83, 152, 231);
   line-height: 50px;
   text-align: center;
   border-radius:12px;
-  margin-left: 10px;
+  margin-left: 40px;
 }
 
 .vista-cajas .cajas .icono.dos{
@@ -62,7 +65,12 @@
 
 }
 .vista-cajas .cajas .icono.cuatro{
-  color: rgb(222, 231, 89);
+  color: black;
   background-color: rgb(238, 234, 16);
+}
+
+.vista-cajas .cajas .icono.uno{
+  color: rgb(133, 14, 14);
+  background-color: rgb(221, 107, 112);
 
 }
