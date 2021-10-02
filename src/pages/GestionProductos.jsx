@@ -3,6 +3,13 @@ import "../styles/Style-gestionar-productos.css";
 import Nav from '../components/nav';
 
 const GestionProductos = () => {
+
+
+
+  const cambioID=(e)=>{
+    console.log(e.target.value);
+  }
+
 	return (
     <body className='flex'>
       
@@ -13,7 +20,7 @@ const GestionProductos = () => {
           <div className="detalles-producto">
             <div className="input-box">
               <span className="detalles">ID</span>
-              <input type="number" placeholder="Ingrese el ID " required />
+              <input onChange={cambioID} type="number" placeholder="Ingrese el ID " required />
             </div>
             <div className="input-box">
               <span className="detalles">Nombre</span>
