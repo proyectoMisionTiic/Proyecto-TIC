@@ -9,7 +9,7 @@ const Sidebar = () => {
         <div> 
 
     
-                <nav className=' celular:bg-gray-800    flex flex-col celular:w-screen   tablet:h-screen  portatil:w-full tablet:w-full portatil:mr-10 tablet:gap-20 portatil:text-3xl  '>
+                <nav className=' celular:bg-gray-800   prueba flex flex-col celular:w-screen   tablet:h-screen  portatil:h-screen portatil:w-full tablet:w-full portatil:mr-10 tablet:gap-20 portatil:text-3xl  '>
 
                 <ul>
             

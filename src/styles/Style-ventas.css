@@ -15,26 +15,29 @@
 	  background: #094b77;
 } */
 
-.entradax{
+
+
+.andrew-entradax{
 	font-size:30px !important;
 	color:white;
 	
 }
 
-.container {
+.andrew-container {
 	/* max-width: 700px; */
 
 	margin:0 auto !important;
 	padding:10px;
 	color:white;
 	font-weight:bold !important;
+
 	
 
 
 }
 
   @media (min-height: 480px) {
-	.container {
+	.andrew-container {
 		
 	max-height: 290px !important;
 	overflow-y: scroll !important;
@@ -45,39 +48,19 @@
   }
 
   @media (min-height: 630px) {
-	.container {
+	.andrew-container {
 	max-height: 380px !important;
 	overflow-y: scroll !important;
 	}
 
   }
+
+
+
   @media (min-height: 700px) {
-	.container {
+	.andrew-container {
 	max-height: 450px !important;
 	overflow-y: scroll !important;
-	}
-
-  }
-
-
-  
-
-  @media (min-height: 800px) {
-	.container {
-	max-height: 520px !important;
-	overflow-y: scroll !important;
-	
-	}
-
-  }
-
-
-
-  @media (min-width: 600px) {
-	.container {
-	max-height: 100% !important;
-	border-radius: 5px;
-	
 	
 	}
 
@@ -86,8 +69,9 @@
 
 
 
-  @media (min-height: 1000px) {
-	.container {
+
+  @media (min-height: 1300px) {
+	.andrew-container {
 	width:100% !important;
 	overflow: hidden !important;
 
@@ -97,16 +81,28 @@
   }
 
   
+  @media (min-height: 700px) {
+	.andrew-container {
+
+	overflow-y: scroll !important;
+	}
+
+  }
+
+
+  
   @media (min-width: 1000px) {
-	.container {
+	.andrew-container {
 	max-height: 100% !important;
 	overflow: hidden !important;
-	
+
+	border-radius: 5px;
+
 	max-width: 1300px;
 
 	}
 	
-	.entradax{
+	.andrew-entradax{
 
 		font-size:100px !important;
 		color:white;
@@ -117,18 +113,43 @@
   }
 
   @media (min-width: 1000px) {
-	.container {
+	.andrew-container {
 		max-width: 1000px;
+		
+		}
+
+		
+	
+  }
+
+  
+  @media (min-width: 600px) {
+	.andrew-container {
+	max-height: 100% !important;
+	
+
+	
+	
+	}
+
+  }
+
+  @media (min-width: 1500px) {
+	.andrew-container {
+		max-width: 1300px;
 		}
 	
   }
 
   @media (min-width: 1500px) {
-	.container {
-		max-width: 1300px;
-		}
+
+	.fondoe{
+		background-color: #fff;
+	}
 	
   }
+
+
 
 
 
@@ -136,28 +157,28 @@
 
 
   
-  .container .titulo {
+  .andrew-container .andrew-titulo {
 	font-size: 30px;
 	font-weight: 500;
 	text-align: center;
   }
-  .container form .detalles-producto {
+  .andrew-container form .andrew-detalles-producto {
 
 	flex-wrap: wrap;
 	justify-content: space-between;
 	margin: 20px 0 12px 0;
   }
   
-  form .detalles-producto .input-box {
+  form .andrew-detalles-producto .andrew-input-box {
 	width: calc(100% / 2 - 20px);
 	margin-bottom: 5px;
   }
-  .detalles-producto .input-box .detalles {
+  .andrew-detalles-producto .andrew-input-box .andrew-detalles {
 	font-weight: 500;
 	display: block;
 	margin-bottom: 5px;
   }
-  .detalles-producto .input-box input {
+  .andrew-detalles-producto .andrew-input-box input {
 	height: 45px;
 	width: 100%;
 	outline: none;
@@ -171,7 +192,7 @@
 
 
   @media (min-width: 700px) {
-	.detalles-producto .input-box input {
+	.andrew-detalles-producto .andrew-input-box input {
 	
 		width: 97%;
 	
@@ -180,7 +201,7 @@
   }
 
   @media (min-width: 1100px) {
-	.detalles-producto .input-box input {
+	.andrew-detalles-producto .andrew-input-box input {
 		height: 45px;
 		width: 97%;
 		outline: none;
@@ -198,12 +219,12 @@
 
 
 
-  .detalles-producto .input-box input:focus,
-  .detalles-producto .input-box input:valid {
+  .andrew-detalles-producto .andrew-input-box input:focus,
+  .andrew-detalles-producto .andrew-input-box input:valid {
 	border-color: #094b77;
   }
   
-  .centrado {
+  .andrew-centrado {
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
@@ -215,7 +236,7 @@
 	margin: 0;
   }
   
-  .estado-titulo {
+  .andrew-estado-titulo {
 	text-align: center;
   }
   form .estado-detalles .estado-titulo {
@@ -228,12 +249,12 @@
 	margin: 14px 0;
 	justify-content: space-between;
   }
-  .estado-detalles .category label {
+  .andrew-estado-detalles .category label {
 	display: flex;
 	align-items: center;
 	cursor: pointer;
   }
-  .estado-detalles .category .punto {
+  .andrew-estado-detalles .category .punto {
 	height: 20px;
 	width: 20px;
 	border-radius: 50%;
@@ -254,14 +275,14 @@
 	text-align: center;
   }
   
-  form .button {
+  form .andrew-button {
 	height: 45px;
 	margin: 20px 0;
 	display: inline-block;
 	width: 100%;
 	
   }
-  form .button input {
+  form .andrew-button input {
 	height: 100%;
 	width: 100%;
 	border-radius: 5px;
@@ -277,30 +298,30 @@
 
   /* RESPONSIVE */
   @media (max-width: 584px) {
-	.container {
+	.andrew-container {
 	  max-width: 100%;
 	}
-	form .detalles-producto .input-box {
+	form .andrew-detalles-producto .andrew-input-box {
 	  margin-bottom: 15px;
 	  width: 100%;
 	}
-	form .estado-detalles .category {
+	form .andrew-estado-detalles .category {
 	  width: 100%;
 	}
  
-	.detalles-producto::-webkit-scrollbar {
+	.andrew-detalles-producto::-webkit-scrollbar {
 	  width: 5px;
 	}
   }
   @media (max-width: 459px) {
-	.container .category {
+	.andrew-container .category {
 	  flex-direction: column;
 	}
   }
 
 
 
-  .colorxd{
+  .andrew-colorxd{
 	background: #094b77;
 	font-size: 20px !important;
 	font-weight: bold;
@@ -310,13 +331,22 @@
 
   }
 
-  .es{
+  .andrew-es{
 	width:100% !important;
   }
 
 
 
 
-.contenedorEntrada{
+.andrew-contenedorEntrada{
 	height:100vh;
 }
+
+
+
+.prueba{
+	max-height:2000px !important;
+}
+
+
+
