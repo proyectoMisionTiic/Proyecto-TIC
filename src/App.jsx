@@ -13,7 +13,7 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path={["/Principal", "/Ventas", "/InformacionVentas",]}>
+        <Route path={["/Principal", "/Ventas", "/InformacionVentas", "/GestionUsuarios"]}>
           <Layout>
             <Switch>
               <Route path="/Principal">
@@ -28,6 +28,9 @@ function App() {
                 <InformacionVentas />
               </Route>
 
+              <Route path="/GestionUsuarios">
+                <GestionUsuarios />
+              </Route>
             </Switch>
           </Layout>
         </Route>
@@ -36,23 +39,9 @@ function App() {
           <Route path="/">
             <Login />
           </Route>
-
-          <Route path="/GestionVentas">
-            <GestionVentas />
-          </Route>
         </Switch>
-
-
+        
       </Switch>
-      <Route path={["/GestionUsuarios"]}>
-          <Layout>
-            <Switch>
-              <Route path="/GestionUsuarios">
-                <GestionUsuarios />
-              </Route>
-            </Switch>
-          </Layout>
-        </Route>
     </Router>
   );
 }
