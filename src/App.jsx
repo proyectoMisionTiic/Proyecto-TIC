@@ -18,7 +18,7 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path={["/Principal", "/Ventas", "/InformacionVentas", "/GestionUsuarios"]}>
+        <Route path={["/Principal", "/Ventas", "/InformacionVentas", "/GestionUsuarios", "/GestionProductos"]}>
           <Layout>
             <Switch>
               <Route path="/Principal">
@@ -27,6 +27,10 @@ function App() {
 
               <Route path="/Ventas">
                 <GestionVentas />
+              </Route>
+
+              <Route path="/GestionProductos">
+                <GestionProductos />
               </Route>
 
               <Route path="/InformacionVentas">
