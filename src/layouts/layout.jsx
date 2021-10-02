@@ -14,7 +14,7 @@ return(
            <div className='tablet:flex'>
                  <Sidebar className='sidebar' />
 
-                <div className='portatil:  celular:flex celular:flex-col contenedor celular:h-screen w-full '>
+                <div className='celular:flex celular:flex-col contenedor celular:h-screen w-full '>
                     <div>{children}</div>
                 </div> 
 

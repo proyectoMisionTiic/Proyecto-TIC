@@ -2,7 +2,10 @@
 import '../src/styles/style.css';
 import Layout from './layouts/layout'
 import React from "react";
-import Principal from './pages/Principal'
+import Principal from './pages/Principal';
+import InformacionVentas from './pages/informacionVentas';
+
+import GestionVentas from "./pages/gestionVentas";
 import {
   BrowserRouter as Router,
   Switch,
@@ -19,25 +22,40 @@ function App() {
 
   <Router>
       <Switch >
-        <Route path={['/Principal']}>
+        <Route path={['/Principal','/Ventas','/InformacionVentas']}>
             <Layout> 
               <Switch> 
                   <Route path='/Principal'>
                     <Principal/>
                   </Route>
+
+                  <Route path='/Ventas'>
+                    <GestionVentas/>
+                  </Route>
+
+                  <Route path='/InformacionVentas'>
+                    <InformacionVentas/>
+                  </Route>
+
               </Switch> 
             </Layout> 
         </Route>
 
 
-        <Route path={['/Login']}>
+
+        
               <Switch> 
-                  <Route path='/Login'>
+                  <Route path='/'>
                     <Login/>
                   </Route>
+
+                  <Route path='/GestionVentas'>
+                    <GestionVentas/>
+                  </Route>
+
+                 
               </Switch> 
         
-        </Route>
       </Switch>
 
       

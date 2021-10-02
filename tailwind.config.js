@@ -13,13 +13,13 @@
 
      theme: {
       screens: {
-        'celular': '300px',
+        'celular': '279px',
         // => @media (min-width: 640px) { ... }
   
         'tablet': '599px',
         // => @media (min-width: 1024px) { ... }
   
-        'portatil': '1024px',
+        'portatil': '1000px',
         // => @media (min-width: 1280px) { ... }
 
 
