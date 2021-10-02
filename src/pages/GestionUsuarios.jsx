@@ -125,7 +125,7 @@ const FormularioCreacionUsuarios = () => {
   return (
     <body className="flex">
       <div className="container centrado mt-7 max-h-full  w-1/2 ">
-        {/* Inicio Seccion de input del usuario */}
+        {/* Inicio registro de usuarios */}
         <div className="titulo">Registro de Usuarios</div>
         <form action="#">
           <div className="detalles-producto">
@@ -141,7 +141,7 @@ const FormularioCreacionUsuarios = () => {
 
             <div className="input-box">
               <span className="detalles">Cédula </span>
-              <input type="number" placeholder="Ingrese el nombre " required />
+              <input type="number" placeholder="Ingrese cédula " required />
             </div>
 
             <div className="input-box">
@@ -160,7 +160,6 @@ const FormularioCreacionUsuarios = () => {
                 <option disabled value={0}>
                   Seleccione un rol
                 </option>
-
                 <option value="rol"> Administrador </option>
                 <option value="rol"> Vendedor </option>
               </select>
@@ -177,16 +176,15 @@ const FormularioCreacionUsuarios = () => {
                 <option disabled value={0}>
                   Seleccione un estado
                 </option>
-
                 <option value="autorizado"> Autorizado </option>
                 <option value="pendiente"> Pendiente </option>
                 <option value="no autorizado"> No Autorizado </option>
               </select>
             </div>
           </div>
-          {/* Final seccion de input */}
+          {/* Fin registro*/}
 
-          {/* Seccion de ESTADO y BOTONES */}
+          {/* Botones de buscar, modificar y registrar */}
 
           <div className="botones">
             <div className="button">
