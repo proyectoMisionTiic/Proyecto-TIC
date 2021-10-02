@@ -28,7 +28,7 @@ const usuariosBackend = [
   },
 ];
 
-const Usuarios = () => {
+const GestionUsuarios = () => {
   const [mostrarTabla, setMostrarTabla] = useState(true);
   const [usuarios, setUsuarios] = useState([]);
   const [textoBoton, setTextoBoton] = useState("Crear o Modificar Usuario");
@@ -203,4 +203,4 @@ const FormularioCreacionUsuarios = () => {
   );
 };
 
-export default Usuarios;
+export default GestionUsuarios;
