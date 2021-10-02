@@ -53,9 +53,41 @@ const Login = ()=>{
                 </form>
 
             </div>
-      </div>
-    );
-}
+          </div>
 
+          <div className="mb-12">
+            <label className="block" htmlFor="">
+              Password:
+            </label>
+            <div className="flex  border-gray-900 border-2 p-1 rounded-xl">
+              <i className="fas fa-lock mr-3 mt-4"></i>
+              <input
+                className="outline-none rounded-xl p-2 w-full"
+                type="Password"
+                placeholder="Password"
+              />
+            </div>
+          </div>
+
+          <div>
+            <input
+              className="text-white w-full bg-gray-900 rounded-xl mt-20 p-3 cursor-pointer "
+              type="button"
+              value="Ingresar"
+            />
+          </div>
+
+          <div>
+            <input
+              className="text-white w-full bg-red-700 rounded-xl mt-20 p-3 cursor-pointer"
+              type="button"
+              value="Ingresar Con Google"
+            />
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
 
 export default Login;

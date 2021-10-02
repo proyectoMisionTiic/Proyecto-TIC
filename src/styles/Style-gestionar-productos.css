@@ -20,9 +20,6 @@
 	border-radius: 5px;
   }
 
-
-
-
   .container .titulo {
 	font-size: 30px;
 	font-weight: 500;
@@ -72,8 +69,6 @@
 	margin: 0;
   }
 
-  
-  
   .estado-titulo {
 	text-align: center;
   }
@@ -161,6 +156,4 @@
 	.container .category {
 	  flex-direction: column;
 	}
-  }
-
 

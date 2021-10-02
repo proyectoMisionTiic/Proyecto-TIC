@@ -5,18 +5,79 @@
 
 
 .contenedor{
-
   width:100%;
-  background-color:tra;
 
-  
+  background-color:rgb(215, 226, 226);
+}
+
+.contenido-principal {
+  position:relative;
+  padding-top: 50px;
+  background-color:rgb(215, 226, 226)
+
+}
+.contenido-principal .vista-cajas {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 0 20px
+}
+.contenido-principal .vista-cajas .cajas{
+  width: calc(100% /4 - 15px);
+  background-color:#fff;
+  display:flex;
+  justify-content: center;
+  padding: 20px;
+  align-items: center; 
+  border-radius: 12px;
+
+
+  background-color:tra;
+}
+
+.contenido-principal .vista-cajas .tema-caja{
+  font-size: 25px;
+  font-weight: 500;
+  /* padding: 10px; */
+  padding-bottom: 10px;
+}
+
+.contenido-principal .vista-cajas .cifra{
+  font-size: 35px;
+  font-weight: 500;
+  margin: 5px;
+  /* display: inline-block; */
+   justify:center; 
 }
 
 
-.fondo{
-
+.vista-cajas .cajas .icono{
+  font-size: 35px;
+  font-weight: 600;
+  height: 50px;
+  width: 50px;
+  background: rgb(83, 152, 231);
+  line-height: 50px;
+  text-align: center;
+  border-radius:12px;
+  margin-left: 40px;
   background-position: bottom center;
   background-image:url('../media/pexels-sam-lion-5709661\ \(1\).jpg') !important;
+
 }
 
+.vista-cajas .cajas .icono.dos{
+  color: rgb(16, 180, 43);
+  background-color: rgb(133, 236, 133);
 
+}
+.vista-cajas .cajas .icono.cuatro{
+  color: black;
+  background-color: rgb(238, 234, 16);
+}
+
+.vista-cajas .cajas .icono.uno{
+  color: rgb(133, 14, 14);
+  background-color: rgb(221, 107, 112);
+
+}

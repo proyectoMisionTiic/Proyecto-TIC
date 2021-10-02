@@ -1,9 +1,9 @@
 import Botonsidebar from "./botonsidebar";
 
+
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
-
   return (
     <div>
       <nav className=" celular:bg-gray-800    flex flex-col celular:w-screen   tablet:h-screen  portatil:w-full tablet:w-full portatil:mr-10 tablet:gap-20 portatil:text-3xl  ">
