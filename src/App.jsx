@@ -1,7 +1,10 @@
-
-import '../src/styles/style.css';
-import Layout from './layouts/layout'
+import "../src/styles/style.css";
+import Layout from "./layouts/layout";
 import React from "react";
+
+import Principal from "./pages/Principal";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
 import Principal from './pages/Principal';
 import InformacionVentas from './pages/informacionVentas';
 
@@ -15,10 +18,21 @@ import {
 
 import Login from './pages/Login'
 
-
-
+import Login from "./pages/Login";
+import GestionUsuarios from "./pages/GestionUsuarios";
 function App() {
   return (
+
+    <Router>
+      <Switch>
+        <Route path={['/Principal']}>
+          <Layout>
+            <Switch>
+              <Route path='/Principal'>
+                <Principal />
+              </Route>
+            </Switch>
+          </Layout>
 
   <Router>
       <Switch >
@@ -41,7 +55,16 @@ function App() {
             </Layout> 
         </Route>
 
-
+       
+        <Route path={['/Usuarios']}>
+          <Layout>
+            <Switch>
+              <Route path='/Usuarios'>
+                <GestionUsuarios/>
+              </Route>
+            </Switch>
+          </Layout>
+        </Route>
 
         
               <Switch> 
@@ -56,20 +79,9 @@ function App() {
                  
               </Switch> 
         
+
       </Switch>
-
-      
-
-
-
-
-
-
-  </Router>
-
-
-
-
+    </Router>
   );
 }
 
