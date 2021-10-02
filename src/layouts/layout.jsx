@@ -5,7 +5,7 @@ import '../styles/style.css';
 
 const layout = ({children})=>{
 return(
-    <div className='overflow-x-hidden overflow-y-hidden bg-white    portatil:text-4xl  Monitor:text-2xl '>
+    <div className='overflow-x overflow-y-scroll    bg-gray-800  fondoe portatil:text-4xl  Monitor:text-2xl '>
         <div className='tablet:flex tablet:flex-row  displaygrid'>
 
         <div>

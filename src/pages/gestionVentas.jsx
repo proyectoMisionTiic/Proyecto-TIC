@@ -6,35 +6,35 @@ const GestionVentas = () => {
   return (
 
 
-      <div className="container  bg-gray-800  ">
+      <div className="andrew-container  bg-gray-800  mb-10 ">
         {/* Inicio Seccion de input del usuario */}
-        <div className="titulo mb-10 ">Gestionar Ventas</div>
+        <div className="andrew-titulo mb-10 ">Gestionar Ventas</div>
 
          <form  className='' action="#">
      
 
 
-          <div className="detalles-producto ">
+          <div className="andrew-detalles-producto ">
           <div className='text-3xl mb-10 m-auto text-center '>Ingreso De Productos</div>
 
              <div className='tablet:flex tablet:gap-3 portatil:gap-5'>
-                  <div className="input-box ">
-                    <span className="detalles">ID Producto</span>
+                  <div className="andrew-input-box ">
+                    <span className="andrew-detalles">ID Producto</span>
                     <input type="number" placeholder="Ingrese el identificador" required />
                   </div>
 
-                  <div className="input-box">
-                    <span className="detalles">Cantidad Producto</span>
+                  <div className="andrew-input-box">
+                    <span className="andrew-detalles">Cantidad Producto</span>
                     <input type="number" placeholder="Ingrese la cantidad de productos" required />
                   </div>
              </div>
 
-            <div className="input-box">
-              <span className="detalles">Valor unitario Producto</span>
+            <div className="andrew-input-box">
+              <span className="andrew-detalles">Valor unitario Producto</span>
               <input type="number" placeholder="Ingrese el valor unitario" required />
             </div>
 
-            <div className="button w-full">
+            <div className="andrew-button w-full">
               <input type="submit" value="Ingresar Producto" />
             </div>
 
@@ -66,14 +66,14 @@ const GestionVentas = () => {
 
 
             <div className='tablet:flex tablet:gap-5'>
-              <div className="input-box">
-                <span className="detalles">ID Venta</span>
+              <div className="andrew-input-box">
+                <span className="andrew-detalles">ID Venta</span>
                 <input type="number" placeholder="Ingrese el ID " required />
               </div>
 
 
-              <div className="input-box">
-                <span className="detalles ">Valor Total</span>
+              <div className="andrew-input-box">
+                <span className="andrew-detalles ">Valor Total</span>
                 <input type="number" placeholder="Ingrese el valor total" required />
               </div>
 
@@ -81,13 +81,13 @@ const GestionVentas = () => {
 
 
             <div className='tablet:flex tablet:gap-5'>
-                  <div className="input-box">
-                    <span className="detalles">Fecha de venta</span>
+                  <div className="andrew-input-box">
+                    <span className="andrew-detalles">Fecha de venta</span>
                     <input type="date" required />
                   </div>
 
-                  <div className="input-box">
-                    <span className="detalles">Documento Cliente</span>
+                  <div className="andrew-input-box">
+                    <span className="andrew-detalles">Documento Cliente</span>
                     <input type="number" placeholder="Ingrese el documento del cliente" required />
                   </div>
               </div>
@@ -95,24 +95,32 @@ const GestionVentas = () => {
               <div className='tablet:flex tablet:gap-5'>
               
 
-                  <div className="input-box">
-                    <span className="detalles">Nombre Vendedor</span>
+                  <div className="andrew-input-box">
+                    <span className="andrew-detalles">Nombre Vendedor</span>
                     <input  type="text" placeholder="Ingrese el nombre del vendedor" required />
                   </div>
 
-                  <div className="input-box">
-                    <span className="detalles">Nombre Cliente</span>
+                  <div className="andrew-input-box">
+                    <span className="andrew-detalles">Nombre Cliente</span>
                     <input  type="text" placeholder="Ingrese el nombre del vendedor" required />
                   </div>
            </div>
 
+
+            <div className="andrew-button w-full ">
+              <input type="submit" value="Registrar Venta" />
+            </div>
+
+                    <div className="">
+                    
+                    <input className='bg-gray-800' type="text"  />
+                  </div>
+
+
           
 
 
-            <div className="input-box es mt-10">
-              <input className=' mb-10 colorxd text-white ' type="submit" value='Registrar Venta' required />
-            </div>
-
+         
 
 
           </div>

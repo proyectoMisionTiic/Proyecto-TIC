@@ -6,13 +6,13 @@ const informacionVentas = () => {
     return (
       <div >
   
-        <div className="container bg-gray-900">
+        <div className="andrew-container bg-gray-900">
           {/* Inicio Seccion de input del usuario */}
-          <div className="titulo mb-10 ">Informacion Ventas</div>
+          <div className="andrew-titulo mb-10 ">Informacion Ventas</div>
   
            <form  className='' action="#">
        
-            <div className="detalles-producto ">
+            <div className="andrew-detalles-producto ">
   
               <table class="min-w-full bg-white">
                 <thead class="bg-gray-800 text-white">
