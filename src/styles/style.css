@@ -4,6 +4,13 @@
 @tailwind utilities;
 
 
+/* Fonfo login */
+.fondo{
+
+  background-position: bottom center;
+  background-image:url('../media/pexels-sam-lion-5709661\ \(1\).jpg') !important;
+}
+
 .contenedor{
   width:100%;
 
@@ -61,9 +68,6 @@
   text-align: center;
   border-radius:12px;
   margin-left: 40px;
-  background-position: bottom center;
-  background-image:url('../media/pexels-sam-lion-5709661\ \(1\).jpg') !important;
-
 }
 
 .vista-cajas .cajas .icono.dos{

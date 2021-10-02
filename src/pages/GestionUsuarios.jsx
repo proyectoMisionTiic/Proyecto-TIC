@@ -124,7 +124,7 @@ const TablaUsuarios = ({ listaUsuarios }) => {
 const FormularioCreacionUsuarios = () => {
   return (
     <body className="flex">
-      <div className="container centrado mt-7 max-h-full  w-1/2 ">
+           <div className="self-center   container p-10 ml-20 mr-20 mt-10 w-full ">
         {/* Inicio registro de usuarios */}
         <div className="titulo">Registro de Usuarios</div>
         <form action="#">
@@ -186,13 +186,7 @@ const FormularioCreacionUsuarios = () => {
 
           {/* Botones de buscar, modificar y registrar */}
 
-          <div className="botones">
-            <div className="button">
-              <input type="submit" value="Buscar por cédula" />
-            </div>
-            <div className="button">
-              <input type="submit" value="Modificar usuario" />
-            </div>
+          <div className="botones">  
             <div className="button">
               <input type="submit" value="Registrar usuario" />
             </div>

@@ -33,6 +33,7 @@ const Sidebar = () => {
             <Botonsidebar className="celular:" NombreBoton="Ver Productos" />
           </div>
 
+          <Link to="/GestionProductos">
           <div className=" flex  hover:bg-green-500 my-1 p-2.5  ml-2 mr-2 tablet:mb-10 portatil:mb-15">
             <i class="fab fa-shopify text-white justify-center mr-3"></i>
             <Botonsidebar
@@ -40,6 +41,7 @@ const Sidebar = () => {
               NombreBoton="Gestionar Producto"
             />
           </div>
+          </Link>
 
           <Link to="/GestionUsuarios">
             <div className=" flex  hover:bg-green-500 my-1 p-2.5  ml-2 mr-2 tablet:mb-10 portatil:mb-15">
