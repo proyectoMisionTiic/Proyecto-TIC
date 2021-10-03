@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../styles/Style-gestionar-productos.css";
+import { ToastContainer, toast } from "react-toastify";
 
 const usuariosBackend = [
   {
@@ -27,7 +28,17 @@ const usuariosBackend = [
     estado: "Pendiente",
   },
 ];
-
+const mostrarMensaje = () => {
+  toast.success("Usuario editado correctamente", {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
+};
 const VerUsuarios = () => {
   const [mostrarTabla, setMostrarTabla] = useState(true);
   const [usuarios, setUsuarios] = useState([]);
@@ -117,7 +128,10 @@ const TablaUsuarios = ({ listaUsuarios }) => {
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h5 class="text-center modal-title" id="exampleModalLabel">
+                            <h5
+                              class="text-center modal-title"
+                              id="exampleModalLabel"
+                            >
                               Editar Usuario
                             </h5>
                             <button
@@ -174,21 +188,37 @@ const TablaUsuarios = ({ listaUsuarios }) => {
                                   </select>
                                 </div>
                               </div>
-                             
                             </form>
+
+                            <div class="modal-footer">
+                              <button
+                                type="button"
+                                class="btn btn-secondary"
+                                data-dismiss="modal"
+                              >
+                                Cerrar
+                              </button>
+                       
+                            <div className="button">
+                              <input
+                                onClick={mostrarMensaje}
+                                type="submit"
+                                value="Guardar"
+                              />
+                            </div>
                           </div>
-                          <div class="modal-footer">
-                            <button
-                              type="button"
-                              class="btn btn-secondary"
-                              data-dismiss="modal"
-                            >
-                              Cerrar
-                            </button>
-                            <button type="button" class="btn btn-primary">
-                              Guardar
-                            </button>
                           </div>
+                          <ToastContainer
+                            position="top-center"
+                            autoClose={5000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
+                          />
                         </div>
                       </div>
                     </div>
