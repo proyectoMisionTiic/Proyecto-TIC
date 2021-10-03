@@ -95,8 +95,103 @@ const TablaUsuarios = ({ listaUsuarios }) => {
                     <td>{usuario.email}</td>
                     <td>{usuario.rol}</td>
                     <td>{usuario.estado}</td>
-                    <i class="fas fa-ban"></i>
-                    <i class="fas fa-broom"></i>
+                    <i type="submit" class="fas fa-broom"></i>
+
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      data-toggle="modal"
+                      data-target="#exampleModal"
+                    >
+                      Editar
+                    </button>
+
+                    <div
+                      class="modal fade"
+                      id="exampleModal"
+                      tabindex="-1"
+                      role="dialog"
+                      aria-labelledby="exampleModalLabel"
+                      aria-hidden="true"
+                    >
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="text-center modal-title" id="exampleModalLabel">
+                              Editar Usuario
+                            </h5>
+                            <button
+                              type="button"
+                              class="close"
+                              data-dismiss="modal"
+                              aria-label="Close"
+                            >
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <form action="#">
+                              <div className="detalles-producto">
+                                <div className="input-box">
+                                  <span className="detalles">Rol</span>
+                                  <select
+                                    className="border-2"
+                                    name="brand"
+                                    required
+                                    defaultValue={0}
+                                  >
+                                    <option disabled value={0}>
+                                      Seleccione un rol
+                                    </option>
+                                    <option value="rol"> Administrador </option>
+                                    <option value="rol"> Vendedor </option>
+                                  </select>
+                                </div>
+
+                                <div className="input-box">
+                                  <span className="detalles">Estado</span>
+                                  <select
+                                    className="border-2"
+                                    name="brand"
+                                    required
+                                    defaultValue={0}
+                                  >
+                                    <option disabled value={0}>
+                                      Seleccione un estado
+                                    </option>
+                                    <option value="autorizado">
+                                      {" "}
+                                      Autorizado{" "}
+                                    </option>
+                                    <option value="pendiente">
+                                      {" "}
+                                      Pendiente{" "}
+                                    </option>
+                                    <option value="no autorizado">
+                                      {" "}
+                                      No Autorizado{" "}
+                                    </option>
+                                  </select>
+                                </div>
+                              </div>
+                             
+                            </form>
+                          </div>
+                          <div class="modal-footer">
+                            <button
+                              type="button"
+                              class="btn btn-secondary"
+                              data-dismiss="modal"
+                            >
+                              Cerrar
+                            </button>
+                            <button type="button" class="btn btn-primary">
+                              Guardar
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </tr>
                 );
               })}
