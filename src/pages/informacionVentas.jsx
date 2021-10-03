@@ -1,3 +1,4 @@
+
 import React from 'react'
 import "../styles/Style-ventas.css";
 import Nav from '../components/nav';
@@ -23,6 +24,7 @@ const informacionVentas = () => {
                     <th class="  text-left py-3 px-4 uppercase font-semibold text-sm">Documento Cliente</th>
                     <th class="  text-left py-3 px-4 uppercase font-semibold text-sm">Nombre Vendedor</th>
                     <th class="  text-left py-3 px-4 uppercase font-semibold text-sm">Nombre Cliente</th>
+                    <th class="  text-left py-3 px-4 uppercase font-semibold text-sm">Productos</th>
                    
                     
                   </tr>
@@ -30,6 +32,7 @@ const informacionVentas = () => {
                 <tbody class="text-gray-700">
   
                   <tr class="bg-gray-100">
+                    <td class=" text-left py-3 px-4">0</td>
                     <td class=" text-left py-3 px-4">0</td>
                     <td class=" text-left py-3 px-4">0</td>
                     <td class=" text-left py-3 px-4">0</td>
