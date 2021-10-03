@@ -169,9 +169,22 @@ const GestionVentas = () => {
               />
             </div>
 
-            <div className="">
-              <input className="bg-gray-800" type="text" />
-            </div>
+                          <div className="andrew-input-box">
+                          <span className="andrew-detalles text-transparent ">Nombre Cliente</span>
+                          <input  type="hidden" placeholder="Ingrese el nombre del vendedor" required />
+                        </div>
+
+                        <div className="andrew-input-box">
+                          <span className="andrew-detalles text-transparent ">Nombre Cliente</span>
+                          <input  type="hidden" placeholder="Ingrese el nombre del vendedor" required />
+                        </div>
+
+
+           
+
+
+
+
           </div>
         </form>
 
