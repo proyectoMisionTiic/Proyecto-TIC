@@ -198,15 +198,16 @@ const TablaUsuarios = ({ listaUsuarios }) => {
                               >
                                 Cerrar
                               </button>
-                       
-                            <div className="button">
-                              <input
-                                onClick={mostrarMensaje}
+
+                              <button
                                 type="submit"
                                 value="Guardar"
-                              />
+                                class="btn btn-primary"
+                                onClick={mostrarMensaje}
+                              >
+                                Guardar cambios
+                              </button>
                             </div>
-                          </div>
                           </div>
                           <ToastContainer
                             position="top-center"
