@@ -2,7 +2,18 @@ import React from 'react'
 import "../styles/Style-gestionar-productos.css";
 
 const GestionProductos = () => {
+  const mostrarMensajevp = () => {
+    toast.success('Producto Registrado Correctamente', {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
 
+  }
 
 	return (
     <body className='flex'>
@@ -60,12 +71,23 @@ const GestionProductos = () => {
               </label>
             </div>
           </div>
-          <div className="botones">
+         <div className="botones">
             <div className="button">
-              <input type="submit" value="Registrar producto" />
-            </div>
+                    <input onClick={mostrarMensajevp} type="submit" value="Registrar producto" />
+                    </div>
           </div>
         </form>
+      <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
         {/* Fin seccion de ESTADO y BOTONES */}
       </div>
       
