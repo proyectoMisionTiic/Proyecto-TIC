@@ -1,5 +1,18 @@
 import React from 'react'
 import "../styles/Style-gestionar-productos.css";
+import { ToastContainer, toast } from "react-toastify";
+const mostrarMensajevp = () => {
+  toast.success('Producto Registrado Correctamente', {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
+
+}
 
 const GestionProductos = () => {
   const mostrarMensajevp = () => {
