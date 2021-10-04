@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../styles/Style-gestionar-productos.css";
 import { ToastContainer, toast } from "react-toastify";
 const mostrarMensaje = () => {
-  toast.success("Producto Registrado Correctamente", {
+  toast.success("Usuario Registrado Correctamente", {
     position: "top-center",
     autoClose: 5000,
     hideProgressBar: false,
@@ -83,7 +83,7 @@ const GestionUsuarios = () => {
               <input
                 onClick={mostrarMensaje}
                 type="submit"
-                value="Registrar producto"
+                value="Registrar usuario"
               />
             </div>
           </div>
