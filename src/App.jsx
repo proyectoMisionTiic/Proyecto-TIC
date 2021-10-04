@@ -10,6 +10,7 @@ import InformacionVentas from "./pages/informacionVentas";
 import GestionUsuarios from "./pages/GestionUsuarios";
 import GestionVentas from "./pages/gestionVentas";
 import VerUsuarios from "./pages/VerUsuarios";
+import VerProductos from "./pages/VerProductos";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 
