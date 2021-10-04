@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import "../styles/Style-gestionar-productos.css";
 import { ToastContainer, toast } from "react-toastify";
 
+
+
 const Productosbackend = [
   {
     ID : "903-550HM",
@@ -157,9 +159,9 @@ const Tablaproductos = ({ listaproductos }) => {
                   <tr>
                     <td>{producto.ID}</td>
                     <td>{producto.Nombre}</td>
-                    <td>{usuario.Descripción}</td>
-                    <td>{usuario.Cantidad}</td>
-                    <td>{usuario.Valor_unitario}</td>
+                    <td>{producto.Descripción}</td>
+                    <td>{producto.Cantidad}</td>
+                    <td>{producto.Valor_unitario}</td>
                     <i type="submit" class="fas fa-broom"></i>
 
                     <button
@@ -250,7 +252,7 @@ const Tablaproductos = ({ listaproductos }) => {
                               type="submit"
                               value="Guardar"
                               class="btn btn-primary"
-                              onClick={mostrarMensaje}
+                              onClick={mostrarMensajep}
                             >
                               Guardar cambios
                             </button>

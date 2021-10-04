@@ -20,7 +20,7 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path={["/Principal", "/Ventas", "/InformacionVentas", "/GestionUsuarios", "/VerUsuarios", "/GestionProductos"]}>
+        <Route path={["/Principal", "/Ventas", "/InformacionVentas", "/GestionUsuarios", "/VerUsuarios", "/GestionProductos", "/VerProductos"]}>
           <Layout>
             <Switch>
               <Route path="/Principal">
@@ -42,10 +42,14 @@ function App() {
               <Route path="/GestionUsuarios">
                 <GestionUsuarios />
               </Route>
+              <Route path="/VerProductos">
+                <VerProductos />
+              </Route>
 
               <Route path="/VerUsuarios">
                 <VerUsuarios />
               </Route>
+
             </Switch>
           </Layout>
         </Route>
