@@ -1,10 +1,22 @@
 import React, { useEffect, useState } from "react";
 import "../styles/Style-gestionar-productos.css";
+import { ToastContainer, toast } from "react-toastify";
+const mostrarMensaje = () => {
+  toast.success("Producto Registrado Correctamente", {
+    position: "top-center",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
+};
 
 const GestionUsuarios = () => {
   return (
     <body className="flex">
-           <div className="self-center   container p-20 ml-20 mr-20 mt-10 w-full ">
+      <div className="self-center   container p-20 ml-20 mr-20 mt-10 w-full ">
         {/* Inicio registro de usuarios */}
         <div className="titulo">Registro de Usuarios</div>
         <form action="#">
@@ -66,12 +78,27 @@ const GestionUsuarios = () => {
 
           {/* Botones de buscar, modificar y registrar */}
 
-          <div className="botones">  
+          <div className="botones">
             <div className="button">
-              <input type="submit" value="Registrar usuario" />
+              <input
+                onClick={mostrarMensaje}
+                type="submit"
+                value="Registrar producto"
+              />
             </div>
           </div>
         </form>
+        <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </div>
     </body>
   );
