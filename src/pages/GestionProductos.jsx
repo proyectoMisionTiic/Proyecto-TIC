@@ -1,22 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState, useRef } from 'react';
 import "../styles/Style-gestionar-productos.css";
 import { ToastContainer, toast } from "react-toastify";
-const mostrarMensajevp = () => {
-  toast.success('Producto Registrado Correctamente', {
-    position: "top-center",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  });
-
-}
+import {VerProductos} from "./VerProductos.jsx";
+import Tablaproductos from "./VerProductos.jsx";
 
 const GestionProductos = () => {
   const mostrarMensajevp = () => {
-    toast.success('Producto Registrado Correctamente', {
+    toast.success("Producto Registrado Correctamente", {
       position: "top-center",
       autoClose: 5000,
       hideProgressBar: false,
@@ -25,16 +15,29 @@ const GestionProductos = () => {
       draggable: true,
       progress: undefined,
     });
+  };
+  const form=useRef(null)
 
-  }
+  const submitformulario = (e) => {
+    e.preventDefault();
+    const data=new FormData(form.current);
+  
+    //nuevoProducto (objeto vacio) almacena los productos en un diccionario
+    const nuevoProducto = {};
+      data.forEach((value, key) => {
+        nuevoProducto[key] = value;
+      });
+      console.log("Datos enviados", nuevoProducto);
+      // setProductos([...listaproductos,nuevoProducto])
 
-	return (
-    <body className='flex'>
-      
+  };
+
+  return (
+    <body className="flex">
       <div className="self-center   container p-10 ml-20 mr-20 mt-10 w-full ">
         {/* Inicio Seccion de input del usuario */}
         <div className="titulo">Registro de productos</div>
-        <form action="#">
+        <form onSubmit={submitformulario} ref={form}>
           <div className="detalles-producto">
             <div className="input-box">
               <span className="detalles">ID</span>
@@ -42,19 +45,26 @@ const GestionProductos = () => {
             </div>
             <div className="input-box">
               <span className="detalles">Nombre</span>
-              <input type="text" placeholder="Ingrese el nombre " required />
+              <input 
+              type="text" 
+              placeholder="Ingrese el nombre " 
+              name='nombre'
+              required />
             </div>
             <div className="input-box">
               <span className="detalles">Descripción</span>
               <input
                 type="text"
                 placeholder="Ingrese una descripción "
+                name='descripcion'
                 required
               />
             </div>
             <div className="input-box">
               <span className="detalles">Valor unitario</span>
-              <input type="number" placeholder="Ingrese el valor " required />
+              <input type="number" placeholder="Ingrese el valor " 
+              name='valor'
+              required />
             </div>
             <div className="input-box centrado">
               <span className="detalles centrado">Cantidad</span>
@@ -62,6 +72,7 @@ const GestionProductos = () => {
                 type="number"
                 className="centrado"
                 placeholder="Ingrese la cantidad "
+                name='cantidad'
                 required
               />
             </div>
@@ -70,8 +81,8 @@ const GestionProductos = () => {
 
           {/* Seccion de ESTADO y BOTONES */}
           <div className="estado-detalles">
-            <input type="radio" name="estado" id="punto-1" />
-            <input type="radio" name="estado" id="punto-2" />
+            <input type="radio" name="estado" id="punto-1" value='disponible' required />
+            <input type="radio" name="estado" id="punto-2" value='No disponible'/>
             <span className="estado-titulo">Estado</span>
             <div className="category">
               <label for="punto-1">
@@ -84,28 +95,31 @@ const GestionProductos = () => {
               </label>
             </div>
           </div>
-         <div className="botones">
+          <div className="botones">
             <div className="button">
-                    <input onClick={mostrarMensajevp} type="submit" value="Registrar producto" />
-                    </div>
+              <input
+                onClick={mostrarMensajevp}
+                type="submit"
+                value="Registrar producto"
+              />
+            </div>
           </div>
         </form>
-      <ToastContainer
-            position="top-center"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-          />
+        <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
         {/* Fin seccion de ESTADO y BOTONES */}
       </div>
-      
-      </body>
-	);
-}
+    </body>
+  );
+};
 
-export default GestionProductos
+export default GestionProductos;
