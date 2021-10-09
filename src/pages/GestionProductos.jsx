@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import "../styles/Style-gestionar-productos.css";
 import { ToastContainer, toast } from "react-toastify";
-import {VerProductos} from "./VerProductos.jsx";
-import Tablaproductos from "./VerProductos.jsx";
+import axios from "axios";
+
 
 const GestionProductos = () => {
   const mostrarMensajevp = () => {
@@ -18,7 +18,7 @@ const GestionProductos = () => {
   };
   const form=useRef(null)
 
-  const submitformulario = (e) => {
+  const submitformulario = async (e) => {
     e.preventDefault();
     const data=new FormData(form.current);
   
@@ -28,7 +28,25 @@ const GestionProductos = () => {
         nuevoProducto[key] = value;
       });
       console.log("Datos enviados", nuevoProducto);
-      // setProductos([...listaproductos,nuevoProducto])
+      
+      const options = {
+        method: 'POST',
+        url: 'http://localhost:3000/productos/nuevo/',
+        headers: { 'Content-Type': 'application/json' },
+        data: { nombre: nuevoProducto.nombre, descripcion: nuevoProducto.descripcion, valor: nuevoProducto.valor, 
+          cantidad: nuevoProducto.cantidad, estado: nuevoProducto.estado}
+      };
+  
+      await axios
+        .request(options)
+        .then(function (response) {
+          console.log(response.data);
+          toast.success('Producto agregado con éxito');
+        })
+        .catch(function (error) {
+          console.error(error);
+          toast.error('Error creando el producto');
+        });
 
   };
 
@@ -39,10 +57,10 @@ const GestionProductos = () => {
         <div className="titulo">Registro de productos</div>
         <form onSubmit={submitformulario} ref={form}>
           <div className="detalles-producto">
-            <div className="input-box">
+            {/* <div className="input-box">
               <span className="detalles">ID</span>
-              <input type="number" placeholder="Ingrese el ID " required />
-            </div>
+              <input type="number" placeholder="Ingrese el ID " name='id' required />
+            </div> */}
             <div className="input-box">
               <span className="detalles">Nombre</span>
               <input 
@@ -97,8 +115,7 @@ const GestionProductos = () => {
           </div>
           <div className="botones">
             <div className="button">
-              <input
-                onClick={mostrarMensajevp}
+              <input                
                 type="submit"
                 value="Registrar producto"
               />
