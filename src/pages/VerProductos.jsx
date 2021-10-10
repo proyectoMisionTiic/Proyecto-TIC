@@ -1,131 +1,41 @@
 import React, { useEffect, useState } from "react";
 import "../styles/Style-gestionar-productos.css";
 import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
+import { prettyDOM } from "@testing-library/dom";
+
+
+const options = {method: 'GET', url: 'http://localhost:4000/productos/ver'};
 
 
 
-const Productosbackend = [
-  {
-    ID : "903-550HM",
-    Nombre: "Elia",
-    Descripción: "Camiseta Rosada",
-    Cantidad: "122",
-    Valor_unitario: "$44.900",
-  },
-  {
-    ID : "903-1507L",
-    Nombre: "Elayne",
-    Descripción: "Camiseta blanca y fucsia",
-    Cantidad: "88",
-    Valor_unitario: "$39.900",
-  },
-  {
-    ID : "019-1505Z",
-    Nombre: "Nous",
-    Descripción: "Tenis Blancos/Rosados",
-    Cantidad: "147",
-    Valor_unitario: "$59.900",
-  },
-  {
-    ID : "911-1501x",
-    Nombre: "Edna",
-    Descripción: "Body + short blanco",
-    Cantidad: "95",
-    Valor_unitario: "$69.900",
-  },{
-    ID : "916-9002x",
-    Nombre: "Diya",
-    Descripción: "Short Demin Azul",
-    Cantidad: "56",
-    Valor_unitario: "$69.900"
-  },{
-    ID : "915-5507N",
-    Nombre: "Elle",
-    Descripción: "vestido lila",
-    Cantidad: "74",
-    Valor_unitario: "$89.900",
-  },
-  {
-    ID : "916-3642X",
-    Nombre: "Ezequil",
-    Descripción: "Camiseta + Bermuda azul",
-    Cantidad: "96",
-    Valor_unitario: "$79.900",
-  },
-  {
-    ID : "915-9264N",
-    Nombre: "Mojito",
-    Descripción: "Zapatos beige",
-    Cantidad: "115",
-    Valor_unitario: "$49.900",
-  },
-  {
-    ID : "916-4523X",
-    Nombre: "Emerson",
-    Descripción: "Jogger",
-    Cantidad: "92",
-    Valor_unitario: "$69.900",
-  },
-  {
-    ID : "915-9207p",
-    Nombre: "A.Elían",
-    Descripción: "Pantalón negro",
-    Cantidad: "189",
-    Valor_unitario: "$89.900",
-  },
-  {
-    ID : "915-4756A",
-    Nombre: "Euken",
-    Descripción: "Botas",
-    Cantidad: "57",
-    Valor_unitario: "$129.900",
-  },
-  {
-    ID : "916-3521U",
-    Nombre: "Enrico",
-    Descripción: "Gorro Tejido Azul/Rojo",
-    Cantidad: "92",
-    Valor_unitario: "$39.900",
-  }
-];
-const mostrarMensajep = () => {
-  toast.success("Producto editado correctamente", {
-    position: "top-center",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  });
-};
-const VerProductos = () => {
-  const [mostrarTablap, setMostrarTablap] = useState(true);
-  const [productos, setproductos] = useState([]);
 
-  useEffect(() => {
-    //obtener lista de usuarios
+
+
+const Tablaproductos = () => {
+  const [productos, setproductos] = useState([{}]);
+
+  const mostrarMensajep = () => {
+    toast.success("Producto editado correctamente", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+
+     let Productosbackend = [{}];
+  axios.request(options).then(function (response) {
+    Productosbackend = response.data;
     setproductos(Productosbackend);
-  }, []);
 
-  useEffect(() => {}, [mostrarTablap]);
+  }).catch(function (error) {
+    console.error(error);
+  });
 
-  return (
-    <div className="flex h-full w-full flex-col items-center justify-start p-8">
-      <div className="flex flex-col">
-        <Tablaproductos listaproductos={productos} />
-      </div>
-    </div>
-  );
-};
-
-const Tablaproductos = ({ listaproductos }) => {
-  useEffect(() => {
-    console.log(
-      "este es el listado de Productos en el componente de tabla",
-      listaproductos
-    );
-  }, [listaproductos]);
   return (
     <div className="bg-gray-800 self-center container ml-80 mr-80 mt-10 ">
       <div class="md:px-32 w-full">
@@ -154,14 +64,14 @@ const Tablaproductos = ({ listaproductos }) => {
               </tr>
             </thead>
             <tbody>
-              {listaproductos.map((producto) => {
+              {productos.map((xd) => {
                 return (
                   <tr>
-                    <td>{producto.ID}</td>
-                    <td>{producto.Nombre}</td>
-                    <td>{producto.Descripción}</td>
-                    <td>{producto.Cantidad}</td>
-                    <td>{producto.Valor_unitario}</td>
+                    <td>{xd._id}</td>
+                    <td>{xd.nombre}</td>
+                    <td>{xd.descripcion}</td>
+                    <td>{xd.valor}</td>
+                    <td>{xd.cantidad}</td>
                     <i type="submit" class="fas fa-broom"></i>
 
                     <button
@@ -284,4 +194,5 @@ const Tablaproductos = ({ listaproductos }) => {
   );
 };
 
-export default VerProductos;
+export default Tablaproductos;
+
