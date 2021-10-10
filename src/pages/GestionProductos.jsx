@@ -31,7 +31,7 @@ const GestionProductos = () => {
       
       const options = {
         method: 'POST',
-        url: 'http://localhost:3000/productos/nuevo/',
+        url: 'http://localhost:4000/productos/nuevo/',
         headers: { 'Content-Type': 'application/json' },
         data: { nombre: nuevoProducto.nombre, descripcion: nuevoProducto.descripcion, valor: nuevoProducto.valor, 
           cantidad: nuevoProducto.cantidad, estado: nuevoProducto.estado}
