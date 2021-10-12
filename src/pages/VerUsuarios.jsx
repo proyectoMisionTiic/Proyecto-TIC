@@ -106,7 +106,6 @@ const TablaUsuarios = ({ listaUsuarios }) => {
                     <td>{usuario.email}</td>
                     <td>{usuario.rol}</td>
                     <td>{usuario.estado}</td>
-                    <i type="submit" class="fas fa-broom"></i>
 
                     <button
                       type="button"
@@ -120,7 +119,7 @@ const TablaUsuarios = ({ listaUsuarios }) => {
                     <div
                       class="modal fade"
                       id="exampleModal"
-                      tabindex="-1"
+                      tabIndex="-1"
                       role="dialog"
                       aria-labelledby="exampleModalLabel"
                       aria-hidden="true"

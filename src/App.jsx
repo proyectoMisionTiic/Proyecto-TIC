@@ -1,7 +1,6 @@
 
 import "./styles/Style-gestionar-productos.css";
 import GestionProductos from "./pages/GestionProductos";
-
 import "../src/styles/style.css";
 import Layout from "./layouts/layout";
 import React from "react";
@@ -12,12 +11,17 @@ import GestionVentas from "./pages/gestionVentas";
 import VerUsuarios from "./pages/VerUsuarios";
 import VerProductos from "./pages/VerProductos";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-
+import { Auth0Provider } from "@auth0/auth0-react";
 
 import Login from "./pages/Login";
 
 function App() {
   return (
+    <Auth0Provider
+    domain="misiontic-ticteam.us.auth0.com"
+    clientId="7t4qvRFQjxaIj2YWKaSk7OZOMQXjDtq5"
+    redirectUri={window.location.origin}
+  >
     <Router>
       <Switch>
         <Route path={["/Principal", "/Ventas", "/InformacionVentas", "/GestionUsuarios", "/VerUsuarios", "/GestionProductos", "/VerProductos"]}>
@@ -62,6 +66,7 @@ function App() {
         
       </Switch>
     </Router>
+    </Auth0Provider>
   );
 }
 
