@@ -1,71 +1,34 @@
 import React, { useEffect, useState } from "react";
 import "../styles/Style-gestionar-productos.css";
 import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
 
-const usuariosBackend = [
-  {
-    nombre: "Juan",
-    apellido: "Montoya",
-    cedula: "123456789",
-    email: "juanmontoya@gmail.com",
-    rol: "Administrador",
-    estado: "Pendiente",
-  },
-  {
-    nombre: "Andrea",
-    apellido: "Gomez",
-    cedula: "987654321",
-    email: "andgomez@hotmail.com",
-    rol: "Vendedor",
-    estado: "Autorizado",
-  },
-  {
-    nombre: "Santiago",
-    apellido: "Cadavid",
-    cedula: "145623698",
-    email: "santicadv@hotmail.com",
-    rol: "Vendedor",
-    estado: "Pendiente",
-  },
-];
-const mostrarMensaje = () => {
-  toast.success("Usuario editado correctamente", {
-    position: "top-center",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
+
+const options = {method: 'GET', url: 'http://localhost:4000/usuarios/listar'};
+
+const TablaUsuarios = () => {
+  const [usuarios, setusuarios] = useState([{}]);
+
+  const mostrarMensaje = () => {
+    toast.success("Usuario editado correctamente", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+
+     let Usuariosbackend = [{}];
+  axios.request(options).then(function (response) {
+    Usuariosbackend = response.data;
+    setusuarios(Usuariosbackend);
+
+  }).catch(function (error) {
+    console.error(error);
   });
-};
-const VerUsuarios = () => {
-  const [mostrarTabla, setMostrarTabla] = useState(true);
-  const [usuarios, setUsuarios] = useState([]);
-
-  useEffect(() => {
-    //obtener lista de usuarios
-    setUsuarios(usuariosBackend);
-  }, []);
-
-  useEffect(() => {}, [mostrarTabla]);
-
-  return (
-    <div className="flex h-full w-full flex-col items-center justify-start p-8">
-      <div className="flex flex-col">
-        <TablaUsuarios listaUsuarios={usuarios} />
-      </div>
-    </div>
-  );
-};
-
-const TablaUsuarios = ({ listaUsuarios }) => {
-  useEffect(() => {
-    console.log(
-      "este es el listado de usuarios en el componente de tabla",
-      listaUsuarios
-    );
-  }, [listaUsuarios]);
   return (
     <div className="bg-gray-800 self-center container ml-80 mr-80 mt-10 ">
       <div class="md:px-32 w-full">
@@ -97,7 +60,7 @@ const TablaUsuarios = ({ listaUsuarios }) => {
               </tr>
             </thead>
             <tbody>
-              {listaUsuarios.map((usuario) => {
+              {usuarios.map((usuario) => {
                 return (
                   <tr>
                     <td>{usuario.nombre}</td>
@@ -106,6 +69,7 @@ const TablaUsuarios = ({ listaUsuarios }) => {
                     <td>{usuario.email}</td>
                     <td>{usuario.rol}</td>
                     <td>{usuario.estado}</td>
+                    <i type="submit" class="fas fa-broom"></i>
 
                     <button
                       type="button"
@@ -119,7 +83,7 @@ const TablaUsuarios = ({ listaUsuarios }) => {
                     <div
                       class="modal fade"
                       id="exampleModal"
-                      tabIndex="-1"
+                      tabindex="-1"
                       role="dialog"
                       aria-labelledby="exampleModalLabel"
                       aria-hidden="true"
@@ -233,4 +197,6 @@ const TablaUsuarios = ({ listaUsuarios }) => {
   );
 };
 
-export default VerUsuarios;
+export default TablaUsuarios;
+
+
