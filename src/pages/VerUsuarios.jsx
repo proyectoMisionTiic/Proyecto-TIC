@@ -106,7 +106,6 @@ const TablaUsuarios = ({ listaUsuarios }) => {
                     <td>{usuario.email}</td>
                     <td>{usuario.rol}</td>
                     <td>{usuario.estado}</td>
-                    <i type="submit" class="fas fa-broom"></i>
 
                     <button
                       type="button"
