@@ -1,8 +1,12 @@
 import Logo from "../media/logo_small.png";
-
+import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 
+
 const Login = () => {
+
+  const { loginWithRedirect } = useAuth0();
+
   return (
     <div className="fondo w-full h-screen  celular:text-2x1 tablet:text-4xl flex  ">
       <div className="rounded-3xl p-6  mx-auto my-auto shadow-2xl bg-white ">
@@ -55,11 +59,12 @@ const Login = () => {
           </Link>
 
           <div>
-            <input
+            <button type="button"
               className="text-white w-full bg-red-700 rounded-xl mt-20 p-3 cursor-pointer"
-              type="button"
               value="Ingresar Con Google"
-            />
+              onClick={()=>loginWithRedirect()}
+              Ingresa con Google
+            >Ingresa con google</button>
           </div>
         </form>
       </div>

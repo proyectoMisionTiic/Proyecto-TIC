@@ -30,6 +30,7 @@ const Tablaproductos = () => {
   };
 
   let Productosbackend = [{}];
+  useEffect(() => {
   axios
     .request(options)
     .then(function (response) {
@@ -39,6 +40,7 @@ const Tablaproductos = () => {
     .catch(function (error) {
       console.error(error);
     });
+  },[]);
 
     const actualizarProducto = async () => {
       //enviar la info al backend
@@ -90,14 +92,14 @@ const Tablaproductos = () => {
               </tr>
             </thead>
             <tbody >
-              {productos.map((producto)  => {
+              {productos.map((xd)  => {
                 return (
-                  <tr >
-                    <td key={nanoid()}  >{producto._id}</td>
-                    <td>{producto.nombre}</td>
-                    <td>{producto.descripcion}</td>
-                    <td>{producto.valor}</td>
-                    <td>{producto.cantidad}</td>
+                  <tr key={nanoid()}>
+                    <td>{xd._id}</td>
+                    <td>{xd.nombre}</td>
+                    <td>{xd.descripcion}</td>
+                    <td>{xd.valor}</td>
+                    <td>{xd.cantidad}</td>
 
                     <button
                       type="button"
@@ -110,7 +112,7 @@ const Tablaproductos = () => {
                     <div
                       className="modal fade"
                       id="exampleModal"
-                      tabindex="-1"
+                      tabIndex="-1"
                       role="dialog"
                       aria-labelledby="exampleModalLabel"
                       aria-hidden="true"
@@ -131,6 +133,7 @@ const Tablaproductos = () => {
                             </button>
                           </div>
                           <div className="modal-body">
+                            
                             <form className="w-full max-w-sm align-center">
                               <div className="md:flex md:items-center mb-6">
                                 <div className="md:w-1/3">
@@ -146,7 +149,7 @@ const Tablaproductos = () => {
                                     className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                                     id="inline-full-name"
                                     type="text"
-                                    value={producto.nombre}
+                                    value={infoNuevoProducto.nombre}
                                     onChange={(e) =>
                                       setInfoNuevoProducto({
                                         ...infoNuevoProducto,
@@ -170,7 +173,7 @@ const Tablaproductos = () => {
                                     className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                                     id="inline-full-name"
                                     type="text"
-                                    value={producto.descripcion}
+                                    // value={producto.descripcion}
                                     onChange={(e) =>
                                       setInfoNuevoProducto({
                                         ...infoNuevoProducto,
@@ -194,7 +197,7 @@ const Tablaproductos = () => {
                                     className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                                     id="inline-full-name"
                                     type="number"
-                                    value={producto.cantidad}
+                                    // value={producto.cantidad}
                                     onChange={(e) =>
                                       setInfoNuevoProducto({
                                         ...infoNuevoProducto,
@@ -218,7 +221,7 @@ const Tablaproductos = () => {
                                     className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                                     id="inline-full-name"
                                     type="number"
-                                    value={producto.valor}
+                                    // value={producto.valor}
                                     onChange={(e) =>
                                       setInfoNuevoProducto({
                                         ...infoNuevoProducto,
