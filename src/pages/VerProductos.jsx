@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import "../styles/Style-gestionar-productos.css";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
-import { nanoid } from 'nanoid';
+import {obtenerProductos} from "../utils/api.js"
+import { nanoid } from "nanoid";
 
-const options = { method: "GET", url: "http://localhost:4000/productos/ver" };
 
 const Tablaproductos = () => {
-  const [productos, setproductos] = useState([{}]);
+  const [productos, setProductos] = useState([]);
+  const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
   const [infoNuevoProducto, setInfoNuevoProducto] = useState({
     _id: productos._id,
     nombre: productos.nombre,
@@ -29,40 +30,47 @@ const Tablaproductos = () => {
     });
   };
 
-  let Productosbackend = [{}];
   useEffect(() => {
-  axios
-    .request(options)
-    .then(function (response) {
-      Productosbackend = response.data;
-      setproductos(Productosbackend);
-    })
-    .catch(function (error) {
-      console.error(error);
-    });
-  },[]);
+    const fetchProductos = async () => {
+      await obtenerProductos(
+        (response) => {
+          setProductos(response.data);
+          setEjecutarConsulta(false);          
+        },
+        (error) => {
+          console.error("Salio un error:", error);
+        }
+      );
+    };
+    console.log("los productos son ",productos);
+    console.log("los infoNuevoProducto son ",infoNuevoProducto);
+    console.log('consulta', ejecutarConsulta);
+    if (ejecutarConsulta) {
+      fetchProductos();
+    }
+  }, [ejecutarConsulta]);
 
-    const actualizarProducto = async () => {
-      //enviar la info al backend
-      const options = {
-        method: 'PATCH',
-        url: `http://localhost:4000/productos/${productos._id}/`,
-        headers: { 'Content-Type': 'application/json' },
-        data: { ...infoNuevoProducto },
-      };
-  
-      await axios
-        .request(options)
-        .then(function (response) {
-          console.log(response.data);
-          toast.success('Producto modificado con éxito');
-        })
-        .catch(function (error) {
-          toast.error('Error modificando el Producto');
-          console.error(error);
-        });
+
+  const actualizarProducto = async () => {
+    //enviar la info al backend
+    const options = {
+      method: "PATCH",
+      url: `http://localhost:4000/productos/${productos._id}/`,
+      headers: { "Content-Type": "application/json" },
+      data: { ...infoNuevoProducto },
     };
 
+    await axios
+      .request(options)
+      .then(function (response) {
+        console.log(response.data);
+        toast.success("Producto modificado con éxito");
+      })
+      .catch(function (error) {
+        toast.error("Error modificando el Producto");
+        console.error(error);
+      });
+  };
 
   return (
     <div classNameName="bg-gray-800 self-center container ml-80 mr-80 mt-10 ">
@@ -91,8 +99,8 @@ const Tablaproductos = () => {
                 </th>
               </tr>
             </thead>
-            <tbody >
-              {productos.map((xd)  => {
+            <tbody>
+              {productos.map((xd) => {
                 return (
                   <tr key={nanoid()}>
                     <td>{xd._id}</td>
@@ -133,13 +141,12 @@ const Tablaproductos = () => {
                             </button>
                           </div>
                           <div className="modal-body">
-                            
                             <form className="w-full max-w-sm align-center">
                               <div className="md:flex md:items-center mb-6">
                                 <div className="md:w-1/3">
                                   <label
                                     classNameName="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                                    for="inline-full-name"
+                                    htmlFor="inline-full-name"
                                   >
                                     Nuevo Nombre del productos
                                   </label>
@@ -149,7 +156,7 @@ const Tablaproductos = () => {
                                     className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                                     id="inline-full-name"
                                     type="text"
-                                    value={infoNuevoProducto.nombre}
+                                    value={xd.nombre}
                                     onChange={(e) =>
                                       setInfoNuevoProducto({
                                         ...infoNuevoProducto,
@@ -163,7 +170,7 @@ const Tablaproductos = () => {
                                 <div className="md:w-1/3">
                                   <label
                                     className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                                    for="inline-full-name"
+                                    htmlFor="inline-full-name"
                                   >
                                     Nueva Descripción
                                   </label>
@@ -187,7 +194,7 @@ const Tablaproductos = () => {
                                 <div className="md:w-1/3">
                                   <label
                                     className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                                    for="inline-full-name"
+                                    htmlFor="inline-full-name"
                                   >
                                     Nueva cantidad
                                   </label>
@@ -211,7 +218,7 @@ const Tablaproductos = () => {
                                 <div className="md:w-1/3">
                                   <label
                                     className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                                    for="inline-full-name"
+                                    htmlFor="inline-full-name"
                                   >
                                     Nuevo Valor unitario
                                   </label>
@@ -245,7 +252,7 @@ const Tablaproductos = () => {
                               type="submit"
                               value="Guardar"
                               className="btn btn-primary"
-                              onClick={mostrarMensajep,actualizarProducto}
+                              onClick={(mostrarMensajep, actualizarProducto)}
                             >
                               Guardar cambios
                             </button>
