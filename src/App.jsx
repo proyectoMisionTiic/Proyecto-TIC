@@ -21,6 +21,7 @@ function App() {
     domain="misiontic-ticteam.us.auth0.com"
     clientId="7t4qvRFQjxaIj2YWKaSk7OZOMQXjDtq5"
     redirectUri={window.location.origin}
+    audience='api-gestor-ventas'
   >
     <Router>
       <Switch>
