@@ -1,285 +1,240 @@
 import React, { useEffect, useState } from "react";
 import "../styles/Style-gestionar-productos.css";
-import { ToastContainer, toast } from "react-toastify";
-import axios from "axios";
-import {obtenerProductos} from "../utils/api.js"
+import { toast,ToastContainer } from "react-toastify";
+import { obtenerProductos, editarProducto } from "../utils/api.js";
 import { nanoid } from "nanoid";
 
 
 const Tablaproductos = () => {
   const [productos, setProductos] = useState([]);
   const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
-  const [infoNuevoProducto, setInfoNuevoProducto] = useState({
-    _id: productos._id,
-    nombre: productos.nombre,
-    descripcion: productos.descripcion,
-    valor: productos.valor,
-    cantidad: productos.cantidad,
-    estado: productos.estado
-  });
-
-  const mostrarMensajep = () => {
-    toast.success("productos editado correctamente", {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  };
 
   useEffect(() => {
     const fetchProductos = async () => {
       await obtenerProductos(
         (response) => {
           setProductos(response.data);
-          setEjecutarConsulta(false);          
+          setEjecutarConsulta(false);
         },
         (error) => {
           console.error("Salio un error:", error);
         }
       );
     };
-    console.log("los productos son ",productos);
-    console.log("los infoNuevoProducto son ",infoNuevoProducto);
-    console.log('consulta', ejecutarConsulta);
+    console.log("los productos son ", productos);
+    // console.log("los infoNuevoProducto son ", infoNuevoProducto);
+    console.log("consulta", ejecutarConsulta);
     if (ejecutarConsulta) {
       fetchProductos();
     }
   }, [ejecutarConsulta]);
 
-
-  const actualizarProducto = async () => {
-    //enviar la info al backend
-    const options = {
-      method: "PATCH",
-      url: `http://localhost:4000/productos/${productos._id}/`,
-      headers: { "Content-Type": "application/json" },
-      data: { ...infoNuevoProducto },
-    };
-
-    await axios
-      .request(options)
-      .then(function (response) {
-        console.log(response.data);
-        toast.success("Producto modificado con éxito");
-      })
-      .catch(function (error) {
-        toast.error("Error modificando el Producto");
-        console.error(error);
-      });
-  };
-
   return (
     <div classNameName="bg-gray-800 self-center container ml-80 mr-80 mt-10 ">
       <div className="md:px-32 w-full">
-        <div className="shadow overflow-hidden rounded border-b border-gray-200">
-          <table className="min-w-full bg-white">
-            <thead className="bg-gray-900 text-white">
-              <tr>
-                <th className="text-xl w-2 py-4 px-2 text-left uppercase font-semibold">
-                  ID
-                </th>
-                <th className="text-xl w-2 py-4 text-left uppercase font-semibold">
-                  Nombre
-                </th>
-                <th className="text-xl w-2 py-4 text-left uppercase font-semibold">
-                  Descripción
-                </th>
-                <th className="text-xl w-2 py-4 text-left uppercase font-semibold">
-                  Cantidad
-                </th>
-                <th className="text-xl w-2 py-4 text-left uppercase font-semibold">
-                  Valor_unitario
-                </th>
-                <th className="text-xl w-2 py-4 text-left uppercase font-semibold">
-                  Acciones
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {productos.map((xd) => {
-                return (
-                  <tr key={nanoid()}>
-                    <td>{xd._id}</td>
-                    <td>{xd.nombre}</td>
-                    <td>{xd.descripcion}</td>
-                    <td>{xd.valor}</td>
-                    <td>{xd.cantidad}</td>
-
-                    <button
-                      type="button"
-                      className="btn btn-primary"
-                      data-toggle="modal"
-                      data-target="#exampleModal"
-                    >
-                      Editar
-                    </button>
-                    <div
-                      className="modal fade"
-                      id="exampleModal"
-                      tabIndex="-1"
-                      role="dialog"
-                      aria-labelledby="exampleModalLabel"
-                      aria-hidden="true"
-                    >
-                      <div className="modal-dialog" role="document">
-                        <div className="modal-content">
-                          <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLabel">
-                              Editar productos
-                            </h5>
-                            <button
-                              type="button"
-                              className="close"
-                              data-dismiss="modal"
-                              aria-label="Close"
-                            >
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div className="modal-body">
-                            <form className="w-full max-w-sm align-center">
-                              <div className="md:flex md:items-center mb-6">
-                                <div className="md:w-1/3">
-                                  <label
-                                    classNameName="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                                    htmlFor="inline-full-name"
-                                  >
-                                    Nuevo Nombre del productos
-                                  </label>
-                                </div>
-                                <div className="md:w-2/3">
-                                  <input
-                                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                                    id="inline-full-name"
-                                    type="text"
-                                    value={xd.nombre}
-                                    onChange={(e) =>
-                                      setInfoNuevoProducto({
-                                        ...infoNuevoProducto,
-                                        nombre: e.target.value,
-                                      })
-                                    }
-                                  />
-                                </div>
-                              </div>
-                              <div className="md:flex md:items-center mb-6">
-                                <div className="md:w-1/3">
-                                  <label
-                                    className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                                    htmlFor="inline-full-name"
-                                  >
-                                    Nueva Descripción
-                                  </label>
-                                </div>
-                                <div className="md:w-2/3">
-                                  <input
-                                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                                    id="inline-full-name"
-                                    type="text"
-                                    // value={producto.descripcion}
-                                    onChange={(e) =>
-                                      setInfoNuevoProducto({
-                                        ...infoNuevoProducto,
-                                        descripcion: e.target.value,
-                                      })
-                                    }
-                                  />
-                                </div>
-                              </div>
-                              <div className="md:flex md:items-center mb-6">
-                                <div className="md:w-1/3">
-                                  <label
-                                    className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                                    htmlFor="inline-full-name"
-                                  >
-                                    Nueva cantidad
-                                  </label>
-                                </div>
-                                <div className="md:w-2/3">
-                                  <input
-                                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                                    id="inline-full-name"
-                                    type="number"
-                                    // value={producto.cantidad}
-                                    onChange={(e) =>
-                                      setInfoNuevoProducto({
-                                        ...infoNuevoProducto,
-                                        cantidad: e.target.value,
-                                      })
-                                    }
-                                  />
-                                </div>
-                              </div>
-                              <div className="md:flex md:items-center mb-6">
-                                <div className="md:w-1/3">
-                                  <label
-                                    className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                                    htmlFor="inline-full-name"
-                                  >
-                                    Nuevo Valor unitario
-                                  </label>
-                                </div>
-                                <div className="md:w-2/3">
-                                  <input
-                                    className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                                    id="inline-full-name"
-                                    type="number"
-                                    // value={producto.valor}
-                                    onChange={(e) =>
-                                      setInfoNuevoProducto({
-                                        ...infoNuevoProducto,
-                                        valor: e.target.value,
-                                      })
-                                    }
-                                  />
-                                </div>
-                              </div>
-                            </form>
-                          </div>
-                          <div className="modal-footer">
-                            <button
-                              type="button"
-                              className="btn btn-secondary"
-                              data-dismiss="modal"
-                            >
-                              Cerrar
-                            </button>
-                            <button
-                              type="submit"
-                              value="Guardar"
-                              className="btn btn-primary"
-                              onClick={(mostrarMensajep, actualizarProducto)}
-                            >
-                              Guardar cambios
-                            </button>
-                          </div>
-                        </div>
-                        <ToastContainer
-                          position="top-center"
-                          autoClose={5000}
-                          hideProgressBar={false}
-                          newestOnTop={false}
-                          closeOnClick
-                          rtl={false}
-                          pauseOnFocusLoss
-                          draggable
-                          pauseOnHover
-                        />
-                      </div>
-                    </div>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+        <div className="shadow overflow-hidden rounded border-b border-gray-200"></div>
+        <Tabla
+          listaProductos={productos}
+          setEjecutarConsulta={setEjecutarConsulta}
+        />
       </div>
     </div>
   );
 };
 
 export default Tablaproductos;
+
+const Tabla = ({ listaProductos, productos, setEjecutarConsulta }) => {
+  const [busqueda, setBusqueda] = useState("");
+  const [productosFiltrados, setProductosFiltrados] = useState(listaProductos);
+
+  useEffect(() => {
+    setProductosFiltrados(
+      listaProductos.filter((elemento) => {
+        return JSON.stringify(elemento)
+          .toLowerCase()
+          .includes(busqueda.toLowerCase());
+      })
+    );
+  }, [busqueda, listaProductos]);
+
+  return (
+    <table className="m-auto w-11/12 rounded-xl bg-white ">
+      <thead className="bg-gray-900 text-white">
+      <ToastContainer
+          position="top-center"
+          autoClose={4000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+        <tr>
+          <th className="text-xl w-2 py-4 px-2 text-center uppercase font-semibold">
+            ID
+          </th>
+          <th className="text-xl w-2 py-4 text-center uppercase font-semibold">
+            Nombre
+          </th>
+          <th className="text-xl w-2 py-4 text-center uppercase font-semibold">
+            Descripción
+          </th>
+          <th className="text-xl w-2 py-4 text-center uppercase font-semibold">
+            Cantidad
+          </th>
+          <th className="text-xl w-2 py-4 text-center uppercase font-semibold">
+            Valor_unitario
+          </th>
+          <th className="text-xl w-2 py-4 text-center uppercase font-semibold">
+            Acciones
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {productosFiltrados.map((productos) => {
+          return (
+            <FilaProductos
+              key={nanoid()}
+              productos={productos}
+              setEjecutarConsulta={setEjecutarConsulta}
+            />
+          );
+        })}
+      </tbody>
+    </table>
+  );
+};
+
+const FilaProductos = ({ productos, setEjecutarConsulta }) => {
+  const [edit, setEdit] = useState(false);
+  const [infoNuevoProducto, setInfoNuevoProducto] = useState({
+    _id: productos._id,
+    nombre: productos.nombre,
+    descripcion: productos.descripcion,
+    valor: productos.valor,
+    cantidad: productos.cantidad,
+    estado: productos.estado,
+  });
+
+  const actualizarProducto = async () => {
+    await editarProducto(
+      productos._id,
+      {
+        nombre: infoNuevoProducto.nombre,
+        descripcion: infoNuevoProducto.descripcion,
+        valor: infoNuevoProducto.valor,
+        cantidad: infoNuevoProducto.cantidad,
+        estado: infoNuevoProducto.estado,
+      },
+      (response) => {
+        toast.success("Producto modificado con éxito");
+        setEdit(false);
+        setEjecutarConsulta(true);
+      },
+      (error) => {
+        console.log("errorrrrrrrrrrrrr");
+        toast.error("Error modificando el vehículo");
+        console.error(error);
+      }
+    );
+  };
+
+  return (
+    <tr>
+      {edit ? (
+        <>
+          <td className="text-center">{infoNuevoProducto._id.slice(20)}</td>
+          <td>
+            <input
+              className="bg-gray-50 border self-center-center w-3/4 border-gray-600 p-2 rounded-lg "
+              type="text"
+              value={infoNuevoProducto.nombre}
+              onChange={(e) =>
+                setInfoNuevoProducto({
+                  ...infoNuevoProducto,
+                  nombre: e.target.value,
+                })
+              }
+            />
+          </td>
+          <td>
+            <input
+              className="bg-gray-50 border w-3/4 border-gray-600 p-2 rounded-lg"
+              type="text"
+              value={infoNuevoProducto.descripcion}
+              onChange={(e) =>
+                setInfoNuevoProducto({
+                  ...infoNuevoProducto,
+                  descripcion: e.target.value,
+                })
+              }
+            />
+          </td>
+          <td>
+            <input
+              className="bg-gray-50 border w-3/4 border-gray-600 p-2 rounded-lg"
+              type="text"
+              value={infoNuevoProducto.valor}
+              onChange={(e) =>
+                setInfoNuevoProducto({
+                  ...infoNuevoProducto,
+                  valor: e.target.value,
+                })
+              }
+            />
+          </td>
+          <td>
+            <input
+              className="bg-gray-50 border w-3/4 border-gray-600 p-2 rounded-lg"
+              type="text"
+              value={infoNuevoProducto.cantidad}
+              onChange={(e) =>
+                setInfoNuevoProducto({
+                  ...infoNuevoProducto,
+                  cantidad: e.target.value,
+                })
+              }
+            />
+          </td>
+        </>
+      ) : (
+        <>
+          <td className="text-center">{productos._id.slice(20)}</td>
+          <td className="text-center">{productos.nombre}</td>
+          <td className="text-center">{productos.descripcion}</td>
+          <td className="text-center">{productos.valor}</td>
+          <td className="text-center">{productos.cantidad}</td>
+        </>
+      )}
+      <td className="flex my-4 ">
+        <div className="flex w-full justify-around">
+          {edit ? (
+            <>
+              <i
+                onClick={() => actualizarProducto()}
+                className="fas fa-check text-green-700 hover:text-green-500"
+              />
+
+              <i
+                onClick={() => setEdit(!edit)}
+                className="fas fa-ban text-yellow-700 hover:text-yellow-500"
+              />
+            </>
+          ) : (
+            <>
+              <i
+                onClick={() => setEdit(!edit)}
+                className="fas fa-pencil-alt text-yellow-700 hover:text-yellow-500"
+              />
+
+              <i className="fas fa-trash text-red-700 hover:text-red-500" />
+            </>
+          )}
+        </div>
+      </td>
+    </tr>
+  );
+};
