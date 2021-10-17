@@ -151,7 +151,7 @@ const FilaUsuarios = ({ usuarios, setEjecutarConsulta }) => {
         <>
           <td>
             <input
-              className="bg-gray-50 border self-center-center w-3/4 border-gray-600 p-2 rounded-lg "
+              className="text-center"
               type="text"
               value={usuarios.nombre}
             />
@@ -159,7 +159,7 @@ const FilaUsuarios = ({ usuarios, setEjecutarConsulta }) => {
 
           <td>
             <input
-              className="bg-gray-50 border self-center-center w-3/4 border-gray-600 p-2 rounded-lg "
+              className="text-center"
               type="text"
               value={usuarios.apellido}
             />
@@ -167,18 +167,14 @@ const FilaUsuarios = ({ usuarios, setEjecutarConsulta }) => {
 
           <td>
             <input
-              className="bg-gray-50 border self-center-center w-3/4 border-gray-600 p-2 rounded-lg "
+              className="text-center"
               type="text"
               value={usuarios.cedula}
             />
           </td>
 
           <td>
-            <input
-              className="bg-gray-50 border self-center-center w-3/4 border-gray-600 p-2 rounded-lg "
-              type="text"
-              value={usuarios.email}
-            />
+            <input className="text-center" type="text" value={usuarios.email} />
           </td>
 
           <td>

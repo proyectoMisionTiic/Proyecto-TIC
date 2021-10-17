@@ -31,7 +31,7 @@ export const obtenerUsuarios = async (successCallback, errorCallback) => {
 export const editarUsuario = async (id, data, successCallback, errorCallback) => {
   const options = {
     method: 'PATCH',
-    url: `http://localhost:4000/productos/${id}`,
+    url: `http://localhost:4000/usuarios/${id}`,
     headers: { 'Content-Type': 'application/json' },
     data,
   };
