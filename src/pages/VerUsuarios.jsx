@@ -179,7 +179,7 @@ const FilaUsuarios = ({ usuarios, setEjecutarConsulta }) => {
 
           <td>
             <input
-              className="bg-gray-50 border self-center-center w-3/4 border-gray-600 p-2 rounded-lg "
+              className="bg-gray-50 border w-3/4 border-gray-600 p-2 rounded-lg"
               type="text"
               value={infoNuevoUsuario.rol}
               onChange={(e) =>
