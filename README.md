@@ -19,27 +19,28 @@ INTEGRANTES :
   
   
 SOBRE EL PROYECTO:
-Construir una aplicación software que permita controlar las ventas físicas y virtuales de una empresa de manufactura y hacerles el correspondiente seguimiento.
+Construir una aplicación web que permita controlar las ventas físicas y virtuales de una empresa de manufactura y hacerles el correspondiente seguimiento.
 
 LA APLICACIÓN CONTARÁ CON:
 ● Módulo administrador de ventas
 ● Módulo para registrar el estado de la venta
 ● Gestión de vendedores
-● Gestión de ingreso al sistema de información
+● Gestión de ingreso al sistema de información 
+● Autentificación en Oauth0
 ● Gestión de usuarios y roles
 
 LAS HERRAMIENTAS A USAR SON:
 ●	React JS
 ●	HTML 5 
 ● CSS3 
+● Tailwind Css
 ●	Lenguaje JavaScript
-●	Lenguaje TypeScript 
 ●	Node Js
 ●	Plataformas de desarrollo para Backend (Node JS)
 ●	Stack MERN
-●	(OAuth2)
-●	(Heroku)
-●	(Git / GitHub)
+●	OAuth0
+●	Heroku
+●	Git / GitHub
 
 
 
