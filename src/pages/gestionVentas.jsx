@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "../styles/Style-ventas.css";
 import { obtenerUsuarios, obtenerProductos, crearVenta } from "../utils/api.js";
 
-const GestionVentas = () => {
+const GestionVentas = ({setProductoAAgregar}) => {
   const mostrarMensajeV = () => {
     toast.success("Venta Registrada Correctamente", {
       position: "top-center",
@@ -128,6 +128,7 @@ const GestionVentas = () => {
                   name="producto"
                   className="text-black p-2  w-3/4 rounded-md border-blue-400 focus:ring-indigo-500 "
                   defaultValue={-1}
+                  onChange={(e)=> setProductoAAgregar(e.target.value)}
                   required
                 >
                   <option disabled value={-1}>
@@ -269,7 +270,7 @@ const GestionVentas = () => {
   );
 };
 
-const TablaProductos = () => {
+const TablaProductos = ({}) => {
   const [productoAAgregar, setProductoAAgregar] = useState([{}]);
   return (
     <table className="min-w-full bg-white ">
