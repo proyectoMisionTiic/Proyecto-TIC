@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../styles/Style-ventas.css";
 import { toast, ToastContainer } from "react-toastify";
-import { crearVenta, editarVenta } from "../utils/api.js";
+import { obtenerVenta, editarVenta } from "../utils/api.js";
 
 import { nanoid } from "nanoid";
 
@@ -11,7 +11,7 @@ const TablaVentas = () => {
 
   useEffect(() => {
     const fetchVentas = async () => {
-      await crearVenta(
+      await obtenerVenta(
         (response) => {
           setVentas(response.data);
           setEjecutarConsulta(false);
@@ -56,7 +56,7 @@ const Tabla = ({ listaVentas, ventas, setEjecutarConsulta }) => {
 
   return (
     <div className="andrew-container bg-gray-900">
-      {/* Inicio Seccion de input del usuario */}
+ 
       <div className="andrew-titulo mb-10 ">Informacion Ventas</div>
 
       {/* Barra de busqueda */}
