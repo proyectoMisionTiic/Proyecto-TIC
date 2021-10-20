@@ -47,3 +47,13 @@ export const crearVenta = async (data, successCallback, errorCallback) => {
   };
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
+
+export const editarVenta = async (id, data, successCallback, errorCallback) => {
+  const options = {
+    method: 'PATCH',
+    url: `http://localhost:4000/ventas/${id}`,
+    headers: { 'Content-Type': 'application/json' },
+    data,
+  };
+  await axios.request(options).then(successCallback).catch(errorCallback);
+};
