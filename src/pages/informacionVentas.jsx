@@ -91,13 +91,13 @@ const Tabla = ({ listaVentas, ventas, setEjecutarConsulta }) => {
             pauseOnHover
           />
           <tr>
-            <th class=" text-xl py-3 px-4 uppercase font-semibold ">
+          <th class=" text-xl py-3 px-4 uppercase font-semibold ">
               ID Venta
             </th>
             <th class=" text-xl py-3 px-4 uppercase font-semibold ">
               Valor total
             </th>
-            <th class=" text-xl py-3 px-4 uppercase font-semibold ">
+              <th class=" text-xl py-3 px-4 uppercase font-semibold ">
               Fecha de venta
             </th>
             <th class=" text-xl py-3 px-4 uppercase font-semibold ">
@@ -176,7 +176,7 @@ const FilaVentas = ({ ventas, setEjecutarConsulta }) => {
           <td className="text-center">{infoNuevaVenta._id.slice(20)}</td>
           <td>
             <input
-              className="bg-gray-50 border self-center-center w-3/4 border-gray-600 p-2 rounded-lg "
+              className="bg-gray-50 text-gray-800 border self-center-center w-3/4 border-gray-600 p-2 rounded-lg "
               type="text"
               value={infoNuevaVenta.valorTotal}
               onChange={(e) =>
@@ -189,7 +189,7 @@ const FilaVentas = ({ ventas, setEjecutarConsulta }) => {
           </td>
           <td>
             <input
-              className="bg-gray-50 border w-3/4 border-gray-600 p-2 rounded-lg"
+              className="bg-gray-50 text-gray-800 border w-3/4 border-gray-600 p-2 rounded-lg"
               type="text"
               value={infoNuevaVenta.fecha}
               onChange={(e) =>
@@ -202,7 +202,7 @@ const FilaVentas = ({ ventas, setEjecutarConsulta }) => {
           </td>
           <td>
             <input
-              className="bg-gray-50 border w-3/4 border-gray-600 p-2 rounded-lg"
+              className="bg-gray-50 text-gray-800 border w-3/4 border-gray-600 p-2 rounded-lg"
               type="text"
               value={infoNuevaVenta.documentoCliente}
               onChange={(e) =>
@@ -215,7 +215,7 @@ const FilaVentas = ({ ventas, setEjecutarConsulta }) => {
           </td>
           <td>
             <input
-              className="bg-gray-50 border w-3/4 border-gray-600 p-2 rounded-lg"
+              className="bg-gray-50 text-gray-800 border w-3/4 border-gray-600 p-2 rounded-lg"
               type="text"
               value={infoNuevaVenta.nombreCliente}
               onChange={(e) =>
@@ -228,7 +228,7 @@ const FilaVentas = ({ ventas, setEjecutarConsulta }) => {
           </td>
           <td>
             <input
-              className="bg-gray-50 border w-3/4 border-gray-600 p-2 rounded-lg"
+              className="bg-gray-50 text-gray-800 border w-3/4 border-gray-600 p-2 rounded-lg"
               type="text"
               value={infoNuevaVenta.nombreVendedor}
               onChange={(e) =>
@@ -241,7 +241,7 @@ const FilaVentas = ({ ventas, setEjecutarConsulta }) => {
           </td>
           <td>
             <input
-              className="bg-gray-50 border w-3/4 border-gray-600 p-2 rounded-lg"
+              className="bg-gray-50 text-gray-800 border w-3/4 border-gray-600 p-2 rounded-lg"
               type="text"
               value={infoNuevaVenta.productos}
               onChange={(e) =>
@@ -255,13 +255,13 @@ const FilaVentas = ({ ventas, setEjecutarConsulta }) => {
         </>
       ) : (
         <>
-          <td className="text-center">{ventas._id.slice(20)}</td>
-          <td className="text-center">{ventas.valorTotal}</td>
-          <td className="text-center">{ventas.fecha}</td>
-          <td className="text-center">{ventas.documentoCliente}</td>
-          <td className="text-center">{ventas.nombreCliente}</td>
-          <td className="text-center">{ventas.nombreVendedor}</td>
-          <td className="text-center">{ventas.productos}</td>
+          <td className="text-center text-gray-800">{ventas._id.slice(20)}</td>
+          <td className="text-center text-gray-800">{ventas.valorTotal}</td>
+          <td className="text-center text-gray-800">{ventas.fecha}</td>
+          <td className="text-center text-gray-800">{ventas.documentoCliente}</td>
+          <td className="text-center text-gray-800">{ventas.nombreCliente}</td>
+          <td className="text-center text-gray-800">{ventas.nombreVendedor}</td>
+          <td className="text-center text-gray-800">{ventas.productos}</td>
         </>
       )}
       <td className="flex my-4 ">

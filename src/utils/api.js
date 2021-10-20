@@ -41,9 +41,18 @@ export const editarUsuario = async (id, data, successCallback, errorCallback) =>
 export const crearVenta = async (data, successCallback, errorCallback) => {
   const options = {
     method: "POST",
-    url: "http://localhost:4000/ventas/nuevo",
+    url: "http://localhost:4000/ventas/crear",
     headers: { "Content-Type": "application/json" },
     data,
+  };
+  await axios.request(options).then(successCallback).catch(errorCallback);
+};
+
+export const obtenerVenta = async (successCallback, errorCallback) => {
+  const options = {
+    method: "GET",
+    url: "http://localhost:4000/ventas/listar/",
+    headers: {},
   };
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
@@ -57,3 +66,4 @@ export const editarVenta = async (id, data, successCallback, errorCallback) => {
   };
   await axios.request(options).then(successCallback).catch(errorCallback);
 };
+

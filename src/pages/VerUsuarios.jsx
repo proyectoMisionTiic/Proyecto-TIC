@@ -178,30 +178,17 @@ const FilaUsuarios = ({ usuarios, setEjecutarConsulta }) => {
           </td>
 
           <td>
-            <select
+            <input
               className="bg-gray-50 border w-3/4 border-gray-600 p-2 rounded-lg"
               type="text"
-            >
-              <option disabled value={0}>
-                Seleccione un rol
-              </option>
-              <option value="Administrador" name="rol">
-                {" "}
-                Administrador{" "}
-              </option>
-              <option value="Vendedor" name="rol">
-                {" "}
-                Vendedor{" "}
-              </option>
               value={infoNuevoUsuario.rol}
-              onChange=
-              {(e) =>
+              onChange={(e) =>
                 setInfoNuevoUsuario({
                   ...infoNuevoUsuario,
                   rol: e.target.value,
                 })
               }
-            </select>
+            />
           </td>
           <td>
             <input
@@ -216,7 +203,8 @@ const FilaUsuarios = ({ usuarios, setEjecutarConsulta }) => {
               }
             />
           </td>
-          
+          <td></td>
+          <td></td>
         </>
       ) : (
         <>
