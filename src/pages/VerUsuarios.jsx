@@ -203,8 +203,6 @@ const FilaUsuarios = ({ usuarios, setEjecutarConsulta }) => {
               }
             />
           </td>
-          <td></td>
-          <td></td>
         </>
       ) : (
         <>
