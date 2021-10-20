@@ -91,9 +91,7 @@ const GestionProductos = () => {
                 id="input-example"
                 name="valor"
                 placeholder="Ingrese el valor"
-                defaultValue={0}
                 decimalsLimit={0}
-                onValueChange={(value, name) => console.log(value, name)}
                 required
               />
             </div>
