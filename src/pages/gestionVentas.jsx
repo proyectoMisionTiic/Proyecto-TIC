@@ -5,20 +5,9 @@ import "react-toastify/dist/ReactToastify.css";
 import "../styles/Style-ventas.css";
 import { obtenerUsuarios, obtenerProductos, crearVenta } from "../utils/api.js";
 
-const GestionVentas = ({setProductoAAgregar}) => {
+const GestionVentas = ({ setProductoAAgregar }) => {
   const mostrarMensajeV = () => {
     toast.success("Venta Registrada Correctamente", {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  };
-  const mostrarMensajeP = () => {
-    toast.success("Producto Registrado Correctamente", {
       position: "top-center",
       autoClose: 5000,
       hideProgressBar: false,
@@ -32,6 +21,7 @@ const GestionVentas = ({setProductoAAgregar}) => {
   const form = useRef(null);
   const [vendedores, setVendedores] = useState([{}]);
   const [productos, setProductos] = useState([{}]);
+  const [productosTabla, setProductosTabla] = useState([{}]);
 
   useEffect(() => {
     const fetchVendedores = async () => {
@@ -70,10 +60,19 @@ const GestionVentas = ({setProductoAAgregar}) => {
     });
     console.log(formData);
 
+    const listaProductos = Object.keys(formData)
+      .map((k) => {
+        if (k.includes("productos")) {
+          return productosTabla.filter((v) => v._id === formData[k])[0];
+        }
+        return null;
+      })
+      .filter((v) => v);
+
     const datosVenta = {
       vendedor: vendedores.filter((v) => v._id === formData.vendedor)[0],
       producto: productos.filter((v) => v._id === formData.producto)[0],
-      cantidad: formData.cantidad,
+      productos: listaProductos,
     };
     console.log(datosVenta);
 
@@ -112,39 +111,17 @@ const GestionVentas = ({setProductoAAgregar}) => {
                   <option disabled value={-1}>
                     Seleccione un vendedor
                   </option>
-                  {vendedores.map((el) => {
-                    return (
-                      <option key={nanoid()} value={el._id}>
-                        {`${el.nombre} ${el.apellido}`}
-                      </option>
-                    );
-                  })}
-                </select>
-              </div>
-
-              <div className="andrew-input-box ">
-                <span className="andrew-detalles">Producto</span>
-                <select
-                  name="producto"
-                  className="text-black p-2  w-3/4 rounded-md border-blue-400 focus:ring-indigo-500 "
-                  defaultValue={-1}
-                  onChange={(e)=> setProductoAAgregar(e.target.value)}
-                  required
-                >
-                  <option disabled value={-1}>
-                    Seleccione un producto
-                  </option>
-                  {productos.map((xd) => {
+                  {vendedores.map((xd) => {
                     return (
                       <option key={nanoid()} value={xd._id}>
-                        {`${xd.nombre} - ${xd.descripcion} (${xd.cantidad} und) `}
+                        {`${xd.nombre} ${xd.apellido}`}
                       </option>
                     );
                   })}
                 </select>
               </div>
 
-              <div className="andrew-input-box">
+              {/* <div className="andrew-input-box">
                 <span className="andrew-detalles">Cantidad Producto</span>
                 <input
                   type="number"
@@ -153,19 +130,19 @@ const GestionVentas = ({setProductoAAgregar}) => {
                   placeholder="Ingrese la cantidad de productos"
                   required
                 />
-              </div>
+              </div> */}
             </div>
 
-            <div className="andrew-button">
-              <input type="submit" value="Agregar Producto" />
-            </div>
-
-            <TablaProductos />
+            <TablaProductos
+              productos={productos}
+              setProductos={setProductos}
+              setProductosTabla={setProductosTabla}
+            />
           </div>
         </form>
 
         <form action="#">
-          <div className="andrew-detalles-producto ">
+          {/* <div className="andrew-detalles-producto ">
             <div className="text-3xl mt-10 m-auto text-center mb-10">
               Ingreso De Venta
             </div>
@@ -173,14 +150,14 @@ const GestionVentas = ({setProductoAAgregar}) => {
             <div className="tablet:flex tablet:gap-5">
               <div className="andrew-input-box">
                 <span className="andrew-detalles">ID Venta</span>
-                <input type="number" placeholder="Ingrese el ID " required />
+                <input type="number" placeholder="Ingrese xd ID " required />
               </div>
 
               <div className="andrew-input-box">
                 <span className="andrew-detalles ">Valor Total</span>
                 <input
                   type="number"
-                  placeholder="Ingrese el valor total"
+                  placeholder="Ingrese xd valor total"
                   required
                 />
               </div>
@@ -196,7 +173,7 @@ const GestionVentas = ({setProductoAAgregar}) => {
                 <span className="andrew-detalles">Documento Cliente</span>
                 <input
                   type="number"
-                  placeholder="Ingrese el documento del cliente"
+                  placeholder="Ingrese xd documento del cliente"
                   required
                 />
               </div>
@@ -207,7 +184,7 @@ const GestionVentas = ({setProductoAAgregar}) => {
                 <span className="andrew-detalles">Nombre Vendedor</span>
                 <input
                   type="text"
-                  placeholder="Ingrese el nombre del vendedor"
+                  placeholder="Ingrese xd nombre del vendedor"
                   required
                 />
               </div>
@@ -216,19 +193,12 @@ const GestionVentas = ({setProductoAAgregar}) => {
                 <span className="andrew-detalles">Nombre Cliente</span>
                 <input
                   type="text"
-                  placeholder="Ingrese el nombre del vendedor"
+                  placeholder="Ingrese xd nombre del vendedor"
                   required
                 />
               </div>
             </div>
 
-            <div className="andrew-button w-full ">
-              <input
-                onClick={mostrarMensajeV}
-                type="submit"
-                value="Registrar Venta"
-              />
-            </div>
 
             <div className="andrew-input-box">
               <span className="andrew-detalles text-transparent ">
@@ -236,7 +206,7 @@ const GestionVentas = ({setProductoAAgregar}) => {
               </span>
               <input
                 type="hidden"
-                placeholder="Ingrese el nombre del vendedor"
+                placeholder="Ingrese xd nombre del vendedor"
                 required
               />
             </div>
@@ -247,10 +217,17 @@ const GestionVentas = ({setProductoAAgregar}) => {
               </span>
               <input
                 type="hidden"
-                placeholder="Ingrese el nombre del vendedor"
+                placeholder="Ingrese xd nombre del vendedor"
                 required
               />
             </div>
+          </div> */}
+          <div className="andrew-button w-full ">
+            <input
+              onClick={mostrarMensajeV}
+              type="submit"
+              value="Registrar Venta"
+            />
           </div>
         </form>
 
@@ -270,34 +247,153 @@ const GestionVentas = ({setProductoAAgregar}) => {
   );
 };
 
-const TablaProductos = ({}) => {
+const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
   const [productoAAgregar, setProductoAAgregar] = useState([{}]);
+  const [filasTabla, setFilasTabla] = useState([]);
+
+  useEffect(() => {
+    setProductosTabla(filasTabla);
+  }, [filasTabla, setProductosTabla]);
+
+  const agregarNuevoProducto = () => {
+    setFilasTabla([...filasTabla, productoAAgregar]);
+    setProductos(productos.filter((v) => v._id !== productoAAgregar._id));
+    setProductoAAgregar({});
+  };
+
+  const eliminarProducto = (productoAEliminar) => {
+    setFilasTabla(filasTabla.filter((v) => v._id !== productoAEliminar._id));
+    setProductos([...productos, productoAEliminar]);
+  };
+
+  const modificarProducto = (producto, cantidad) => {
+    setFilasTabla(
+      filasTabla.map((ft) => {
+        if (ft._id === producto.id) {
+          ft.cantidad = cantidad;
+          ft.total = producto.valor * cantidad;
+        }
+        return ft;
+      })
+    );
+  };
+
   return (
-    <table className="min-w-full bg-white ">
-      <thead className="bg-gray-800 text-white">
-        <tr>
-          <th className=" w-1/3   text-left py-3 px-4 uppercase font-semibold text-sm">
-            Producto
-          </th>
-          <th className=" w-1/3   text-left py-3 px-4 uppercase font-semibold text-sm">
-            Cantidad
-          </th>
-          <th className=" w-1/3   text-left py-3 px-4 uppercase font-semibold text-sm">
-            Precio Unitario
-          </th>
-          <th className=" w-1/3   text-left py-3 px-4 uppercase font-semibold text-sm">
-            Eliminar
-          </th>
-        </tr>
-      </thead>
-      <tbody className="text-gray-700">
-        <tr className="bg-gray-100">
-          <td className="w-1/3 text-left py-3 px-4">0</td>
-          <td className="w-1/3 text-left py-3 px-4">0</td>
-          <td className="w-1/3 text-left py-3 px-4">0</td>
-        </tr>
-      </tbody>
-    </table>
+    <div>
+      <div className="andrew-input-box ">
+        <span className="andrew-detalles">Producto</span>
+        <select
+          name="producto"
+          className="text-black p-2  w-3/4 rounded-md border-blue-400 focus:ring-indigo-500 "
+          valuealue={productoAAgregar._id ?? ""}
+          onChange={(e) =>
+            setProductoAAgregar(
+              productos.filter((v) => v._id === e.target.value)[0]
+            )
+          }
+        >
+          <option disabled value={-1}>
+            Seleccione un producto
+          </option>
+          {productos.map((xd) => {
+            return (
+              <option key={nanoid()} value={xd._id}>
+                {`${xd.nombre} - ${xd.descripcion} (${xd.cantidad} und) `}
+              </option>
+            );
+          })}
+        </select>
+      </div>
+      <button className="bg-blue-500 andrew-button" onClick={() => agregarNuevoProducto()}>
+        Agregar Producto
+      </button>
+      <table className="min-w-full bg-white ">
+        <thead className="bg-gray-800 text-white">
+          <tr>
+            <th className=" text-center py-3 px-4 uppercase font-semibold text-sm">
+              ID
+            </th>
+            <th className="    text-center py-3 px-4 uppercase font-semibold text-sm">
+              Producto
+            </th>
+            <th className="   text-center py-3 px-4 uppercase font-semibold text-sm">
+              Descripción
+            </th>
+            <th className="   text-center py-3 px-4 uppercase font-semibold text-sm">
+              Cantidad
+            </th>
+            <th className="   text-center py-3 px-4 uppercase font-semibold text-sm">
+              Valor unitario
+            </th>
+            <th className="   text-center py-3 px-4 uppercase font-semibold text-sm">
+              Precio total
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {filasTabla.map((xd, index) => {
+            return (
+              <FilaProductos
+                key={xd._id}
+                pro={xd}
+                index={index}
+                eliminarProducto={eliminarProducto}
+                modificarProducto={modificarProducto}
+              />
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+const FilaProductos = ({ pro, index, eliminarProducto, modificarProducto }) => {
+  const [producto, setProducto] = useState(pro);
+  useEffect(() => {
+    console.log("veh", producto);
+  }, [producto]);
+  return (
+    <tr className="text-black text-center">
+      <td>{producto._id.slice(20)}</td>
+      <td>{producto.nombre}</td>
+      <td>{producto.descripcion}</td>
+      {/* <td>{productos.valor}</td> */}
+      <td>
+        <label htmlFor={`valor_${index}`}>
+          <input
+            className="andrew-detalles"
+            type="number"
+            name={`cantidad_${index}`}
+            value={producto.cantidad}
+            onChange={(e) => {
+              modificarProducto(
+                producto,
+                e.target.value === "" ? "0" : e.target.value
+              );
+              setProducto({
+                ...producto,
+                cantidad: e.target.value === "" ? "0" : e.target.value,
+                total:
+                  parseFloat(producto.valor) *
+                  parseFloat(e.target.value === "" ? "0" : e.target.value),
+              });
+            }}
+          />
+        </label>
+      </td>
+      <td>{producto.valor}</td>
+      <td>{parseFloat(producto.total ?? 0)}</td>
+      {/* <td>
+        <i
+          onClick={() => eliminarProducto(producto)}
+          className="fas fa-minus text-red-500 cursor-pointer"
+        />
+      </td> */}
+      {/* <td className="hidden">
+        <input hidden defaultValue={producto._id} name={`producto_${index}`} />
+      </td> */}
+    </tr>
   );
 };
 
