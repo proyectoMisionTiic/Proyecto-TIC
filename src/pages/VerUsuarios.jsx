@@ -250,3 +250,4 @@ const FilaUsuarios = ({ usuarios, setEjecutarConsulta }) => {
     </tr>
   );
 };
+
