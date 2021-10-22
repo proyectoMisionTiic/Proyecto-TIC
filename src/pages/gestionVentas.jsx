@@ -5,23 +5,11 @@ import "react-toastify/dist/ReactToastify.css";
 import "../styles/Style-ventas.css";
 import { obtenerUsuarios, obtenerProductos, crearVenta } from "../utils/api.js";
 
-const GestionVentas = ({ setProductoAAgregar }) => {
-  const mostrarMensajeV = () => {
-    toast.success("Venta Registrada Correctamente", {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  };
-
+const GestionVentas = () => {
   const form = useRef(null);
-  const [vendedores, setVendedores] = useState([{}]);
-  const [productos, setProductos] = useState([{}]);
-  const [productosTabla, setProductosTabla] = useState([{}]);
+  const [vendedores, setVendedores] = useState([]);
+  const [productos, setProductos] = useState([]);
+  const [productosTabla, setProductosTabla] = useState([]);
 
   useEffect(() => {
     const fetchVendedores = async () => {
@@ -58,21 +46,29 @@ const GestionVentas = ({ setProductoAAgregar }) => {
     fd.forEach((value, key) => {
       formData[key] = value;
     });
-    console.log(formData);
+    // console.log(formData);
 
     const listaProductos = Object.keys(formData)
       .map((k) => {
-        if (k.includes("productos")) {
+        if (k.includes("producto")) {
           return productosTabla.filter((v) => v._id === formData[k])[0];
         }
         return null;
       })
       .filter((v) => v);
 
+    console.log(
+      "lista de productos",
+      listaProductos,
+      "productos tabla",
+      productosTabla
+    );
+
     const datosVenta = {
       vendedor: vendedores.filter((v) => v._id === formData.vendedor)[0],
-      producto: productos.filter((v) => v._id === formData.producto)[0],
-      productos: listaProductos,
+      total_venta: formData.total_venta,
+      productos: productosTabla,
+      documento: formData.documento,
     };
     console.log(datosVenta);
 
@@ -82,153 +78,72 @@ const GestionVentas = ({ setProductoAAgregar }) => {
         toast.success("Venta Agregada");
       },
       (error) => {
+        console.log("errorrrrr");
+        toast.error("Error al agregar");
         console.error(error);
       }
     );
   };
 
   return (
-    <div>
-      <div className="andrew-container  bg-gray-800  mb-10 ">
+    <div className="overflow-y-visible">
+      <div className=" m-auto andrew-container bg-gray-800 ">
         {/* Inicio Seccion de input del usuario */}
-        <div className="andrew-titulo mb-10 ">Gestionar Ventas</div>
+        <div className="andrew-titulo ">Gestionar Ventas</div>
 
         <form ref={form} onSubmit={submitForm}>
-          <div className="andrew-detalles-producto ">
-            <div className="text-3xl mb-10 m-auto text-center ">
+          {/* <div className="text-3xl my-10 m-auto text-center ">
               Ingreso De Productos
-            </div>
-
-            <div className="tablet:flex tablet:gap-3 portatil:gap-5">
-              <div className="andrew-input-box ">
-                <span className="andrew-detalles">Vendedor</span>
-                <select
-                  name="vendedor"
-                  className="text-black p-2 w-3/4 rounded-md border-blue-400 focus:ring-indigo-500 "
-                  defaultValue={-1}
-                  required
-                >
-                  <option disabled value={-1}>
-                    Seleccione un vendedor
+            </div> */}
+          <div className="flex flex-col">
+            <span className="text-center my-2">Vendedor</span>
+            <select
+              name="vendedor"
+              className="text-black p-2 text-center m-auto w-5/12 rounded-md"
+              defaultValue={-1}
+              required
+            >
+              <option disabled value={-1}>
+                Seleccione un vendedor
+              </option>
+              {vendedores.map((xd) => {
+                return (
+                  <option key={nanoid()} value={xd._id}>
+                    {`${xd.nombre} ${xd.apellido}`}
                   </option>
-                  {vendedores.map((xd) => {
-                    return (
-                      <option key={nanoid()} value={xd._id}>
-                        {`${xd.nombre} ${xd.apellido}`}
-                      </option>
-                    );
-                  })}
-                </select>
-              </div>
-
-              {/* <div className="andrew-input-box">
-                <span className="andrew-detalles">Cantidad Producto</span>
-                <input
-                  type="number"
-                  className="text-black"
-                  name="cantidad"
-                  placeholder="Ingrese la cantidad de productos"
-                  required
-                />
-              </div> */}
-            </div>
-
-            <TablaProductos
-              productos={productos}
-              setProductos={setProductos}
-              setProductosTabla={setProductosTabla}
-            />
+                );
+              })}
+            </select>
           </div>
-        </form>
+          <TablaProductos
+            productos={productos}
+            setProductos={setProductos}
+            setProductosTabla={setProductosTabla}
+          />
 
-        <form action="#">
-          {/* <div className="andrew-detalles-producto ">
-            <div className="text-3xl mt-10 m-auto text-center mb-10">
-              Ingreso De Venta
-            </div>
-
-            <div className="tablet:flex tablet:gap-5">
-              <div className="andrew-input-box">
-                <span className="andrew-detalles">ID Venta</span>
-                <input type="number" placeholder="Ingrese xd ID " required />
-              </div>
-
-              <div className="andrew-input-box">
-                <span className="andrew-detalles ">Valor Total</span>
-                <input
-                  type="number"
-                  placeholder="Ingrese xd valor total"
-                  required
-                />
-              </div>
-            </div>
-
-            <div className="tablet:flex tablet:gap-5">
-              <div className="andrew-input-box">
-                <span className="andrew-detalles">Fecha de venta</span>
-                <input type="date" required />
-              </div>
-
-              <div className="andrew-input-box">
-                <span className="andrew-detalles">Documento Cliente</span>
-                <input
-                  type="number"
-                  placeholder="Ingrese xd documento del cliente"
-                  required
-                />
-              </div>
-            </div>
-
-            <div className="tablet:flex tablet:gap-5">
-              <div className="andrew-input-box">
-                <span className="andrew-detalles">Nombre Vendedor</span>
-                <input
-                  type="text"
-                  placeholder="Ingrese xd nombre del vendedor"
-                  required
-                />
-              </div>
-
-              <div className="andrew-input-box">
-                <span className="andrew-detalles">Nombre Cliente</span>
-                <input
-                  type="text"
-                  placeholder="Ingrese xd nombre del vendedor"
-                  required
-                />
-              </div>
-            </div>
-
-
-            <div className="andrew-input-box">
-              <span className="andrew-detalles text-transparent ">
-                Nombre Cliente
-              </span>
-              <input
-                type="hidden"
-                placeholder="Ingrese xd nombre del vendedor"
-                required
-              />
-            </div>
-
-            <div className="andrew-input-box">
-              <span className="andrew-detalles text-transparent ">
-                Nombre Cliente
-              </span>
-              <input
-                type="hidden"
-                placeholder="Ingrese xd nombre del vendedor"
-                required
-              />
-            </div>
-          </div> */}
-          <div className="andrew-button w-full ">
+          <div className="flex my-4">
+            <span>Total venta</span>
             <input
-              onClick={mostrarMensajeV}
-              type="submit"
-              value="Registrar Venta"
+              type="number"
+              className="text-black my-6 mx-6 p-2 rounded-lg "
+              name="total_venta"
+              required
+            />
+
+            <span>Documento cliente</span>
+            <input
+              type="number"
+              className="text-black my-6 mx-6  p-2 rounded-lg"
+              name="documento"
+              required
             />
           </div>
+          <button className="bg-blue-500 andrew-button rounded-lg " type="submit">
+            Agregar venta
+          </button>
+          {/* <div className="andrew-button ">
+            <input type="submit" />
+          </div> */}
         </form>
 
         <ToastContainer
@@ -279,20 +194,19 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
   };
 
   return (
-    <div>
-      <div className="andrew-input-box ">
-        <span className="andrew-detalles">Producto</span>
+    <div className="flex flex-col">
+      <div className="flex flex-col ">
+        <span className="text-center my-2">Producto</span>
         <select
-          name="producto"
-          className="text-black p-2  w-3/4 rounded-md border-blue-400 focus:ring-indigo-500 "
-          valuealue={productoAAgregar._id ?? ""}
+          className="text-black p-2 text-center m-auto w-5/12 rounded-md"
+          value={productoAAgregar._id ?? ""}
           onChange={(e) =>
             setProductoAAgregar(
               productos.filter((v) => v._id === e.target.value)[0]
             )
           }
         >
-          <option disabled value={-1}>
+          <option disabled value="">
             Seleccione un producto
           </option>
           {productos.map((xd) => {
@@ -304,19 +218,23 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
           })}
         </select>
       </div>
-      <button className="bg-blue-500 andrew-button" onClick={() => agregarNuevoProducto()}>
+      <button
+        type="button"
+        className="bg-blue-500 andrew-button rounded-lg"
+        onClick={() => agregarNuevoProducto()}
+      >
         Agregar Producto
       </button>
-      <table className="min-w-full bg-white ">
-        <thead className="bg-gray-800 text-white">
-          <tr>
+      <table className="min-w-full bg-white rounded-2xl border">
+        <thead className="bg-gray-800 text-white ">
+          <tr className=" text-white">
             <th className=" text-center py-3 px-4 uppercase font-semibold text-sm">
               ID
             </th>
-            <th className="    text-center py-3 px-4 uppercase font-semibold text-sm">
+            <th className=" text-center py-3 px-4 uppercase font-semibold text-sm">
               Producto
             </th>
-            <th className="   text-center py-3 px-4 uppercase font-semibold text-sm">
+            <th className="  text-center py-3 px-4 uppercase font-semibold text-sm">
               Descripción
             </th>
             <th className="   text-center py-3 px-4 uppercase font-semibold text-sm">
@@ -327,6 +245,9 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
             </th>
             <th className="   text-center py-3 px-4 uppercase font-semibold text-sm">
               Precio total
+            </th>
+            <th className="   text-center py-3 px-4 uppercase font-semibold text-sm">
+              Eliminar
             </th>
           </tr>
         </thead>
@@ -351,21 +272,19 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
 const FilaProductos = ({ pro, index, eliminarProducto, modificarProducto }) => {
   const [producto, setProducto] = useState(pro);
   useEffect(() => {
-    console.log("veh", producto);
+    console.log("producto", producto);
   }, [producto]);
   return (
-    <tr className="text-black text-center">
+    <tr className="bg-white text-black text-center font-normal">
       <td>{producto._id.slice(20)}</td>
       <td>{producto.nombre}</td>
       <td>{producto.descripcion}</td>
-      {/* <td>{productos.valor}</td> */}
-      <td>
+      <td className="w-1/5">
         <label htmlFor={`valor_${index}`}>
           <input
-            className="andrew-detalles"
+            className="w-1/5 border-solid rounded-lg border-black  bg-gray-400 my-2"
             type="number"
             name={`cantidad_${index}`}
-            value={producto.cantidad}
             onChange={(e) => {
               modificarProducto(
                 producto,
@@ -384,15 +303,15 @@ const FilaProductos = ({ pro, index, eliminarProducto, modificarProducto }) => {
       </td>
       <td>{producto.valor}</td>
       <td>{parseFloat(producto.total ?? 0)}</td>
-      {/* <td>
+      <td>
         <i
           onClick={() => eliminarProducto(producto)}
           className="fas fa-minus text-red-500 cursor-pointer"
         />
-      </td> */}
-      {/* <td className="hidden">
+      </td>
+      <td className="hidden">
         <input hidden defaultValue={producto._id} name={`producto_${index}`} />
-      </td> */}
+      </td>
     </tr>
   );
 };
