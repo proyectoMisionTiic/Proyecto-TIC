@@ -9,9 +9,11 @@ import {
 import { nanoid } from "nanoid";
 
 const Tablaproductos = () => {
+  
   const [productos, setProductos] = useState([]);
   const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
-
+  
+ 
   useEffect(() => {
     const fetchProductos = async () => {
       await obtenerProductos(
@@ -33,6 +35,7 @@ const Tablaproductos = () => {
     <div classNameName="bg-gray-800 self-center container ml-80 mr-80 mt-10 ">
       <div className="md:px-32 w-full">
         <div className="shadow overflow-hidden rounded border-b border-gray-200"></div>
+       
         <Tabla
           listaProductos={productos}
           setEjecutarConsulta={setEjecutarConsulta}
@@ -51,17 +54,40 @@ const Tabla = ({ listaProductos, productos, setEjecutarConsulta }) => {
   useEffect(() => {
     setProductosFiltrados(
       listaProductos.filter((elemento) => {
+        //elemento._id.includes(busqueda);
         return JSON.stringify(elemento)
           .toLowerCase()
           .includes(busqueda.toLowerCase());
       })
     );
   }, [busqueda, listaProductos]);
+ 
 
   return (
+    
+     
     <table className="m-auto w-11/12 rounded-xl bg-white ">
-      <thead className="bg-gray-900 text-white">
-        <ToastContainer
+    <thead className=" bg-gray-900  text-white w-full ">  
+    <div className="flex p-6 w-full -m-5 ">
+          <div className="bg-white flex  items-center rounded-md shadow-xl ">
+            <input
+              value={busqueda}
+              onChange ={(e)=> setBusqueda(e.target.value)}
+              className="rounded-l-full w-full py-4 px-6 text-gray-700 leading-tight focus:outline-none"
+              id="search"
+              type="string"
+              placeholder="Búsqueda por id"
+            />
+            <div className="p-4">
+              <button className="bg-blue-500 text-white rounded-full p-2 hover:bg-blue-400 focus:outline-none w-12 h-12 flex items-center justify-center">
+                <i class="bx bx-search text-3xl"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        
+      <ToastContainer
           position="top-center"
           autoClose={4000}
           hideProgressBar={false}
@@ -72,6 +98,7 @@ const Tabla = ({ listaProductos, productos, setEjecutarConsulta }) => {
           draggable
           pauseOnHover
         />
+        
         <tr>
           <th className="text-xl w-2 py-4 px-2 text-center uppercase font-semibold">
             ID
