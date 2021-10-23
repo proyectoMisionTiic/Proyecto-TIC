@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "../styles/Style-ventas.css";
 import { obtenerUsuarios, obtenerProductos, crearVenta } from "../utils/api.js";
 
-const GestionVentas = () => {
+const GestionVentas = (totalVenta) => {
   const form = useRef(null);
   const [vendedores, setVendedores] = useState([]);
   const [productos, setProductos] = useState([]);
@@ -66,7 +66,7 @@ const GestionVentas = () => {
 
     const datosVenta = {
       vendedor: vendedores.filter((v) => v._id === formData.vendedor)[0],
-      total_venta: formData.total_venta,
+      total_venta: totalVenta,
       productos: productosTabla,
       documento: formData.documento,
     };
@@ -86,7 +86,7 @@ const GestionVentas = () => {
   };
 
   return (
-    <div className="overflow-y-visible">
+    <div className="overscroll-y-auto">
       <div className=" m-auto andrew-container bg-gray-800 ">
         {/* Inicio Seccion de input del usuario */}
         <div className="andrew-titulo ">Gestionar Ventas</div>
@@ -95,11 +95,28 @@ const GestionVentas = () => {
           {/* <div className="text-3xl my-10 m-auto text-center ">
               Ingreso De Productos
             </div> */}
-          <div className="flex flex-col">
-            <span className="text-center my-2">Vendedor</span>
+
+          <TablaProductos
+            productos={productos}
+            setProductos={setProductos}
+            setProductosTabla={setProductosTabla}
+          />
+
+          <div className="flex my-3 justify-center">
+            <span className=" mx-2  p-2">Documento cliente</span>
+            <input
+              type="number"
+              className="text-black  mx-2  p-2 rounded-lg w-4/12"
+              name="documento"
+              placeholder="Cedula de ciudadania"
+              required
+            />
+          </div>
+          <div className="flex justify-center ">
+            <span className="text-center my-2 mx-2">Vendedor</span>
             <select
               name="vendedor"
-              className="text-black p-2 text-center m-auto w-5/12 rounded-md"
+              className="text-black p-2  w-4/12 rounded-lg mx-2"
               defaultValue={-1}
               required
             >
@@ -115,30 +132,10 @@ const GestionVentas = () => {
               })}
             </select>
           </div>
-          <TablaProductos
-            productos={productos}
-            setProductos={setProductos}
-            setProductosTabla={setProductosTabla}
-          />
-
-          <div className="flex my-4">
-            <span>Total venta</span>
-            <input
-              type="number"
-              className="text-black my-6 mx-6 p-2 rounded-lg "
-              name="total_venta"
-              required
-            />
-
-            <span>Documento cliente</span>
-            <input
-              type="number"
-              className="text-black my-6 mx-6  p-2 rounded-lg"
-              name="documento"
-              required
-            />
-          </div>
-          <button className="bg-blue-500 andrew-button rounded-lg " type="submit">
+          <button
+            className="bg-blue-500 andrew-button rounded-lg "
+            type="submit"
+          >
             Agregar venta
           </button>
           {/* <div className="andrew-button ">
@@ -165,6 +162,7 @@ const GestionVentas = () => {
 const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
   const [productoAAgregar, setProductoAAgregar] = useState([{}]);
   const [filasTabla, setFilasTabla] = useState([]);
+  const [totalVenta, setTotalVenta] = useState(0);
 
   useEffect(() => {
     setProductosTabla(filasTabla);
@@ -184,7 +182,7 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
   const modificarProducto = (producto, cantidad) => {
     setFilasTabla(
       filasTabla.map((ft) => {
-        if (ft._id === producto.id) {
+        if (ft._id === producto._id) {
           ft.cantidad = cantidad;
           ft.total = producto.valor * cantidad;
         }
@@ -192,6 +190,14 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
       })
     );
   };
+
+  useEffect(() => {
+    let total = 0;
+    filasTabla.forEach((f) => {
+      total = total + f.total;
+    });
+    setTotalVenta(total);
+  }, [filasTabla]);
 
   return (
     <div className="flex flex-col">
@@ -265,12 +271,24 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
           })}
         </tbody>
       </table>
+      <span className="flex justify-center my-2 ">
+        Valor total de la venta = $ {totalVenta}
+      </span>
     </div>
   );
 };
 
 const FilaProductos = ({ pro, index, eliminarProducto, modificarProducto }) => {
   const [producto, setProducto] = useState(pro);
+  const [num, setNum] = useState(1);
+
+  const incNum = () => {
+    setNum(num + 1);
+  };
+  const decNum = () => {
+    setNum(num - 1);
+  };
+
   useEffect(() => {
     console.log("producto", producto);
   }, [producto]);
@@ -279,11 +297,17 @@ const FilaProductos = ({ pro, index, eliminarProducto, modificarProducto }) => {
       <td>{producto._id.slice(20)}</td>
       <td>{producto.nombre}</td>
       <td>{producto.descripcion}</td>
-      <td className="w-1/5">
+      <td className="w-1/5 justify-center">
         <label htmlFor={`valor_${index}`}>
+          <button className="" onClick={decNum} type="button">
+            <i
+              className="fas fa-minus text-red-500 cursor-pointer"
+            />
+          </button>
           <input
-            className="w-1/5 border-solid rounded-lg border-black  bg-gray-400 my-2"
+            className="w-1/5 border-solid rounded-lg border-black  bg-gray-400 my-2 mx-3 text-center"
             type="number"
+            // value={num}
             name={`cantidad_${index}`}
             onChange={(e) => {
               modificarProducto(
@@ -299,6 +323,9 @@ const FilaProductos = ({ pro, index, eliminarProducto, modificarProducto }) => {
               });
             }}
           />
+          <button className="" onClick={incNum} type="button">
+            <i className="fas fa-plus text-green-600 "></i>
+          </button>
         </label>
       </td>
       <td>{producto.valor}</td>
@@ -306,7 +333,7 @@ const FilaProductos = ({ pro, index, eliminarProducto, modificarProducto }) => {
       <td>
         <i
           onClick={() => eliminarProducto(producto)}
-          className="fas fa-minus text-red-500 cursor-pointer"
+          className="fas fa-times text-red-500 cursor-pointer"
         />
       </td>
       <td className="hidden">
