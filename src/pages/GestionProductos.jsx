@@ -1,25 +1,17 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import "../styles/Style-gestionar-productos.css";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
-import CurrencyInput from "react-currency-input-field";
+import CurrencyFormat from "react-currency-format";
 
 const GestionProductos = () => {
-  const mostrarMensajevp = () => {
-    toast.success("Producto Registrado Correctamente", {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-  };
+  const [valorProducto, setValorProducto] = useState();
   const form = useRef(null);
 
   const submitformulario = async (e) => {
     e.preventDefault();
+
+    
     const data = new FormData(form.current);
 
     //nuevoProducto (objeto vacio) almacena los productos en un diccionario
@@ -27,7 +19,7 @@ const GestionProductos = () => {
     data.forEach((value, key) => {
       nuevoProducto[key] = value;
     });
-    console.log("Datos enviados", nuevoProducto);
+
 
     const options = {
       method: "POST",
@@ -52,6 +44,7 @@ const GestionProductos = () => {
         console.error(error);
         toast.error("Error creando el producto");
       });
+      document.getElementById('formproducto').reset();
   };
 
   return (
@@ -59,12 +52,8 @@ const GestionProductos = () => {
       <div className="m-auto self-center   container p-10 w-1/2 ">
         {/* Inicio Seccion de input del usuario */}
         <div className="titulo">Registro de productos</div>
-        <form onSubmit={submitformulario} ref={form}>
+        <form onSubmit={submitformulario} ref={form} id="formproducto">
           <div className="detalles-producto">
-            {/* <div className="input-box">
-              <span className="detalles">ID</span>
-              <input type="number" placeholder="Ingrese el ID " name='id' required />
-            </div> */}
             <div className="input-box">
               <span className="detalles">Nombre</span>
               <input
@@ -85,15 +74,23 @@ const GestionProductos = () => {
             </div>
             <div className="input-box">
               <span className="detalles">Valor unitario</span>
-              <CurrencyInput
-                prefix="$ "
-                className="input-box"
-                id="input-example"
+              <input
+                type="number"
+                placeholder="Ingrese el valor "
                 name="valor"
-                placeholder="Ingrese el valor"
-                decimalsLimit={0}
                 required
               />
+              {/* <CurrencyFormat
+                name="valor"
+                value={valorProducto}
+                displayType={"input"}
+                className="input-box"
+                placeholder="Ingrese el valor"
+                decimalSeparator={false}
+                prefix={"$ "}
+                thousandSeparator="."
+                required
+              /> */}
             </div>
 
             <div className="input-box">
@@ -138,7 +135,7 @@ const GestionProductos = () => {
           </div>
           <div className="botones">
             <div className="button">
-              <input type="submit" value="Registrar producto" />
+              <input type="submit" value="Registrar producto"/>
             </div>
           </div>
         </form>
@@ -160,3 +157,4 @@ const GestionProductos = () => {
 };
 
 export default GestionProductos;
+

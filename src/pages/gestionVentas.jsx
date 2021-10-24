@@ -4,6 +4,7 @@ import { nanoid } from "nanoid";
 import "react-toastify/dist/ReactToastify.css";
 import "../styles/Style-ventas.css";
 import { obtenerUsuarios, obtenerProductos, crearVenta } from "../utils/api.js";
+import CurrencyFormat from "react-currency-format";
 
 const GestionVentas = (totalVenta) => {
   const form = useRef(null);
@@ -46,7 +47,6 @@ const GestionVentas = (totalVenta) => {
     fd.forEach((value, key) => {
       formData[key] = value;
     });
-    // console.log(formData);
 
     const listaProductos = Object.keys(formData)
       .map((k) => {
@@ -57,12 +57,6 @@ const GestionVentas = (totalVenta) => {
       })
       .filter((v) => v);
 
-    console.log(
-      "lista de productos",
-      listaProductos,
-      "productos tabla",
-      productosTabla
-    );
 
     const datosVenta = {
       vendedor: vendedores.filter((v) => v._id === formData.vendedor)[0],
@@ -70,7 +64,7 @@ const GestionVentas = (totalVenta) => {
       productos: productosTabla,
       documento: formData.documento,
     };
-    console.log(datosVenta);
+    // console.log("datos venta", datosVenta);
 
     await crearVenta(
       datosVenta,
@@ -83,6 +77,7 @@ const GestionVentas = (totalVenta) => {
         console.error(error);
       }
     );
+    document.getElementById('formventas').reset();
   };
 
   return (
@@ -91,11 +86,7 @@ const GestionVentas = (totalVenta) => {
         {/* Inicio Seccion de input del usuario */}
         <div className="andrew-titulo ">Gestionar Ventas</div>
 
-        <form ref={form} onSubmit={submitForm}>
-          {/* <div className="text-3xl my-10 m-auto text-center ">
-              Ingreso De Productos
-            </div> */}
-
+        <form ref={form} onSubmit={submitForm} id="formventas">
           <TablaProductos
             productos={productos}
             setProductos={setProductos}
@@ -138,9 +129,6 @@ const GestionVentas = (totalVenta) => {
           >
             Agregar venta
           </button>
-          {/* <div className="andrew-button ">
-            <input type="submit" />
-          </div> */}
         </form>
 
         <ToastContainer
@@ -212,7 +200,7 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
             )
           }
         >
-          <option disabled value="">
+          <option disabled value={-1}>
             Seleccione un producto
           </option>
           {productos.map((xd) => {
@@ -272,7 +260,16 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
         </tbody>
       </table>
       <span className="flex justify-center my-2 ">
-        Valor total de la venta = $ {totalVenta}
+        Valor total de la venta = $ {totalVenta ?? 0}
+        {/* <CurrencyFormat
+          value={totalVenta}
+          displayType={"text"}
+          prefix={"$ "}
+          // decimalSeparator={false}
+          // thousandSeparator="."
+          // fixedDecimalScale={true}
+          // decimalScale={0}
+        /> */}
       </span>
     </div>
   );
@@ -294,20 +291,17 @@ const FilaProductos = ({ pro, index, eliminarProducto, modificarProducto }) => {
   }, [producto]);
   return (
     <tr className="bg-white text-black text-center font-normal">
-      <td>{producto._id.slice(20)}</td>
+      <td>{producto._id.slice(15)}</td>
       <td>{producto.nombre}</td>
       <td>{producto.descripcion}</td>
       <td className="w-1/5 justify-center">
         <label htmlFor={`valor_${index}`}>
           <button className="" onClick={decNum} type="button">
-            <i
-              className="fas fa-minus text-red-500 cursor-pointer"
-            />
+            <i className="fas fa-minus text-red-500 cursor-pointer" />
           </button>
           <input
             className="w-1/5 border-solid rounded-lg border-black  bg-gray-400 my-2 mx-3 text-center"
             type="number"
-            // value={num}
             name={`cantidad_${index}`}
             onChange={(e) => {
               modificarProducto(
@@ -328,16 +322,35 @@ const FilaProductos = ({ pro, index, eliminarProducto, modificarProducto }) => {
           </button>
         </label>
       </td>
-      <td>{producto.valor}</td>
-      <td>{parseFloat(producto.total ?? 0)}</td>
+      <td>
+        {producto.valor}
+        {/* <CurrencyFormat
+          value={producto.valor}
+          displayType={"text"}
+          // decimalSeparator={false}
+          prefix={"$ "}
+          // thousandSeparator="."
+          decimalScale={0}
+          // fixedDecimalScale={true}
+        /> */}
+      </td>
+      <td>
+        {parseFloat(producto.total ?? 0)}
+        {/* <CurrencyFormat
+          value={parseFloat(producto.total ?? 0)}
+          displayType={"text"}
+          // decimalSeparator={false}
+          prefix={"$ "}
+          // thousandSeparator="."
+          decimalScale={0}
+          // fixedDecimalScale={true}
+        /> */}
+      </td>
       <td>
         <i
           onClick={() => eliminarProducto(producto)}
           className="fas fa-times text-red-500 cursor-pointer"
         />
-      </td>
-      <td className="hidden">
-        <input hidden defaultValue={producto._id} name={`producto_${index}`} />
       </td>
     </tr>
   );

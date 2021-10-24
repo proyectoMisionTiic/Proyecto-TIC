@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "../styles/Style-gestionar-productos.css";
-import { toast,ToastContainer } from "react-toastify";
-import { obtenerProductos, editarProducto } from "../utils/api.js";
+import { toast, ToastContainer } from "react-toastify";
+import {
+  obtenerProductos,
+  editarProducto,
+  eliminarProducto,
+} from "../utils/api.js";
 import { nanoid } from "nanoid";
 
 const Tablaproductos = () => {
@@ -22,9 +26,6 @@ const Tablaproductos = () => {
         }
       );
     };
-    console.log("los productos son ", productos);
-    // console.log("los infoNuevoProducto son ", infoNuevoProducto);
-    console.log("consulta", ejecutarConsulta);
     if (ejecutarConsulta) {
       fetchProductos();
     }
@@ -66,10 +67,7 @@ const Tabla = ({ listaProductos, productos, setEjecutarConsulta }) => {
     
      
     <table className="m-auto w-11/12 rounded-xl bg-white ">
-      
-      
     <thead className=" bg-gray-900  text-white w-full ">  
-
     <div className="flex p-6 w-full -m-5 ">
           <div className="bg-white flex  items-center rounded-md shadow-xl ">
             <input
@@ -87,9 +85,7 @@ const Tabla = ({ listaProductos, productos, setEjecutarConsulta }) => {
             </div>
           </div>
         </div>
-        
-     
-        
+
         
       <ToastContainer
           position="top-center"
@@ -167,8 +163,23 @@ const FilaProductos = ({ productos, setEjecutarConsulta }) => {
       },
       (error) => {
         console.log("errorrrrrrrrrrrrr");
-        toast.error("Error modificando el vehículo");
+        toast.error("Error modificando el producto");
         console.error(error);
+      }
+    );
+  };
+
+  const borrarProducto = async () => {
+    await eliminarProducto(
+      productos._id,
+      (response) => {
+        console.log(response.data);
+        toast.success("Producto eliminado con éxito");
+        setEjecutarConsulta(true);
+      },
+      (error) => {
+        console.error(error);
+        toast.error("Error eliminando el producto");
       }
     );
   };
@@ -261,7 +272,10 @@ const FilaProductos = ({ productos, setEjecutarConsulta }) => {
                 className="fas fa-pencil-alt text-yellow-700 hover:text-yellow-500"
               />
 
-              <i className="fas fa-trash text-red-700 hover:text-red-500" />
+              <i
+                className="fas fa-trash text-red-700 hover:text-red-500"
+                onClick={borrarProducto}
+              />
             </>
           )}
         </div>
