@@ -200,7 +200,7 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
             )
           }
         >
-          <option disabled value={-1}>
+          <option  defaultValue={-1}>
             Seleccione un producto
           </option>
           {productos.map((xd) => {
