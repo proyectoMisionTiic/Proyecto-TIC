@@ -2,9 +2,7 @@ import Logo from "../media/logo_small.png";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 
-
 const Login = () => {
-
   const { loginWithRedirect } = useAuth0();
 
   return (
@@ -59,12 +57,14 @@ const Login = () => {
           </Link>
 
           <div>
-            <button type="button"
+            <button
+              type="button"
               className="text-white w-full bg-red-700 rounded-xl mt-20 p-3 cursor-pointer"
               value="Ingresar Con Google"
-              onClick={()=>loginWithRedirect()}
-              Ingresa con Google
-            >Ingresa con google</button>
+              onClick={() => loginWithRedirect()}
+            >
+              Ingresa con google
+            </button>
           </div>
         </form>
       </div>
