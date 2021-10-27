@@ -4,24 +4,23 @@ import { toast, ToastContainer } from "react-toastify";
 import {
   obtenerventas,
   obtenerVenta,
-  editarProducto,
+  editarVenta,
   eliminarProducto,
 } from "../utils/api.js";
 import { nanoid } from "nanoid";
 
-const TablaVentas = () => {
+const Tablaventas = () => {
   
-  const [ventas, setventas] = useState([]);
+  const [ventas, setVentas] = useState([]);
   const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
   
  
   useEffect(() => {
-    const fetchventas = async () => {
+    const fetchVentas = async () => {
       await obtenerVenta(
         (response) => {
-          setventas(response.data);
+          setVentas(response.data);
           setEjecutarConsulta(false);
-          console.log(response.data);
         },
         (error) => {
           console.error("Salio un error:", error);
@@ -29,7 +28,7 @@ const TablaVentas = () => {
       );
     };
     if (ejecutarConsulta) {
-      fetchventas();
+      fetchVentas();
     }
   }, [ejecutarConsulta]);
 
@@ -47,14 +46,14 @@ const TablaVentas = () => {
   );
 };
 
-export default TablaVentas;
+export default Tablaventas;
 
 const Tabla = ({ listaVentas, ventas, setEjecutarConsulta }) => {
   const [busqueda, setBusqueda] = useState("");
-  const [ventasFiltradas, setventasFiltradas] = useState(listaVentas);
+  const [ventasFiltrados, setventasFiltrados] = useState(listaVentas);
 
   useEffect(() => {
-    setventasFiltradas(
+    setventasFiltrados(
       listaVentas.filter((elemento) => {
         //elemento._id.includes(busqueda);
         return JSON.stringify(elemento)
@@ -155,7 +154,7 @@ const Tabla = ({ listaVentas, ventas, setEjecutarConsulta }) => {
         </tr>
       </thead>
       <tbody>
-        {ventasFiltradas.map((ventas) => {
+        {ventasFiltrados.map((ventas) => {
           return (
             <FilaVentas
               key={nanoid()}
@@ -170,55 +169,300 @@ const Tabla = ({ listaVentas, ventas, setEjecutarConsulta }) => {
 };
 
 const FilaVentas = ({ ventas, setEjecutarConsulta }) => {
+  const [edit, setEdit] = useState(false);
+  const [nuevaVenta, setnuevaVenta] = useState({
+    _id: ventas._id.slice(20),
+       
+    documento: ventas.documento,
  
+     _id: ventas.vendedor._id.slice(15),
+     nombre: ventas.vendedor.nombre,
+     apellido: ventas.vendedor.apellido,
+     cedula: ventas.vendedor.cedula,
+     email: ventas.vendedor.email,
+     estado: ventas.vendedor.estado,
+     rol: ventas.vendedor.rol,
+ 
+ 
+     _id: ventas.productos[0]._id.slice(20),
+     nombre: ventas.productos[0].nombre,
+     descripcion: ventas.productos[0].descripcion,
+     valor: ventas.productos[0].valor,
+     cantidad: ventas.productos[0].cantidad,
+ 
+ 
+     total_venta: ventas.vendedor.total_venta
+  });
 
+  const actualizarVenta = async () => {
+    await editarVenta(
+      ventas._id, ventas.vendedor._id, ventas.productos._id,
+      {
+        documento: nuevaVenta.documento,
+     
+        nombre: nuevaVenta.vendedor.nombre,
+        apellido: nuevaVenta.vendedor.apellido,
+        cedula: nuevaVenta.vendedor.cedula,
+        email: nuevaVenta.vendedor.email,
+        estado: nuevaVenta.vendedor.estado,
+        rol: nuevaVenta.vendedor.rol,
+    
+        nombre: nuevaVenta.productos[0].nombre,
+        descripcion: nuevaVenta.productos[0].descripcion,
+        valor: nuevaVenta.productos[0].valor,
+        cantidad: nuevaVenta.productos[0].cantidad,
+    
+    
+        total_venta: ventas.vendedor.total_venta
+      },
+      (response) => {
+        toast.success("Venta modificada con éxito");
+        setEdit(false);
+        setEjecutarConsulta(true);
+      },
+      (error) => {
+        console.log("errorrrrrrrrrrrrr");
+        toast.error("Error modificando la venta");
+        console.error(error);
+      }
+    );
+  };
 
 
   return (
     <tr>
-  
-          <td className="text-center">{ventas._id.slice(20)}</td>
-       
-          <td className="text-center">{ventas.documento}</td>
-
-          <td className="text-center">{ventas.vendedor._id}</td>
-          <td className="text-center">{ventas.vendedor.nombre}</td>
-          <td className="text-center">{ventas.vendedor.apellido}</td>
-          <td className="text-center">{ventas.vendedor.cedula}</td>
-          <td className="text-center">{ventas.vendedor.email}</td>
-          <td className="text-center">{ventas.vendedor.estado}</td>
-          <td className="text-center">{ventas.vendedor.rol}</td>
-
-
-          <td className="text-center">{ventas.productos[0]._id}</td>
-          <td className="text-center">{ventas.productos[0].nombre}</td>
-          <td className="text-center">{ventas.productos[0].descripcion}</td>
-          <td className="text-center">{ventas.productos[0].valor}</td>
-          <td className="text-center">{ventas.productos[0].cantidad}</td>
-
-
-          <td className="text-center">{ventas.vendedor.total_venta}</td>
-
-
+      {edit ? (
+        <>
+        
+          <td>
+            <input
+              className="text-center"
+              type="text"
+              value={ventas._id.slice(20)}
+            />
+          </td>
+          <td>
+            <input
+              className="bg-gray-50 border self-center-center w-3/4 border-gray-600 p-2 rounded-lg "
+              type="text"
+              value={nuevaVenta.documento}
+              onChange={(e) =>
+                setnuevaVenta({
+                  ...nuevaVenta,
+                  documento: e.target.value,
+                })
+              }
+            />
+          </td>
+          <td>
+            <input
+              className="text-center"
+              type="text"
+              value={ventas.vendedor._id.slice(20)}
+            />
+          </td>
+          <td>
+            <input
+              className="bg-gray-50 border w-3/4 border-gray-600 p-2 rounded-lg"
+              type="text"
+              value={ventas.vendedor.nombre}
+              onChange={(e) =>
+                setnuevaVenta({
+                  ...nuevaVenta,
+                  nombre: e.target.value,
+                })
+              }
+            />
+          </td>
+          <td>
+            <input
+              className="bg-gray-50 border w-3/4 border-gray-600 p-2 rounded-lg"
+              type="text"
+              value={ventas.vendedor.apellido}
+              onChange={(e) =>
+                setnuevaVenta({
+                  ...nuevaVenta,
+                  apellido: e.target.value,
+                })
+              }
+            />
+          </td>
+          <td>
+            <input
+              className="bg-gray-50 border w-3/4 border-gray-600 p-2 rounded-lg"
+              type="text"
+              value={ventas.vendedor.cedula}
+              onChange={(e) =>
+                setnuevaVenta({
+                  ...nuevaVenta,
+                  cedula: e.target.value,
+                })
+              }
+            />
+          </td>
+          <td>
+            <input
+              className="bg-gray-50 border w-3/4 border-gray-600 p-2 rounded-lg"
+              type="text"
+              value={ventas.vendedor.email}
+              onChange={(e) =>
+                setnuevaVenta({
+                  ...nuevaVenta,
+                  email: e.target.value,
+                })
+              }
+            />
+          </td>
+          <td>
+            <input
+              className="bg-gray-50 border self-center-center w-3/4 border-gray-600 p-2 rounded-lg "
+              type="text"
+              value={ventas.vendedor.estado}
+              onChange={(e) =>
+                setnuevaVenta({
+                  ...nuevaVenta,
+                  estado: e.target.value,
+                })
+              }
+            />
+          </td>
+          <td>
+            <input
+              className="bg-gray-50 border self-center-center w-3/4 border-gray-600 p-2 rounded-lg "
+              type="text"
+              value={ventas.vendedor.rol}
+              onChange={(e) =>
+                setnuevaVenta({
+                  ...nuevaVenta,
+                  rol: e.target.value,
+                })
+              }
+            />
+          </td>
+          <td>
+            <input
+              className="text-center"
+              type="text"
+              value={ventas.productos[0]._id.slice(20)}
+            />
+          </td>
+         
+          <td>
+            <input
+              className="bg-gray-50 border self-center-center w-3/4 border-gray-600 p-2 rounded-lg "
+              type="text"
+              value={ventas.productos[0].nombre}
+              onChange={(e) =>
+                setnuevaVenta({
+                  ...nuevaVenta,
+                  nombre: e.target.value,
+                })
+              }
+            />
+          </td>
+          <td>
+            <input
+              className="bg-gray-50 border self-center-center w-3/4 border-gray-600 p-2 rounded-lg "
+              type="text"
+              value={ventas.productos[0].descripcion}
+              onChange={(e) =>
+                setnuevaVenta({
+                  ...nuevaVenta,
+                  descripcion: e.target.value,
+                })
+              }
+            />
+          </td>
+          <td>
+            <input
+              className="bg-gray-50 border self-center-center w-3/4 border-gray-600 p-2 rounded-lg "
+              type="text"
+              value={ventas.productos[0].valor}
+              onChange={(e) =>
+                setnuevaVenta({
+                  ...nuevaVenta,
+                  valor: e.target.value,
+                })
+              }
+            />
+          </td>
+          <td>
+            <input
+              className="bg-gray-50 border self-center-center w-3/4 border-gray-600 p-2 rounded-lg "
+              type="text"
+              value={ventas.productos[0].cantidad}
+              onChange={(e) =>
+                setnuevaVenta({
+                  ...nuevaVenta,
+                  cantidad: e.target.value,
+                })
+              }
+            />
+          </td>
+          <td>
+            <input
+              className="bg-gray-50 border self-center-center w-3/4 border-gray-600 p-2 rounded-lg "
+              type="text"
+              value={ventas.total_venta}
+              onChange={(e) =>
+                setnuevaVenta({
+                  ...nuevaVenta,
+                  total_venta: e.target.value,
+                })
+              }
+            />
+          </td>
+        </>
+      ) : (
+        <>
       
+       <td className="text-center">{ventas._id.slice(20)}</td>
+       <td className="text-center">{ventas.documento}</td>
+       <td className="text-center">{ventas.vendedor._id.slice(20)}</td>
+       <td className="text-center">{ventas.vendedor.nombre}</td>
+       <td className="text-center">{ventas.vendedor.apellido}</td>
+       <td className="text-center">{ventas.vendedor.cedula}</td>
+       <td className="text-center">{ventas.vendedor.email}</td>
+       <td className="text-center">{ventas.vendedor.estado}</td>
+       <td className="text-center">{ventas.vendedor.rol}</td>
+       <td className="text-center">{ventas.productos[0]._id.slice(20)}</td>
+       <td className="text-center">{ventas.productos[0].nombre}</td>
+       <td className="text-center">{ventas.productos[0].descripcion}</td>
+       <td className="text-center">{ventas.productos[0].valor}</td>
+       <td className="text-center">{ventas.productos[0].cantidad}</td>
+       <td className="text-center">{ventas.vendedor.total_venta}</td>
 
 
-           
-           <i
-                
-                className="fas fa-pencil-alt text-yellow-700 hover:text-yellow-500"
+        </>
+      )}
+      <td className="flex my-4 ">
+        <div className="flex w-full justify-around">
+          {edit ? (
+            <>
+              <i
+                onClick={() => actualizarVenta()}
+                className="fas fa-check text-green-700 hover:text-green-500"
               />
 
               <i
-                className="fas fa-trash text-red-700 hover:text-red-500"
-                
+                onClick={() => setEdit(!edit)}
+                className="fas fa-ban text-yellow-700 hover:text-yellow-500"
               />
-
-
-
-
-         
-      
+            </>
+          ) : (
+            <>
+              <i
+                onClick={() => setEdit(!edit)}
+                className="fas fa-pencil-alt text-yellow-700 hover:text-yellow-500"
+              />
+              <i
+                className="fas fa-trash text-red-700 hover:text-red-500"
+              />
+            
+            </>
+          )}
+        </div>
+      </td>
     </tr>
   );
 };
