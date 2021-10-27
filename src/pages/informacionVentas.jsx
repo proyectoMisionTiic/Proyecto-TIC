@@ -213,7 +213,7 @@ const FilaVentas = ({ ventas, setEjecutarConsulta }) => {
         cantidad: nuevaVenta.productos[0].cantidad,
     
     
-        total_venta: ventas.vendedor.total_venta
+        total_venta: nuevaVenta.vendedor.total_venta
       },
       (response) => {
         toast.success("Venta modificada con éxito");
@@ -265,7 +265,7 @@ const FilaVentas = ({ ventas, setEjecutarConsulta }) => {
             <input
               className="bg-gray-50 border w-3/4 border-gray-600 p-2 rounded-lg"
               type="text"
-              value={ventas.vendedor.nombre}
+              value={nuevaVenta.nombre}
               onChange={(e) =>
                 setnuevaVenta({
                   ...nuevaVenta,
@@ -278,7 +278,7 @@ const FilaVentas = ({ ventas, setEjecutarConsulta }) => {
             <input
               className="bg-gray-50 border w-3/4 border-gray-600 p-2 rounded-lg"
               type="text"
-              value={ventas.vendedor.apellido}
+              value={nuevaVenta.apellido}
               onChange={(e) =>
                 setnuevaVenta({
                   ...nuevaVenta,
@@ -291,7 +291,7 @@ const FilaVentas = ({ ventas, setEjecutarConsulta }) => {
             <input
               className="bg-gray-50 border w-3/4 border-gray-600 p-2 rounded-lg"
               type="text"
-              value={ventas.vendedor.cedula}
+              value={nuevaVenta.cedula}
               onChange={(e) =>
                 setnuevaVenta({
                   ...nuevaVenta,
@@ -304,7 +304,7 @@ const FilaVentas = ({ ventas, setEjecutarConsulta }) => {
             <input
               className="bg-gray-50 border w-3/4 border-gray-600 p-2 rounded-lg"
               type="text"
-              value={ventas.vendedor.email}
+              value={nuevaVenta.email}
               onChange={(e) =>
                 setnuevaVenta({
                   ...nuevaVenta,
@@ -317,7 +317,7 @@ const FilaVentas = ({ ventas, setEjecutarConsulta }) => {
             <input
               className="bg-gray-50 border self-center-center w-3/4 border-gray-600 p-2 rounded-lg "
               type="text"
-              value={ventas.vendedor.estado}
+              value={nuevaVenta.estado}
               onChange={(e) =>
                 setnuevaVenta({
                   ...nuevaVenta,
@@ -330,7 +330,7 @@ const FilaVentas = ({ ventas, setEjecutarConsulta }) => {
             <input
               className="bg-gray-50 border self-center-center w-3/4 border-gray-600 p-2 rounded-lg "
               type="text"
-              value={ventas.vendedor.rol}
+              value={nuevaVenta.rol}
               onChange={(e) =>
                 setnuevaVenta({
                   ...nuevaVenta,
@@ -351,7 +351,7 @@ const FilaVentas = ({ ventas, setEjecutarConsulta }) => {
             <input
               className="bg-gray-50 border self-center-center w-3/4 border-gray-600 p-2 rounded-lg "
               type="text"
-              value={ventas.productos[0].nombre}
+              value={nuevaVenta.nombre}
               onChange={(e) =>
                 setnuevaVenta({
                   ...nuevaVenta,
@@ -364,7 +364,7 @@ const FilaVentas = ({ ventas, setEjecutarConsulta }) => {
             <input
               className="bg-gray-50 border self-center-center w-3/4 border-gray-600 p-2 rounded-lg "
               type="text"
-              value={ventas.productos[0].descripcion}
+              value={nuevaVenta.descripcion}
               onChange={(e) =>
                 setnuevaVenta({
                   ...nuevaVenta,
@@ -377,7 +377,7 @@ const FilaVentas = ({ ventas, setEjecutarConsulta }) => {
             <input
               className="bg-gray-50 border self-center-center w-3/4 border-gray-600 p-2 rounded-lg "
               type="text"
-              value={ventas.productos[0].valor}
+              value={nuevaVenta.valor}
               onChange={(e) =>
                 setnuevaVenta({
                   ...nuevaVenta,
@@ -390,7 +390,7 @@ const FilaVentas = ({ ventas, setEjecutarConsulta }) => {
             <input
               className="bg-gray-50 border self-center-center w-3/4 border-gray-600 p-2 rounded-lg "
               type="text"
-              value={ventas.productos[0].cantidad}
+              value={nuevaVenta.cantidad}
               onChange={(e) =>
                 setnuevaVenta({
                   ...nuevaVenta,
@@ -403,7 +403,7 @@ const FilaVentas = ({ ventas, setEjecutarConsulta }) => {
             <input
               className="bg-gray-50 border self-center-center w-3/4 border-gray-600 p-2 rounded-lg "
               type="text"
-              value={ventas.total_venta}
+              value={nuevaVenta.total_venta}
               onChange={(e) =>
                 setnuevaVenta({
                   ...nuevaVenta,
