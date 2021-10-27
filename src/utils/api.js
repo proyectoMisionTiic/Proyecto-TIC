@@ -7,7 +7,7 @@ const getToken = () => {
 export const crearProducto = async (data,successCallback, errorCallback) => {
   const options = {
     method: "POST",
-    url: "http://localhost:4000/productos/nuevo/",
+    url: "https://thawing-stream-94254.herokuapp.com/nuevo/",
     headers: { "Content-Type": "application/json",Authorization: getToken() },
     data
   };
