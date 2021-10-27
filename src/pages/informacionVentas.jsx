@@ -1,30 +1,35 @@
 import React, { useEffect, useState } from "react";
-import "../styles/Style-ventas.css";
+import "../styles/Style-gestionar-productos.css";
 import { toast, ToastContainer } from "react-toastify";
-import { obtenerVenta, editarVenta } from "../utils/api.js";
-
+import {
+  obtenerventas,
+  obtenerVenta,
+  editarProducto,
+  eliminarProducto,
+} from "../utils/api.js";
 import { nanoid } from "nanoid";
 
 const TablaVentas = () => {
-  const [ventas, setVentas] = useState([]);
+  
+  const [ventas, setventas] = useState([]);
   const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
-
+  
+ 
   useEffect(() => {
-    const fetchVentas = async () => {
+    const fetchventas = async () => {
       await obtenerVenta(
         (response) => {
-          setVentas(response.data);
+          setventas(response.data);
           setEjecutarConsulta(false);
+          console.log(response.data);
         },
         (error) => {
           console.error("Salio un error:", error);
         }
       );
     };
-    console.log("Las ventas son ", ventas);
-    console.log("consulta", ejecutarConsulta);
     if (ejecutarConsulta) {
-      fetchVentas();
+      fetchventas();
     }
   }, [ejecutarConsulta]);
 
@@ -32,7 +37,11 @@ const TablaVentas = () => {
     <div classNameName="bg-gray-800 self-center container ml-80 mr-80 mt-10 ">
       <div className="md:px-32 w-full">
         <div className="shadow overflow-hidden rounded border-b border-gray-200"></div>
-        <Tabla listaVentas={ventas} setEjecutarConsulta={setEjecutarConsulta} />
+       
+        <Tabla
+          listaVentas={ventas}
+          setEjecutarConsulta={setEjecutarConsulta}
+        />
       </div>
     </div>
   );
@@ -42,254 +51,174 @@ export default TablaVentas;
 
 const Tabla = ({ listaVentas, ventas, setEjecutarConsulta }) => {
   const [busqueda, setBusqueda] = useState("");
-  const [ventasFiltrados, setVentasFiltrados] = useState(listaVentas);
+  const [ventasFiltradas, setventasFiltradas] = useState(listaVentas);
 
   useEffect(() => {
-    setVentasFiltrados(
+    setventasFiltradas(
       listaVentas.filter((elemento) => {
+        //elemento._id.includes(busqueda);
         return JSON.stringify(elemento)
           .toLowerCase()
           .includes(busqueda.toLowerCase());
       })
     );
   }, [busqueda, listaVentas]);
+ 
 
   return (
-    <div className="andrew-container bg-gray-900">
- 
-      <div className="andrew-titulo mb-10 ">Informacion Ventas</div>
-
-      {/* Barra de busqueda */}
-      <div className="flex p-6 w-1/4 -m-5 ">
-        <div className="bg-white flex  items-center rounded-md shadow-xl ">
-          <input
-            className="rounded-l-full w-full py-4 px-6 text-gray-700 leading-tight focus:outline-none"
-            id="search"
-            type="number"
-            placeholder="Búsqueda por id"
-          />
-          <div className="p-4">
-            <button className="bg-blue-500 text-white rounded-full p-2 hover:bg-blue-400 focus:outline-none w-12 h-12 flex items-center justify-center">
-              <i class="bx bx-search text-3xl"></i>
-            </button>
+    
+     
+    <table className="m-auto w-11/12 rounded-xl bg-white ">
+    <thead className=" bg-gray-900  text-white w-full ">  
+    <div className="flex p-6 w-full -m-5 ">
+          <div className="bg-white flex  items-center rounded-md shadow-xl ">
+            <input
+              value={busqueda}
+              onChange ={(e)=> setBusqueda(e.target.value)}
+              className="rounded-l-full w-full py-4 px-6 text-gray-700 leading-tight focus:outline-none"
+              id="search"
+              type="string"
+              placeholder="Búsqueda por id"
+            />
+            <div className="p-4">
+              <button className="bg-blue-500 text-white rounded-full p-2 hover:bg-blue-400 focus:outline-none w-12 h-12 flex items-center justify-center">
+                <i class="bx bx-search text-3xl"></i>
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-      {/* Fin barra */}
 
-      <table class="min-w-full bg-white">
-        <thead class="bg-gray-800 text-white">
-          <ToastContainer
-            position="top-center"
-            autoClose={4000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-          />
-          <tr>
-          <th class=" text-xl py-3 px-4 uppercase font-semibold ">
-              ID Venta
-            </th>
-            <th class=" text-xl py-3 px-4 uppercase font-semibold ">
-              Valor total
-            </th>
-              <th class=" text-xl py-3 px-4 uppercase font-semibold ">
-              Fecha de venta
-            </th>
-            <th class=" text-xl py-3 px-4 uppercase font-semibold ">
-              Documento cliente
-            </th>
-            <th class=" text-xl py-3 px-4 uppercase font-semibold ">
-              Nombre cliente
-            </th>
-            <th class=" text-xl py-3 px-4 uppercase font-semibold ">
-              Nombre vendedor
-            </th>
-            <th class=" text-xl py-3 px-4 uppercase font-semibold ">
-              Productos
-            </th>
-            <th class=" text-xl py-3 px-4 uppercase font-semibold ">
-              Acciones
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {ventasFiltrados.map((ventas) => {
-            return (
-              <FilaVentas
-                key={nanoid()}
-                ventas={ventas}
-                setEjecutarConsulta={setEjecutarConsulta}
-              />
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
+        
+      <ToastContainer
+          position="top-center"
+          autoClose={4000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+        
+        <tr>
+          <th className="text-xl w-2 py-4 px-2 text-center uppercase font-semibold">
+            ID VENTA
+          </th>
+          <th className="text-xl w-2 py-4 text-center uppercase font-semibold">
+            DOCUMENTO
+          </th>
+          <th className="text-xl w-2 py-4 text-center uppercase font-semibold">
+            ID VENDEDOR
+          </th>
+          <th className="text-xl w-2 py-4 text-center uppercase font-semibold">
+            NOMBRE
+          </th>
+          <th className="text-xl w-2 py-4 text-center uppercase font-semibold">
+            APELLIDO
+          </th>
+          <th className="text-xl w-2 py-4 text-center uppercase font-semibold">
+            CEDULA
+          </th>
+          <th className="text-xl w-2 py-4 text-center uppercase font-semibold">
+            CORREO
+          </th>
+          <th className="text-xl w-2 py-4 text-center uppercase font-semibold">
+            ESTADO
+          </th>
+          <th className="text-xl w-2 py-4 text-center uppercase font-semibold">
+            ROL
+          </th>
+
+          <th className="text-xl w-2 py-4 text-center uppercase font-semibold">
+            ID PRODUCTO
+          </th>
+          <th className="text-xl w-2 py-4 text-center uppercase font-semibold">
+            NOMBRE
+          </th>
+          <th className="text-xl w-2 py-4 text-center uppercase font-semibold">
+            DESCRIPCION
+          </th>
+          <th className="text-xl w-2 py-4 text-center uppercase font-semibold">
+            VALOR
+          </th>
+          <th className="text-xl w-2 py-4 text-center uppercase font-semibold">
+            CANTIDAD
+          </th>
+          <th className="text-xl w-2 py-4 text-center uppercase font-semibold">
+            VALOR TOTAL
+          </th>
+
+          <th className="text-xl w-2 py-4 text-center uppercase font-semibold">
+            ACCIONES
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {ventasFiltradas.map((ventas) => {
+          return (
+            <FilaVentas
+              key={nanoid()}
+              ventas={ventas}
+              setEjecutarConsulta={setEjecutarConsulta}
+            />
+          );
+        })}
+      </tbody>
+    </table>
   );
 };
 
 const FilaVentas = ({ ventas, setEjecutarConsulta }) => {
-  const [edit, setEdit] = useState(false);
-  const [infoNuevaVenta, setInfoNuevaVenta] = useState({
-    _id: ventas._id,
-    valorTotal: ventas.valorTotal,
-    fecha: ventas.fecha,
-    documentoCliente: ventas.documentoCliente,
-    nombreCliente: ventas.nombreCliente,
-    nombreVendedor: ventas.nombreVendedor,
-    productos: ventas.productos,
-  });
+ 
 
-  const actualizarVenta = async () => {
-    await editarVenta(
-      ventas._id,
-      {
-        valorTotal: infoNuevaVenta.valorTotal,
-        fecha: infoNuevaVenta.fecha,
-        documentoCliente: infoNuevaVenta.documentoCliente,
-        nombreCliente: infoNuevaVenta.nombreCliente,
-        nombreVendedor: infoNuevaVenta.nombreVendedor,
-        productos: infoNuevaVenta.productos,
-      },
-      (response) => {
-        toast.success("Venta modificada con éxito");
-        setEdit(false);
-        setEjecutarConsulta(true);
-      },
-      (error) => {
-        console.log("errorrrrrrrrrrrrr");
-        toast.error("Error modificando la venta");
-        console.error(error);
-      }
-    );
-  };
+
 
   return (
     <tr>
-      {edit ? (
-        <>
-          <td className="text-center">{infoNuevaVenta._id.slice(20)}</td>
-          <td>
-            <input
-              className="bg-gray-50 text-gray-800 border self-center-center w-3/4 border-gray-600 p-2 rounded-lg "
-              type="text"
-              value={infoNuevaVenta.valorTotal}
-              onChange={(e) =>
-                setInfoNuevaVenta({
-                  ...infoNuevaVenta,
-                  valorTotal: e.target.value,
-                })
-              }
-            />
-          </td>
-          <td>
-            <input
-              className="bg-gray-50 text-gray-800 border w-3/4 border-gray-600 p-2 rounded-lg"
-              type="text"
-              value={infoNuevaVenta.fecha}
-              onChange={(e) =>
-                setInfoNuevaVenta({
-                  ...infoNuevaVenta,
-                  fecha: e.target.value,
-                })
-              }
-            />
-          </td>
-          <td>
-            <input
-              className="bg-gray-50 text-gray-800 border w-3/4 border-gray-600 p-2 rounded-lg"
-              type="text"
-              value={infoNuevaVenta.documentoCliente}
-              onChange={(e) =>
-                setInfoNuevaVenta({
-                  ...infoNuevaVenta,
-                  documentoCliente: e.target.value,
-                })
-              }
-            />
-          </td>
-          <td>
-            <input
-              className="bg-gray-50 text-gray-800 border w-3/4 border-gray-600 p-2 rounded-lg"
-              type="text"
-              value={infoNuevaVenta.nombreCliente}
-              onChange={(e) =>
-                setInfoNuevaVenta({
-                  ...infoNuevaVenta,
-                  nombreCliente: e.target.value,
-                })
-              }
-            />
-          </td>
-          <td>
-            <input
-              className="bg-gray-50 text-gray-800 border w-3/4 border-gray-600 p-2 rounded-lg"
-              type="text"
-              value={infoNuevaVenta.nombreVendedor}
-              onChange={(e) =>
-                setInfoNuevaVenta({
-                  ...infoNuevaVenta,
-                  nombreVendedor: e.target.value,
-                })
-              }
-            />
-          </td>
-          <td>
-            <input
-              className="bg-gray-50 text-gray-800 border w-3/4 border-gray-600 p-2 rounded-lg"
-              type="text"
-              value={infoNuevaVenta.productos}
-              onChange={(e) =>
-                setInfoNuevaVenta({
-                  ...infoNuevaVenta,
-                  productos: e.target.value,
-                })
-              }
-            />
-          </td>
-        </>
-      ) : (
-        <>
-          <td className="text-center text-gray-800">{ventas._id.slice(20)}</td>
-          <td className="text-center text-gray-800">{ventas.valorTotal}</td>
-          <td className="text-center text-gray-800">{ventas.fecha}</td>
-          <td className="text-center text-gray-800">{ventas.documentoCliente}</td>
-          <td className="text-center text-gray-800">{ventas.nombreCliente}</td>
-          <td className="text-center text-gray-800">{ventas.nombreVendedor}</td>
-          <td className="text-center text-gray-800">{ventas.productos}</td>
-        </>
-      )}
-      <td className="flex my-4 ">
-        <div className="flex w-full justify-around">
-          {edit ? (
-            <>
-              <i
-                onClick={() => actualizarVenta()}
-                className="fas fa-check text-green-700 hover:text-green-500"
-              />
+  
+          <td className="text-center">{ventas._id.slice(20)}</td>
+       
+          <td className="text-center">{ventas.documento}</td>
 
-              <i
-                onClick={() => setEdit(!edit)}
-                className="fas fa-ban text-yellow-700 hover:text-yellow-500"
-              />
-            </>
-          ) : (
-            <>
-              <i
-                onClick={() => setEdit(!edit)}
+          <td className="text-center">{ventas.vendedor._id}</td>
+          <td className="text-center">{ventas.vendedor.nombre}</td>
+          <td className="text-center">{ventas.vendedor.apellido}</td>
+          <td className="text-center">{ventas.vendedor.cedula}</td>
+          <td className="text-center">{ventas.vendedor.email}</td>
+          <td className="text-center">{ventas.vendedor.estado}</td>
+          <td className="text-center">{ventas.vendedor.rol}</td>
+
+
+          <td className="text-center">{ventas.productos[0]._id}</td>
+          <td className="text-center">{ventas.productos[0].nombre}</td>
+          <td className="text-center">{ventas.productos[0].descripcion}</td>
+          <td className="text-center">{ventas.productos[0].valor}</td>
+          <td className="text-center">{ventas.productos[0].cantidad}</td>
+
+
+          <td className="text-center">{ventas.vendedor.total_venta}</td>
+
+
+      
+
+
+           
+           <i
+                
                 className="fas fa-pencil-alt text-yellow-700 hover:text-yellow-500"
               />
 
-              <i className="fas fa-trash text-red-700 hover:text-red-500" />
-            </>
-          )}
-        </div>
-      </td>
+              <i
+                className="fas fa-trash text-red-700 hover:text-red-500"
+                
+              />
+
+
+
+
+         
+      
     </tr>
   );
 };
