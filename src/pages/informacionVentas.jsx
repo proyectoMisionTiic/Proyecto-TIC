@@ -2,19 +2,16 @@ import React, { useEffect, useState } from "react";
 import "../styles/Style-gestionar-productos.css";
 import { toast, ToastContainer } from "react-toastify";
 import {
-  obtenerventas,
   obtenerVenta,
   editarVenta,
-  eliminarProducto,
+  eliminarVenta,
 } from "../utils/api.js";
 import { nanoid } from "nanoid";
 
 const Tablaventas = () => {
-  
   const [ventas, setVentas] = useState([]);
   const [ejecutarConsulta, setEjecutarConsulta] = useState(true);
-  
- 
+
   useEffect(() => {
     const fetchVentas = async () => {
       await obtenerVenta(
@@ -33,14 +30,11 @@ const Tablaventas = () => {
   }, [ejecutarConsulta]);
 
   return (
-    <div classNameName="bg-gray-800 self-center container ml-80 mr-80 mt-10 ">
+    <div className="">
       <div className="md:px-32 w-full">
         <div className="shadow overflow-hidden rounded border-b border-gray-200"></div>
-       
-        <Tabla
-          listaVentas={ventas}
-          setEjecutarConsulta={setEjecutarConsulta}
-        />
+
+        <Tabla listaVentas={ventas} setEjecutarConsulta={setEjecutarConsulta} />
       </div>
     </div>
   );
@@ -62,18 +56,15 @@ const Tabla = ({ listaVentas, ventas, setEjecutarConsulta }) => {
       })
     );
   }, [busqueda, listaVentas]);
- 
 
   return (
-    
-     
     <table className="m-auto w-11/12 rounded-xl bg-white ">
-    <thead className=" bg-gray-900  text-white w-full ">  
-    <div className="flex p-6 w-full -m-5 ">
+      <thead className=" bg-gray-900  text-white w-full ">
+        <div className="flex p-6 w-full -m-5 ">
           <div className="bg-white flex  items-center rounded-md shadow-xl ">
             <input
               value={busqueda}
-              onChange ={(e)=> setBusqueda(e.target.value)}
+              onChange={(e) => setBusqueda(e.target.value)}
               className="rounded-l-full w-full py-4 px-6 text-gray-700 leading-tight focus:outline-none"
               id="search"
               type="string"
@@ -87,8 +78,7 @@ const Tabla = ({ listaVentas, ventas, setEjecutarConsulta }) => {
           </div>
         </div>
 
-        
-      <ToastContainer
+        <ToastContainer
           position="top-center"
           autoClose={4000}
           hideProgressBar={false}
@@ -99,13 +89,13 @@ const Tabla = ({ listaVentas, ventas, setEjecutarConsulta }) => {
           draggable
           pauseOnHover
         />
-        
+
         <tr>
           <th className="text-xl w-2 py-4 px-2 text-center uppercase font-semibold">
             ID VENTA
           </th>
           <th className="text-xl w-2 py-4 text-center uppercase font-semibold">
-            DOCUMENTO
+            DOCUMENTO CLIENTE
           </th>
           <th className="text-xl w-2 py-4 text-center uppercase font-semibold">
             ID VENDEDOR
@@ -116,24 +106,12 @@ const Tabla = ({ listaVentas, ventas, setEjecutarConsulta }) => {
           <th className="text-xl w-2 py-4 text-center uppercase font-semibold">
             APELLIDO
           </th>
-          <th className="text-xl w-2 py-4 text-center uppercase font-semibold">
-            CEDULA
-          </th>
-          <th className="text-xl w-2 py-4 text-center uppercase font-semibold">
-            CORREO
-          </th>
-          <th className="text-xl w-2 py-4 text-center uppercase font-semibold">
-            ESTADO
-          </th>
-          <th className="text-xl w-2 py-4 text-center uppercase font-semibold">
-            ROL
-          </th>
 
           <th className="text-xl w-2 py-4 text-center uppercase font-semibold">
             ID PRODUCTO
           </th>
           <th className="text-xl w-2 py-4 text-center uppercase font-semibold">
-            NOMBRE
+            NOMBRE PRODUCTO
           </th>
           <th className="text-xl w-2 py-4 text-center uppercase font-semibold">
             DESCRIPCION
@@ -145,9 +123,8 @@ const Tabla = ({ listaVentas, ventas, setEjecutarConsulta }) => {
             CANTIDAD
           </th>
           <th className="text-xl w-2 py-4 text-center uppercase font-semibold">
-            VALOR TOTAL
+            TOTAL VENTA
           </th>
-
           <th className="text-xl w-2 py-4 text-center uppercase font-semibold">
             ACCIONES
           </th>
@@ -172,48 +149,33 @@ const FilaVentas = ({ ventas, setEjecutarConsulta }) => {
   const [edit, setEdit] = useState(false);
   const [nuevaVenta, setnuevaVenta] = useState({
     _id: ventas._id.slice(20),
-       
+
     documento: ventas.documento,
- 
-     _id: ventas.vendedor._id.slice(15),
-     nombre: ventas.vendedor.nombre,
-     apellido: ventas.vendedor.apellido,
-     cedula: ventas.vendedor.cedula,
-     email: ventas.vendedor.email,
-     estado: ventas.vendedor.estado,
-     rol: ventas.vendedor.rol,
- 
- 
-     _id: ventas.productos[0]._id.slice(20),
-     nombre: ventas.productos[0].nombre,
-     descripcion: ventas.productos[0].descripcion,
-     valor: ventas.productos[0].valor,
-     cantidad: ventas.productos[0].cantidad,
- 
- 
-     total_venta: ventas.vendedor.total_venta
+
+    _idVendedor: ventas.vendedor._id.slice(15),
+    nombre: ventas.vendedor.nombre,
+    apellido: ventas.vendedor.apellido,
+    cedula: ventas.vendedor.cedula,
+    producto: ventas.productos[0].nombre,
+    descripcion: ventas.productos[0].descripcion,
+    valor: ventas.productos[0].valor,
+    cantidad: ventas.productos[0].cantidad,
+
+    total_venta: ventas.vendedor.total_venta,
   });
 
   const actualizarVenta = async () => {
     await editarVenta(
-      ventas._id, ventas.vendedor._id, ventas.productos._id,
+      ventas._id,
       {
         documento: nuevaVenta.documento,
-     
-        nombre: nuevaVenta.vendedor.nombre,
-        apellido: nuevaVenta.vendedor.apellido,
-        cedula: nuevaVenta.vendedor.cedula,
-        email: nuevaVenta.vendedor.email,
-        estado: nuevaVenta.vendedor.estado,
-        rol: nuevaVenta.vendedor.rol,
-    
-        nombre: nuevaVenta.productos[0].nombre,
-        descripcion: nuevaVenta.productos[0].descripcion,
-        valor: nuevaVenta.productos[0].valor,
-        cantidad: nuevaVenta.productos[0].cantidad,
-    
-    
-        total_venta: nuevaVenta.vendedor.total_venta
+        nombre: nuevaVenta.nombre,
+        apellido: nuevaVenta.apellido,
+        producto: nuevaVenta.nombre,
+        descripcion: nuevaVenta.descripcion,
+        valor: nuevaVenta.valor,
+        cantidad: nuevaVenta.cantidad,
+        total_venta: nuevaVenta.total_venta,
       },
       (response) => {
         toast.success("Venta modificada con éxito");
@@ -228,12 +190,25 @@ const FilaVentas = ({ ventas, setEjecutarConsulta }) => {
     );
   };
 
+  const borrarVenta = async () => {
+    await eliminarVenta(
+      ventas._id,
+      (response) => {
+        console.log(response.data);
+        toast.success("Venta eliminada con éxito");
+        setEjecutarConsulta(true);
+      },
+      (error) => {
+        console.error(error);
+        toast.error("Error eliminando la venta");
+      }
+    );
+  };
 
   return (
     <tr>
       {edit ? (
         <>
-        
           <td>
             <input
               className="text-center"
@@ -269,7 +244,7 @@ const FilaVentas = ({ ventas, setEjecutarConsulta }) => {
               onChange={(e) =>
                 setnuevaVenta({
                   ...nuevaVenta,
-                  nombre: e.target.value,
+                  nombre: e.target.value
                 })
               }
             />
@@ -287,58 +262,7 @@ const FilaVentas = ({ ventas, setEjecutarConsulta }) => {
               }
             />
           </td>
-          <td>
-            <input
-              className="bg-gray-50 border w-3/4 border-gray-600 p-2 rounded-lg"
-              type="text"
-              value={nuevaVenta.cedula}
-              onChange={(e) =>
-                setnuevaVenta({
-                  ...nuevaVenta,
-                  cedula: e.target.value,
-                })
-              }
-            />
-          </td>
-          <td>
-            <input
-              className="bg-gray-50 border w-3/4 border-gray-600 p-2 rounded-lg"
-              type="text"
-              value={nuevaVenta.email}
-              onChange={(e) =>
-                setnuevaVenta({
-                  ...nuevaVenta,
-                  email: e.target.value,
-                })
-              }
-            />
-          </td>
-          <td>
-            <input
-              className="bg-gray-50 border self-center-center w-3/4 border-gray-600 p-2 rounded-lg "
-              type="text"
-              value={nuevaVenta.estado}
-              onChange={(e) =>
-                setnuevaVenta({
-                  ...nuevaVenta,
-                  estado: e.target.value,
-                })
-              }
-            />
-          </td>
-          <td>
-            <input
-              className="bg-gray-50 border self-center-center w-3/4 border-gray-600 p-2 rounded-lg "
-              type="text"
-              value={nuevaVenta.rol}
-              onChange={(e) =>
-                setnuevaVenta({
-                  ...nuevaVenta,
-                  rol: e.target.value,
-                })
-              }
-            />
-          </td>
+
           <td>
             <input
               className="text-center"
@@ -346,16 +270,16 @@ const FilaVentas = ({ ventas, setEjecutarConsulta }) => {
               value={ventas.productos[0]._id.slice(20)}
             />
           </td>
-         
+
           <td>
             <input
               className="bg-gray-50 border self-center-center w-3/4 border-gray-600 p-2 rounded-lg "
               type="text"
-              value={nuevaVenta.nombre}
+              value={nuevaVenta.producto}
               onChange={(e) =>
                 setnuevaVenta({
                   ...nuevaVenta,
-                  nombre: e.target.value,
+                  producto: e.target.value,
                 })
               }
             />
@@ -415,24 +339,17 @@ const FilaVentas = ({ ventas, setEjecutarConsulta }) => {
         </>
       ) : (
         <>
-      
-       <td className="text-center">{ventas._id.slice(20)}</td>
-       <td className="text-center">{ventas.documento}</td>
-       <td className="text-center">{ventas.vendedor._id.slice(20)}</td>
-       <td className="text-center">{ventas.vendedor.nombre}</td>
-       <td className="text-center">{ventas.vendedor.apellido}</td>
-       <td className="text-center">{ventas.vendedor.cedula}</td>
-       <td className="text-center">{ventas.vendedor.email}</td>
-       <td className="text-center">{ventas.vendedor.estado}</td>
-       <td className="text-center">{ventas.vendedor.rol}</td>
-       <td className="text-center">{ventas.productos[0]._id.slice(20)}</td>
-       <td className="text-center">{ventas.productos[0].nombre}</td>
-       <td className="text-center">{ventas.productos[0].descripcion}</td>
-       <td className="text-center">{ventas.productos[0].valor}</td>
-       <td className="text-center">{ventas.productos[0].cantidad}</td>
-       <td className="text-center">{ventas.vendedor.total_venta}</td>
-
-
+          <td className="text-center">{ventas._id.slice(20)}</td>
+          <td className="text-center">{ventas.documento}</td>
+          <td className="text-center">{ventas.vendedor._id.slice(20)}</td>
+          <td className="text-center">{ventas.vendedor.nombre}</td>
+          <td className="text-center">{ventas.vendedor.apellido}</td>
+          <td className="text-center">{ventas.productos[0]._id.slice(20)}</td>
+          <td className="text-center">{ventas.productos[0].nombre}</td>
+          <td className="text-center">{ventas.productos[0].descripcion}</td>
+          <td className="text-center">{ventas.productos[0].valor}</td>
+          <td className="text-center">{ventas.productos[0].cantidad}</td>
+          <td className="text-center">{ventas.vendedor.total_venta}</td>
         </>
       )}
       <td className="flex my-4 ">
@@ -455,10 +372,9 @@ const FilaVentas = ({ ventas, setEjecutarConsulta }) => {
                 onClick={() => setEdit(!edit)}
                 className="fas fa-pencil-alt text-yellow-700 hover:text-yellow-500"
               />
-              <i
-                className="fas fa-trash text-red-700 hover:text-red-500"
+              <i className="fas fa-trash text-red-700 hover:text-red-500"
+                  onClick={borrarVenta}
               />
-            
             </>
           )}
         </div>
