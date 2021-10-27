@@ -60,7 +60,7 @@ const GestionVentas = (totalVenta) => {
 
     const datosVenta = {
       vendedor: vendedores.filter((v) => v._id === formData.vendedor)[0],
-      total_venta: totalVenta,
+      total_venta: formData.totalVenta,
       productos: productosTabla,
       documento: formData.documento,
     };
@@ -260,7 +260,13 @@ const TablaProductos = ({ productos, setProductos, setProductosTabla }) => {
         </tbody>
       </table>
       <span className="flex justify-center my-2 ">
-        Valor total de la venta = $ {totalVenta ?? 0}
+        Valor total de la venta = $ 
+        <input type="number" 
+        value={totalVenta}
+        name="totalVenta"
+        className="text-black rounded-xl w-1/12 text-center"
+        id="formventas"
+        />
         {/* <CurrencyFormat
           value={totalVenta}
           displayType={"text"}
