@@ -1,17 +1,16 @@
 import React, { useRef, useState } from "react";
 import "../styles/Style-gestionar-productos.css";
 import { ToastContainer, toast } from "react-toastify";
-import axios from "axios";
-import CurrencyFormat from "react-currency-format";
+import { crearProducto } from "../utils/api.js";
+// import CurrencyFormat from "react-currency-format";
 
 const GestionProductos = () => {
-  const [valorProducto, setValorProducto] = useState();
+  // const [valorProducto, setValorProducto] = useState();
   const form = useRef(null);
 
   const submitformulario = async (e) => {
     e.preventDefault();
 
-    
     const data = new FormData(form.current);
 
     //nuevoProducto (objeto vacio) almacena los productos en un diccionario
@@ -20,31 +19,26 @@ const GestionProductos = () => {
       nuevoProducto[key] = value;
     });
 
-
-    const options = {
-      method: "POST",
-      url: "http://localhost:4000/productos/nuevo/",
-      headers: { "Content-Type": "application/json" },
-      data: {
-        nombre: nuevoProducto.nombre,
-        descripcion: nuevoProducto.descripcion,
-        valor: nuevoProducto.valor,
-        cantidad: nuevoProducto.cantidad,
-        estado: nuevoProducto.estado,
-      },
+    const datosProductos = {
+      nombre: nuevoProducto.nombre,
+      descripcion: nuevoProducto.descripcion,
+      valor: nuevoProducto.valor,
+      cantidad: nuevoProducto.cantidad,
+      estado: nuevoProducto.estado
     };
 
-    await axios
-      .request(options)
-      .then(function (response) {
+    await crearProducto(
+      datosProductos,
+      (response) => {
         console.log(response.data);
         toast.success("Producto agregado con éxito");
-      })
-      .catch(function (error) {
+      },
+      (error) => {
+        toast.error("Error al agregar");
         console.error(error);
-        toast.error("Error creando el producto");
-      });
-      document.getElementById('formproducto').reset();
+      }
+    );
+    document.getElementById("formproducto").reset();
   };
 
   return (
@@ -135,7 +129,7 @@ const GestionProductos = () => {
           </div>
           <div className="botones">
             <div className="button">
-              <input type="submit" value="Registrar producto"/>
+              <input type="submit" value="Registrar producto" />
             </div>
           </div>
         </form>
@@ -157,4 +151,3 @@ const GestionProductos = () => {
 };
 
 export default GestionProductos;
-
