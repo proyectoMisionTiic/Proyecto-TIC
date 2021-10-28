@@ -7,7 +7,7 @@ const getToken = () => {
 export const crearProducto = async (data,successCallback, errorCallback) => {
   const options = {
     method: "POST",
-    url: "http://localhost:4000/productos/nuevo/",
+    url: "https://thawing-stream-94254.herokuapp.com/nuevo/",
     headers: { "Content-Type": "application/json",Authorization: getToken() },
     data
   };
@@ -17,7 +17,7 @@ export const crearProducto = async (data,successCallback, errorCallback) => {
 export const obtenerProductos = async (successCallback, errorCallback) => {
   const options = {
     method: "GET",
-    url: "https://thawing-stream-94254.herokuapp.com//productos/ver/",
+    url: "https://thawing-stream-94254.herokuapp.com/productos/ver/",
     headers: {
       Authorization: getToken(),
     },
@@ -105,7 +105,7 @@ export const editarVenta = async (id, data, successCallback, errorCallback) => {
 export const eliminarVenta = async (id, successCallback, errorCallback) => {
   const options = {
     method: 'DELETE',
-    url: `http://localhost:4000/ventas/${id}`,
+    url: `https://thawing-stream-94254.herokuapp.com/ventas/${id}`,
     headers: { 'Content-Type': 'application/json',Authorization: getToken() }
   };
   await axios.request(options).then(successCallback).catch(errorCallback);
