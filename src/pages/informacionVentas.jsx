@@ -171,7 +171,7 @@ const FilaVentas = ({ ventas, setEjecutarConsulta }) => {
         documento: nuevaVenta.documento,
         nombre: nuevaVenta.nombre,
         apellido: nuevaVenta.apellido,
-        producto: nuevaVenta.nombre,
+        producto: nuevaVenta.producto,
         descripcion: nuevaVenta.descripcion,
         valor: nuevaVenta.valor,
         cantidad: nuevaVenta.cantidad,
@@ -300,7 +300,7 @@ const FilaVentas = ({ ventas, setEjecutarConsulta }) => {
           <td>
             <input
               className="bg-gray-50 border self-center-center w-3/4 border-gray-600 p-2 rounded-lg "
-              type="text"
+              type="number"
               value={nuevaVenta.valor}
               onChange={(e) =>
                 setnuevaVenta({
@@ -313,7 +313,7 @@ const FilaVentas = ({ ventas, setEjecutarConsulta }) => {
           <td>
             <input
               className="bg-gray-50 border self-center-center w-3/4 border-gray-600 p-2 rounded-lg "
-              type="text"
+              type="number"
               value={nuevaVenta.cantidad}
               onChange={(e) =>
                 setnuevaVenta({
@@ -326,7 +326,7 @@ const FilaVentas = ({ ventas, setEjecutarConsulta }) => {
           <td>
             <input
               className="bg-gray-50 border self-center-center w-3/4 border-gray-600 p-2 rounded-lg "
-              type="text"
+              type="number"
               value={nuevaVenta.total_venta}
               onChange={(e) =>
                 setnuevaVenta({

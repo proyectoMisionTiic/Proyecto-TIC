@@ -110,10 +110,10 @@ const Tabla = ({ listaProductos, productos, setEjecutarConsulta }) => {
             Descripción
           </th>
           <th className="text-xl w-2 py-4 text-center uppercase font-semibold">
-            Cantidad
+          Valor unitario
           </th>
           <th className="text-xl w-2 py-4 text-center uppercase font-semibold">
-            Valor_unitario
+            Cantidad
           </th>
           <th className="text-xl w-2 py-4 text-center uppercase font-semibold">
             Acciones
