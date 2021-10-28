@@ -4,7 +4,7 @@ import { nanoid } from "nanoid";
 import "react-toastify/dist/ReactToastify.css";
 import "../styles/Style-ventas.css";
 import { obtenerUsuarios, obtenerProductos, crearVenta } from "../utils/api.js";
-import CurrencyFormat from "react-currency-format";
+// import CurrencyFormat from "react-currency-format";
 
 const GestionVentas = (totalVenta) => {
   const form = useRef(null);
@@ -48,14 +48,14 @@ const GestionVentas = (totalVenta) => {
       formData[key] = value;
     });
 
-    const listaProductos = Object.keys(formData)
-      .map((k) => {
-        if (k.includes("producto")) {
-          return productosTabla.filter((v) => v._id === formData[k])[0];
-        }
-        return null;
-      })
-      .filter((v) => v);
+    // const listaProductos = Object.keys(formData)
+    //   .map((k) => {
+    //     if (k.includes("producto")) {
+    //       return productosTabla.filter((v) => v._id === formData[k])[0];
+    //     }
+    //     return null;
+    //   })
+    //   .filter((v) => v);
 
 
     const datosVenta = {
