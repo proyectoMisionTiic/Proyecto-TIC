@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Sidebar = () => {
   const { logout } = useAuth0();
   const cerrarSesion = () => {
-    logout({ returnTo: "http://localhost:3000/login" });
+    logout({ returnTo: "https://thawing-stream-94254.herokuapp.com/login" });
     localStorage.setItem("token", null);
   };
   return (
