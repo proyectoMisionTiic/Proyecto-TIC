@@ -20,7 +20,7 @@ function App() {
     <Auth0Provider
       domain="dev-tic-team.us.auth0.com"
       clientId="SGmvGQ8cUb3RpguTU6Yapeyp12R4b83R"
-      redirectUri="https://thawing-stream-94254.herokuapp.com/principal"
+      redirectUri="http://localhost:3000/principal"
       audience="api-gestor-ventas"
     >
       <Router>
